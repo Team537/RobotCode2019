@@ -7,6 +7,7 @@ public class JoystickExtreme{
 
     public static Joystick IJoystickExtreme = new Joystick(RobotMap.IO.JOYSTICK_PORT_MAIN);
 
+    //Button mappings
     public static class Interface {
         public static final int X = 0;
         public static final int Y = 1;
