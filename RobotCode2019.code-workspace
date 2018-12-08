@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "Competition2019"
+		},
+		{
+			"path": "Alpha2018"
+		}
+	],
+	"settings": {
+		"java.configuration.updateBuildConfiguration": "automatic"
+	}
+}
