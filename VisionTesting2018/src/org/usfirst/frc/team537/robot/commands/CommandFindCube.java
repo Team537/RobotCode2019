@@ -101,7 +101,7 @@ public class CommandFindCube extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
-    	Robot.subsystemDrive.setTarget(Robot.subsystemGyro.getAngle(), angle, 0.0f);
+    	Robot.subsystemDrive.setTarget(0.00, angle, 0.0f);
     	//Robot.subsystemDrive.setTarget(Robot.subsystemGyro.getAngle(), 0.0, 0.0, 0.0);
     	//driveTo = new CommandDriveRate(angle, 0.0 , 0.10);
     	
