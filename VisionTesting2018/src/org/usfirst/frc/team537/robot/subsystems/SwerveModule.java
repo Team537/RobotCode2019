@@ -86,7 +86,7 @@ public class SwerveModule {
 
 	public void dashboard() {
 	//	SmartDashboard.putNumber(moduleName + " Angle Setpoint", setpointAngle);
-		SmartDashboard.putNumber(moduleName + " Angle (deg)", currentAngle);
+		SmartDashboard.putNumber(moduleName + " Angle (deg)", currentAngle / 360);
 
 	//	SmartDashboard.putNumber(moduleName + " Drive Setpoint", setpointDrive);
 	//	SmartDashboard.putNumber(moduleName + " Drive (m)", currentPosition / RobotMap.Digital.DRIVE_M_TO_ENCODER);
