@@ -22,7 +22,7 @@ import frc.robot.subsystems.SubsystemDrive;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static SubsystemDrive drive = new SubsystemDrive();
+  public static SubsystemDrive drive;
   public static OI m_oi;
 
   Command m_autonomousCommand;
@@ -34,6 +34,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    drive = new SubsystemDrive();
     m_oi = new OI();
     //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());

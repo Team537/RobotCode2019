@@ -8,6 +8,10 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.CommandDrive;
 
 /**
  * Add your docs here.
@@ -16,9 +20,17 @@ public class SubsystemDrive extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
+  public void SmartDashboard() {
+  }
+
+  public void driveBase(double Right, double Left){
+    
+  }
+
+  
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+    setDefaultCommand(new CommandDrive());
   }
 }
