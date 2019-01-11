@@ -10,9 +10,9 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class CommandAlignTarget extends Command {
-  public CommandAlignTarget() {
-    // Use requires() heesre to declare subsystem dependencies
+public class CommandDriveArcade extends Command {
+  public CommandDriveArcade() {
+    // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.m_drivetrain);
   }

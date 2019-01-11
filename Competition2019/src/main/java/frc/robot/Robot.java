@@ -10,9 +10,11 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.subsystems.SubsystemDrive;
+import frc.robot.subsystems.SubsystemDrivetrain;
+import frc.robot.subsystems.SubsystemGyro;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -22,7 +24,8 @@ import frc.robot.subsystems.SubsystemDrive;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static SubsystemDrive drive;
+  public static SubsystemDrivetrain m_drivetrain;
+  public static SubsystemGyro m_gyro;
   public static OI m_oi;
 
   Command m_autonomousCommand;
@@ -34,7 +37,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    drive = new SubsystemDrive();
+    m_drivetrain = new SubsystemDrivetrain();
+    m_gyro = new SubsystemGyro();
+
     m_oi = new OI();
     //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());

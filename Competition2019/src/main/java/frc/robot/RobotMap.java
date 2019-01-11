@@ -7,40 +7,66 @@
 
 package frc.robot;
 
-/**
- * The RobotMap is a mapping from the ports sensors and actuators are wired into
- * to a variable name. This provides flexibility changing wiring, makes checking
- * the wiring easier and significantly reduces the number of magic numbers
- * floating around.
- */
 public class RobotMap {
-  // For example to map the left and right motors, you could define the
-  // following variables to use with your drivetrain subsystem.
-  // public static int leftMotor = 1;
-  // public static int rightMotor = 2;
 
-  // If you are using multiple modules, make sure to define both the port
-  // number and the module. For example you with a rangefinder:
-  // public static int rangefinderPort = 1;
-  // public static int rangefinderModule = 1;
+  public static final int kSlotIdx = 0;
+	public static final int kPIDLoopIdx = 0;
+  public static final int kTimeoutMs = 10;
 
   public static class INTERFACE {
     public static final int MAIN_CONTROLLER_PORT = 0;
     public static final int SECONDARY_CONTROLLER_PORT = 1;
   }
 
+  public static class ROBOT {
+    public static final double LED_BRIGHTNESS = 0.5;
+
+		public static final double WHEEL_DIAMETER = 0.1016; // m
+		public static final double WIDTH = 0.26; // m
+		public static final double DEPTH = 0.207; // m
+		public static final double RATIO = Math.sqrt((DEPTH * DEPTH) + (WIDTH * WIDTH));
+
+		public static final double DRIVE_M_TO_ENCODER = 1984.4878; // ticks/m
+		public static final double DRIVE_SPEED = 0.8; // % 0-1.0
+		
+		public static final double DRIVE_PATH_SCALE = 0.4; // % -1.0-1.0 speed scale for the pathfinder
+
+		public static final double MAX_VELOCITY = 1.7; // m/s (maximum robot velocity the robot is capable of)
+		public static final double MAX_ACCELERATION = 2.0; // m/s/s
+    public static final double MAX_JERK = 60.0; // m/s/s/s
+  
+
+		//public static final Trajectory.Config TRAJECTORY_CONFIG = new Trajectory.Config(Trajectory.FitMethod.HERMITE_CUBIC, Trajectory.Config.SAMPLES_HIGH, 0.05, MAX_VELOCITY, MAX_ACCELERATION, MAX_JERK);
+  }
+
+  public static class PIDs {
+    public static final PID DRIVE_ANGLE_FRONT_LEFT = new PID(4.9, 0.0, 4.0, "PID Front Left");
+		public static final PID DRIVE_ANGLE_FRONT_RIGHT = new PID(3.8, 0.0, 4.0, "PID Front Right");
+		public static final PID DRIVE_ANGLE_BACK_LEFT = new PID(5.4, 0.0, 4.3, "PID Back Left");
+		public static final PID DRIVE_ANGLE_BACK_RIGHT = new PID(5.4, 0.0, 4.3, "PID Back Right");
+
+		public static final PID DRIVE_PATH = new PID(1.0, 0.0, 0.0, "PID Path");
+
+		public static final PID DRIVE_ROTATE = new PID(0.01, 0.0, 0.002, "PID Rotate");
+		public static final PID DRIVE_MODE_SPEED = new PID(0.0, 0.0, 0.0, "PID Mode Speed");
+		public static final PID DRIVE_MODE_RATE = new PID(0.05, 0.0, 0.025, 0.3, "PID Mode Rate");
+public static final PID DRIVE_MODE_DISTANCE = new PID(0.22, 0.0, 0.0, "PID Front Distance");
+  }
+
+  public static class CAN {
+    public static final int CANIFIER = 0;
+
+		public static final int DRIVE_FRONT_LEFT_DRIVE = 4;
+		public static final int DRIVE_FRONT_LEFT_ANGLE = 3;
+		public static final int DRIVE_FRONT_RIGHT_DRIVE = 1;
+		public static final int DRIVE_FRONT_RIGHT_ANGLE = 2;
+		public static final int DRIVE_BACK_LEFT_DRIVE = 5;
+		public static final int DRIVE_BACK_LEFT_ANGLE = 6;
+		public static final int DRIVE_BACK_RIGHT_DRIVE = 8;
+    public static final int DRIVE_BACK_RIGHT_ANGLE = 7;
+  }
+
   public static class VISION {
     public static final int CAMERA_PORT = 1;
   } 
-
-  public static class CAN {
-    public static final int RIGHT_MASTER = 1;
-    public static final int RIGHT_FOLLOWER1  = 2;
-    public static final int RIGHT_FOLLOWER2 = 3;
-
-    public static final int LEFT_MASTER = 4;
-    public static final int LEFT_FOLLOWER1 = 5;
-    public static final int LEFT_FOLLOWER2 = 6;
-
-  }
 }
