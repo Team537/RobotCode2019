@@ -9,8 +9,8 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class CommandDriveReset extends Command {
-  public CommandDriveReset() {
+public class DriveReset extends Command {
+  public DriveReset() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }

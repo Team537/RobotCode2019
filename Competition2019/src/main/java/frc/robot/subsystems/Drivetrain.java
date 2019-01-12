@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -21,10 +14,10 @@ import frc.robot.Maths;
 import frc.robot.PID;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
-import frc.robot.commands.CommandDriveArcade;
-import frc.robot.commands.CommandDriveReset;
+import frc.robot.commands.DriveArcade;
+import frc.robot.commands.DriveReset;
 
-public class SubsystemDrivetrain extends Subsystem implements PIDOutput {
+public class Drivetrain extends Subsystem implements PIDOutput {
 	public static enum SwerveMode {
 		ModeSpeed(ControlMode.PercentOutput, RobotMap.PIDs.DRIVE_MODE_SPEED), 
 		ModeRate(ControlMode.Velocity, RobotMap.PIDs.DRIVE_MODE_RATE), 
@@ -222,7 +215,8 @@ public class SubsystemDrivetrain extends Subsystem implements PIDOutput {
 	);
 	private PIDController m_controllerRotate;
 
-	public SubsystemDrivetrain() {
+	
+	public Drivetrain() {
 		m_controllerRotate = new PIDController(RobotMap.PIDs.DRIVE_ROTATE.getP(), RobotMap.PIDs.DRIVE_ROTATE.getI(), RobotMap.PIDs.DRIVE_ROTATE.getD(),
 			Robot.m_gyro, this);
 		m_controllerRotate.setInputRange(0.0, 360.0);
@@ -240,9 +234,9 @@ public class SubsystemDrivetrain extends Subsystem implements PIDOutput {
 
 	@Override
 	public void initDefaultCommand() {
-		SmartDashboard.putData("Drive Reset", new CommandDriveReset());
+		SmartDashboard.putData("Drive Reset", new DriveReset());
 
-		setDefaultCommand(new CommandDriveArcade());
+		setDefaultCommand(new DriveArcade());
 	}
 	
 	public void setTarget(double gyro, double rotation, double strafe, double forward) {

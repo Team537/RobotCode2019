@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot.subsystems;
 
 import com.kauailabs.navx.frc.AHRS;
@@ -16,16 +9,12 @@ import edu.wpi.first.wpilibj.PIDSourceType;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-/**
- * Add your docs here.
- */
-public class SubsystemGyro extends Subsystem implements PIDSource{
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
+public class Gyro extends Subsystem implements PIDSource{
+
   private AHRS m_ahrs;
 
-  public SubsystemGyro() {
-    try {
+  public Gyro() {
+    try{ 
       m_ahrs = new AHRS(SPI.Port.kMXP);
       reset();
     } catch (RuntimeException e) {
@@ -55,13 +44,13 @@ public class SubsystemGyro extends Subsystem implements PIDSource{
 
 	@Override
 	public void setPIDSourceType(PIDSourceType pidSource) {
-		m_ahrs.setPIDSourceType(pidSource);
+    m_ahrs.setPIDSourceType(pidSource);
 	}
 
 	@Override
 	public double pidGet() {
 		return getAngle();
-}
+  }
 
   public void reset() {
     m_ahrs.reset();
