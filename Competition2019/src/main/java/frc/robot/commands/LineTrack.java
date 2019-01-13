@@ -1,21 +1,21 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Robot;
 
-public class DriveReset extends Command {
-  public DriveReset() {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+public class LineTrack extends Command {
+  public LineTrack() {
+    requires(Robot.m_photosensor); 
   }
 
-  // Called just before this Command runs the first time
   @Override
   protected void initialize() {
   }
 
-  // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    Robot.m_photosensor.white(Robot.m_photosensor.DIOsensor.get());
+    
   }
 
   // Make this return true when this Command no longer needs to run execute()

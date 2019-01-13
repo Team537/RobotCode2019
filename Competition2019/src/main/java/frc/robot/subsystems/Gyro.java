@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Gyro extends Subsystem implements PIDSource{
 
@@ -27,6 +28,7 @@ public class Gyro extends Subsystem implements PIDSource{
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
+    SmartDashboard.putNumber("angle", getAngle());
   }
 
   public double getAngle() {
