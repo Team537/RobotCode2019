@@ -7,11 +7,11 @@ import frc.robot.joysticks.JoystickExtreme;
 
 
 public class OI {
-  public IJoystick JOYSTICK_MAIN  = new JoystickExtreme(RobotMap.INTERFACE.MAIN_CONTROLLER_PORT);
-  //public IJoystick JOYSTICK_SECONDARY = new Joystick(1);
-  
-  public OI(){
+  public IJoystick m_main;
+  public IJoystick m_secondary;
 
-    
+  public OI(){
+    this.m_main = new JoystickExtreme(RobotMap.INTERFACE.JOYSTICK_MAIN);
+
   } 
 }

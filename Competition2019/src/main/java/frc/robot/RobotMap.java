@@ -7,7 +7,7 @@ public class RobotMap {
   public static final int kTimeoutMs = 10;
 
   public static class INTERFACE {
-    public static final int MAIN_CONTROLLER_PORT = 0;
+    public static final int JOYSTICK_MAIN = 0;
     public static final int SECONDARY_CONTROLLER_PORT = 1;
   }
 
