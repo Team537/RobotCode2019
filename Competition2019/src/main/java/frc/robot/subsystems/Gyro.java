@@ -29,6 +29,7 @@ public class Gyro extends Subsystem implements PIDSource{
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
     SmartDashboard.putNumber("angle", getAngle());
+    SmartDashboard.putData("Angle", getAngle());
   }
 
   public double getAngle() {
