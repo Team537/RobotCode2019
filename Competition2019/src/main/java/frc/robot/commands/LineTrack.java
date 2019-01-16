@@ -14,7 +14,7 @@ public class LineTrack extends Command {
 
   @Override
   protected void execute() {
-    Robot.m_photosensor.white(Robot.m_photosensor.DIOsensor.get());
+    Robot.m_photosensor.onWhiteLine(Robot.m_photosensor.sensorRight.get(), Robot.m_photosensor.sensorLeft.get());
     
   }
 

@@ -8,10 +8,12 @@ import frc.robot.commands.LineTrack;
 
 public class Photosensor extends Subsystem {
 
-  public DigitalInput DIOsensor = new DigitalInput(2);
+  public DigitalInput sensorRight = new DigitalInput(2);
+  public DigitalInput sensorLeft = new DigitalInput(3);
 
-  public void white(boolean isWhite){
-      SmartDashboard.putBoolean("White?", isWhite);
+  public void onWhiteLine(boolean right, boolean left){
+      SmartDashboard.putBoolean("Right On line?", right);
+      SmartDashboard.putBoolean("Left On line?", left);
   }
 
   @Override

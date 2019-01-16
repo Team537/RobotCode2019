@@ -60,6 +60,6 @@ public static final PID DRIVE_MODE_DISTANCE = new PID(0.22, 0.0, 0.0, "PID Front
   }
 
   public static class VISION {
-    public static final int CAMERA_PORT = 1;
+		public static final int CAMERA_PORT = 1;
   } 
 }

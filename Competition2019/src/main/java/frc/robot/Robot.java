@@ -23,7 +23,7 @@ public class Robot extends TimedRobot {
  
   @Override
   public void robotInit() {
-    //m_drivetrain = new Drivetrain();
+    m_drivetrain = new Drivetrain();
     m_gyro = new Gyro();
     m_photosensor = new Photosensor();
 
