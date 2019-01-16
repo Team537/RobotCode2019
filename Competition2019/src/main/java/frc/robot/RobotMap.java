@@ -10,7 +10,7 @@ public class RobotMap {
 
   public static class INTERFACE {
     public static final int JOYSTICK_MAIN = 0;
-    public static final int SECONDARY_CONTROLLER_PORT = 1;
+    public static final int JOYSTICK_SECONDARY = 1;
   }
 
   public static class ROBOT {
