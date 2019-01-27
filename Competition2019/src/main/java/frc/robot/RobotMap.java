@@ -14,7 +14,7 @@ public class RobotMap {
   }
 
   public static class ROBOT {
-    public static final double LED_BRIGHTNESS = 0.5;
+		public static final double LED_BRIGHTNESS = 0.5;
 
 		public static final double WHEEL_DIAMETER = 0.1016; // m
 		public static final double WIDTH = 0.26; // m 
@@ -28,14 +28,14 @@ public class RobotMap {
 
 		public static final double MAX_VELOCITY = 1.7; // m/s (maximum robot velocity the robot is capable of)
 		public static final double MAX_ACCELERATION = 2.0; // m/s/s
-    public static final double MAX_JERK = 60.0; // m/s/s/s
+  	public static final double MAX_JERK = 60.0; // m/s/s/s
   
 
 		//public static final Trajectory.Config TRAJECTORY_CONFIG = new Trajectory.Config(Trajectory.FitMethod.HERMITE_CUBIC, Trajectory.Config.SAMPLES_HIGH, 0.05, MAX_VELOCITY, MAX_ACCELERATION, MAX_JERK);
   }
 
   public static class PIDs {
-    public static final PID DRIVE_ANGLE_FRONT_LEFT = new PID(4.9, 0.0, 4.0, "PID Front Left");
+  	public static final PID DRIVE_ANGLE_FRONT_LEFT = new PID(4.9, 0.0, 4.0, "PID Front Left");
 		public static final PID DRIVE_ANGLE_FRONT_RIGHT = new PID(3.8, 0.0, 4.0, "PID Front Right");
 		public static final PID DRIVE_ANGLE_BACK_LEFT = new PID(5.4, 0.0, 4.3, "PID Back Left");
 		public static final PID DRIVE_ANGLE_BACK_RIGHT = new PID(5.4, 0.0, 4.3, "PID Back Right");
@@ -50,7 +50,7 @@ public class RobotMap {
   }
 
   public static class CAN {
-    public static final int CANIFIER = 0;
+  	public static final int CANIFIER = 0;
 
 		public static final int DRIVE_FRONT_LEFT_DRIVE = 4;
 		public static final int DRIVE_FRONT_LEFT_ANGLE = 3;
@@ -59,7 +59,7 @@ public class RobotMap {
 		public static final int DRIVE_BACK_LEFT_DRIVE = 5;
 		public static final int DRIVE_BACK_LEFT_ANGLE = 6;
 		public static final int DRIVE_BACK_RIGHT_DRIVE = 8;
-    public static final int DRIVE_BACK_RIGHT_ANGLE = 7;
+  	public static final int DRIVE_BACK_RIGHT_ANGLE = 7;
   }
 
   public static class VISION {
