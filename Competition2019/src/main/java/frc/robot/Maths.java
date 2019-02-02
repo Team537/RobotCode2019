@@ -19,10 +19,9 @@ public class Maths {
 	public static double maxValue(double... fs) {
 		double max = Double.MIN_VALUE;
 
-		for (double v : fs) {
+		for (double v : fs)
 			if (v > max)
 				max = v;
-		}
 
 		return max;
 	}
@@ -36,10 +35,9 @@ public class Maths {
 	public static double minValue(double... fs) {
 		double min = Double.MAX_VALUE;
 
-		for (double v : fs) {
+		for (double v : fs)
 			if (v < min)
 				min = v;
-		}
 
 		return min;
 	}
@@ -65,9 +63,8 @@ public class Maths {
 	public static double wrapDegrees(double angle) {
 		double result = angle % 360.0F;
 		
-		if (result < 0.0f) {
+		if (result < 0.0f)
 			result += 360.0F;
-		}
 
 		return result;
 	}
