@@ -121,6 +121,18 @@ public class Maths {
 	}
 
 	/**
+	 * Ensures {@code value} is in the range of {@code min} to {@code max}. If {@code value} is greater than {@code max}, this will return {@code max}. If {@code value} is less than {@code min}, this will return {@code min}. Otherwise, {@code value} is returned unchanged.
+	 *
+	 * @param value The value to clamp.
+	 * @param min The smallest value of the result.
+	 * @param max The largest value of the result.
+	 * @return {@code value}, clamped between {@code min} and {@code max}.
+	 */
+	public static int clampInt(int value, int min, int max) {
+		return value < min ? min : value > max ? max : value;
+	}
+
+	/**
 	 * Limits the value.
 	 *
 	 * @param value The value.

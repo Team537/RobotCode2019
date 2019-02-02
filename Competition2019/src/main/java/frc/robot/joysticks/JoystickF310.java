@@ -4,6 +4,9 @@ package frc.robot.joysticks;
  * Represents a Logitech F310 hand-held controller.
  */
 public class JoystickF310 extends IJoystick {
+
+	public static String name = "F310";
+
 	public class Keys {
 		public static final int A = 1;
 		public static final int B = 2;
@@ -37,6 +40,6 @@ public class JoystickF310 extends IJoystick {
 
 	@Override
 	public String getJoystickType() {
-		return "F310";
+		return name;
 	}
 }

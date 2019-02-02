@@ -4,6 +4,9 @@ package frc.robot.joysticks;
  * Represents a Logitech Extreme 3D Pro stick joystick.
  */
 public class JoystickExtreme extends IJoystick {
+
+	public static String name = "Extreme";
+
 	public class Keys {
 		public static final int INDEX_TRIGGER = 1;
 		public static final int THUMB_TRIGGER = 2;
@@ -37,6 +40,6 @@ public class JoystickExtreme extends IJoystick {
 	
 	@Override
 	public String getJoystickType() {
-		return "Extreme";
+		return name;
 	}
 }
