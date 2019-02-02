@@ -58,14 +58,11 @@ public class RobotMap {
 	public static final int DRIVE_BACK_LEFT_ANGLE = 6;
 	public static final int DRIVE_BACK_RIGHT_DRIVE = 8;
 	public static final int DRIVE_BACK_RIGHT_ANGLE = 7;
-	public static final int MANIPULATOR_SHOULDER = 10;
-	public static final int MANIPULATOR_WRIST = 11;
   }
 
   public static class VISION {
 		public static final int TARGET_CAM_PORT = 0;
 		public static final int TARGET_CAM_WIDTH = 320;
-
 		public static final int TARGET_CAM_HEIGHT = 240;
   } 
 }

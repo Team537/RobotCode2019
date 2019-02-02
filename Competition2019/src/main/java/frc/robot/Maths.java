@@ -4,11 +4,11 @@ package frc.robot;
  * A class that holds many various math functions.
  */
 public class Maths {
-	public static double PI = 3.14159265358979323846;
-	public static double DEGREES_IN_CIRCLE = 360.0;
-	public static double DEGREES_IN_HALF_CIRCLE = 180.0;
+	public static double PI = 3.14159265358979323846D;
+	public static double DEGREES_IN_CIRCLE = 360.0D;
+	public static double DEGREES_IN_HALF_CIRCLE = 180.0D;
 	public static double ANG2RAD = PI / DEGREES_IN_HALF_CIRCLE;
-	public static double LOG_HALF = Math.log(0.5);
+	public static double LOG_HALF = Math.log(0.5D);
 
 	/**
 	 * Gets the maximum value.
@@ -17,13 +17,11 @@ public class Maths {
 	 * @return The maximum value.
 	 */
 	public static double maxValue(double... fs) {
-		double max = 0.0;
+		double max = Double.MIN_VALUE;
 
-		for (double v : fs) {
-			if (v > max) {
+		for (double v : fs)
+			if (v > max)
 				max = v;
-			}
-		}
 
 		return max;
 	}
@@ -35,13 +33,11 @@ public class Maths {
 	 * @return The minimum value.
 	 */
 	public static double minValue(double... fs) {
-		double min  = 0.0;
+		double min = Double.MAX_VALUE;
 
-		for (double v : fs) {
-			if (v < min) {
+		for (double v : fs)
+			if (v < min)
 				min = v;
-			}
-		}
 
 		return min;
 	}
@@ -65,11 +61,10 @@ public class Maths {
 	 * @return The normalized angle.
 	 */
 	public static double wrapDegrees(double angle) {
-		double result = angle % 360.0f;
+		double result = angle % 360.0F;
 		
-		if (result < 0.0f) {
-			result += 360.0f;
-		}
+		if (result < 0.0f)
+			result += 360.0F;
 
 		return result;
 	}
@@ -82,7 +77,7 @@ public class Maths {
 	 * @return The rounded value.
 	 */
 	public static float roundToPlace(float value, int place) {
-		float placeMul = (float) (Math.pow(10.0f, place));
+		float placeMul = (float) (Math.pow(10.0F, place));
 		return (float) Math.round((value) * placeMul) / placeMul;
 	}
 
@@ -94,7 +89,11 @@ public class Maths {
 	 * @return The rounded value.
 	 */
 	public static double roundToPlace(double value, int place) {
-		double placeMul = Math.pow(10.0, place);
+		double placeMul = 1D;
+		for (int i = 0; i < place; i++)
+			placeMul *= 10D;
+		for (int i = 0; i > place; i++)
+			placeMul /= 10D;
 		return Math.round((value) * placeMul) / placeMul;
 	}
 
@@ -106,7 +105,7 @@ public class Maths {
 	 * @return Returns a value with deadband applied.
 	 */
 	public static double deadband(double min, double value) {
-		return Math.abs(value) >= Math.abs(min) ? value : 0.0;
+		return Math.abs(value) >= Math.abs(min) ? value : 0.0D;
 	}
 
 	/**
@@ -142,7 +141,7 @@ public class Maths {
 	 */
 	public static double cosInterpolate(double a, double b, double blend) {
 		double ft = blend * Math.PI;
-		double f = (1f - Math.cos(ft)) * 0.5;
-		return a * (1.0 - f) + b * f;
+		double f = (1D - Math.cos(ft)) * 0.5D;
+		return a * (1.0D - f) + b * f;
 	}
 }
