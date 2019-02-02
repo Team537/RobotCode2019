@@ -17,12 +17,11 @@ public class Maths {
 	 * @return The maximum value.
 	 */
 	public static double maxValue(double... fs) {
-		double max = 0D;
+		double max = Double.MIN_VALUE;
 
 		for (double v : fs) {
-			if (v > max) {
+			if (v > max)
 				max = v;
-			}
 		}
 
 		return max;
@@ -35,7 +34,7 @@ public class Maths {
 	 * @return The minimum value.
 	 */
 	public static double minValue(double... fs) {
-		double min = 0D;
+		double min = Double.MAX_VALUE;
 
 		for (double v : fs) {
 			if (v < min)
