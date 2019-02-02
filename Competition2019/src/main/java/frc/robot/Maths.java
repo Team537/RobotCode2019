@@ -4,9 +4,9 @@ package frc.robot;
  * A class that holds many various math functions.
  */
 public class Maths {
-	public static double PI = 3.14159265358979323846;
-	public static double DEGREES_IN_CIRCLE = 360.0;
-	public static double DEGREES_IN_HALF_CIRCLE = 180.0;
+	public static double PI = 3.14159265358979323846D;
+	public static double DEGREES_IN_CIRCLE = 360.0D;
+	public static double DEGREES_IN_HALF_CIRCLE = 180.0D;
 	public static double ANG2RAD = PI / DEGREES_IN_HALF_CIRCLE;
 	public static double LOG_HALF = Math.log(0.5);
 
