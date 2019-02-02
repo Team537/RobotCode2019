@@ -1,7 +1,5 @@
 package frc.robot;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 public class RobotMap {
 
   public static final int kSlotIdx = 0;
@@ -52,19 +50,22 @@ public class RobotMap {
   public static class CAN {
   	public static final int CANIFIER = 0;
 
-		public static final int DRIVE_FRONT_LEFT_DRIVE = 4;
-		public static final int DRIVE_FRONT_LEFT_ANGLE = 3;
-		public static final int DRIVE_FRONT_RIGHT_DRIVE = 1;
-		public static final int DRIVE_FRONT_RIGHT_ANGLE = 2;
-		public static final int DRIVE_BACK_LEFT_DRIVE = 5;
-		public static final int DRIVE_BACK_LEFT_ANGLE = 6;
-		public static final int DRIVE_BACK_RIGHT_DRIVE = 8;
-  	public static final int DRIVE_BACK_RIGHT_ANGLE = 7;
+	public static final int DRIVE_FRONT_LEFT_DRIVE = 4;
+	public static final int DRIVE_FRONT_LEFT_ANGLE = 3;
+	public static final int DRIVE_FRONT_RIGHT_DRIVE = 1;
+	public static final int DRIVE_FRONT_RIGHT_ANGLE = 2;
+	public static final int DRIVE_BACK_LEFT_DRIVE = 5;
+	public static final int DRIVE_BACK_LEFT_ANGLE = 6;
+	public static final int DRIVE_BACK_RIGHT_DRIVE = 8;
+	public static final int DRIVE_BACK_RIGHT_ANGLE = 7;
+	public static final int MANIPULATOR_SHOULDER = 10;
+	public static final int MANIPULATOR_WRIST = 11;
   }
 
   public static class VISION {
 		public static final int TARGET_CAM_PORT = 0;
 		public static final int TARGET_CAM_WIDTH = 320;
+
 		public static final int TARGET_CAM_HEIGHT = 240;
   } 
 }

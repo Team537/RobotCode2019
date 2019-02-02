@@ -35,7 +35,7 @@ public class Maths {
 	 * @return The minimum value.
 	 */
 	public static double minValue(double... fs) {
-		double min = 0.0;
+		double min  = 0.0;
 
 		for (double v : fs) {
 			if (v < min) {
