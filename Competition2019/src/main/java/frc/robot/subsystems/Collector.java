@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
+import frc.robot.commands.CollectorDefault;
 import frc.robot.commands.CollectorTilt;
 
 public class Collector extends Subsystem {
@@ -21,7 +22,7 @@ public class Collector extends Subsystem {
     private WPI_TalonSRX m_intake = new WPI_TalonSRX(RobotMap.CAN.COLLECTOR_INTAKE);
     private DigitalInput m_collectLimit = new DigitalInput(RobotMap.DIO.COLLECTOR_LIMIT);
 
-    public void intake(double intakeSpeed) {
+    public void setSpeed(double intakeSpeed) {
         boolean ballIn = m_collectLimit.get();
 
         if(ballIn) {
@@ -49,9 +50,13 @@ public class Collector extends Subsystem {
         m_intake.set(ControlMode.PercentOutput, 0.00);
     }
 
+    public void reset() {
+        m_intake.set(ControlMode.PercentOutput, 0.00);
+    }
+
     @Override
     public void initDefaultCommand() {
-        setDefaultCommand(new CollectorTilt());
+        setDefaultCommand(new CollectorDefault());
     }
 
 }
