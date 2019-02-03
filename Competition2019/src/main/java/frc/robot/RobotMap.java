@@ -46,6 +46,9 @@ public class RobotMap {
 		public static final PID DRIVE_MODE_SPEED = new PID(0.0, 0.0, 0.0, "PID Mode Speed");
 		public static final PID DRIVE_MODE_RATE = new PID(0.05, 0.0, 0.025, 0.3, "PID Mode Rate");
 		public static final PID DRIVE_MODE_DISTANCE = new PID(0.22, 0.0, 0.0, "PID Front Distance");
+
+		public static final PID ARM_WRIST = new PID(0.00, 0.00, 0.00, "PID Arm Wrist");
+		public static final PID ARM_SHOULDER = new PID(0.00, 0.00, 0.00, "PID Arm Shoulder");
   	}
 
 	public static class CAN {
@@ -62,6 +65,12 @@ public class RobotMap {
 
 		public static final int MANIPULATOR_WRIST = 9;
 		public static final int MANIPULATOR_SHOULDER = 10;
+
+		public static final int COLLECTOR_INTAKE = 11;
+	}
+
+	public static class DIO {
+		public static final int COLLECTOR_LIMIT = 1;
 	}
 
 	public static class VISION {
