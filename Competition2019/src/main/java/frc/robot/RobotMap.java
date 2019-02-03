@@ -4,16 +4,16 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class RobotMap {
 
-  public static final int kSlotIdx = 0;
+	public static final int kSlotIdx = 0;
 	public static final int kPIDLoopIdx = 0;
-  public static final int kTimeoutMs = 10;
+	public static final int kTimeoutMs = 10;
 
-  public static class INTERFACE {
-    public static final int JOYSTICK_MAIN = 0;
-    public static final int JOYSTICK_SECONDARY = 1;
-  }
+	public static class INTERFACE {
+  		public static final int JOYSTICK_MAIN = 0;
+		public static final int JOYSTICK_SECONDARY = 1;
+	}
 
-  public static class ROBOT {
+	public static class ROBOT {
 		public static final double LED_BRIGHTNESS = 0.5;
 
 		public static final double WHEEL_DIAMETER = 0.1016; // m
@@ -28,14 +28,14 @@ public class RobotMap {
 
 		public static final double MAX_VELOCITY = 1.7; // m/s (maximum robot velocity the robot is capable of)
 		public static final double MAX_ACCELERATION = 2.0; // m/s/s
-  	public static final double MAX_JERK = 60.0; // m/s/s/s
+  		public static final double MAX_JERK = 60.0; // m/s/s/s
   
 
 		//public static final Trajectory.Config TRAJECTORY_CONFIG = new Trajectory.Config(Trajectory.FitMethod.HERMITE_CUBIC, Trajectory.Config.SAMPLES_HIGH, 0.05, MAX_VELOCITY, MAX_ACCELERATION, MAX_JERK);
-  }
+  	}
 
-  public static class PIDs {
-  	public static final PID DRIVE_ANGLE_FRONT_LEFT = new PID(4.9, 0.0, 4.0, "PID Front Left");
+	public static class PIDs {
+  		public static final PID DRIVE_ANGLE_FRONT_LEFT = new PID(4.9, 0.0, 4.0, "PID Front Left");
 		public static final PID DRIVE_ANGLE_FRONT_RIGHT = new PID(3.8, 0.0, 4.0, "PID Front Right");
 		public static final PID DRIVE_ANGLE_BACK_LEFT = new PID(5.4, 0.0, 4.3, "PID Back Left");
 		public static final PID DRIVE_ANGLE_BACK_RIGHT = new PID(5.4, 0.0, 4.3, "PID Back Right");
@@ -46,11 +46,10 @@ public class RobotMap {
 		public static final PID DRIVE_MODE_SPEED = new PID(0.0, 0.0, 0.0, "PID Mode Speed");
 		public static final PID DRIVE_MODE_RATE = new PID(0.05, 0.0, 0.025, 0.3, "PID Mode Rate");
 		public static final PID DRIVE_MODE_DISTANCE = new PID(0.22, 0.0, 0.0, "PID Front Distance");
+  	}
 
-  }
-
-  public static class CAN {
-  	public static final int CANIFIER = 0;
+	public static class CAN {
+  		public static final int CANIFIER = 0;
 
 		public static final int DRIVE_FRONT_LEFT_DRIVE = 4;
 		public static final int DRIVE_FRONT_LEFT_ANGLE = 3;
@@ -59,12 +58,23 @@ public class RobotMap {
 		public static final int DRIVE_BACK_LEFT_DRIVE = 5;
 		public static final int DRIVE_BACK_LEFT_ANGLE = 6;
 		public static final int DRIVE_BACK_RIGHT_DRIVE = 8;
-  	public static final int DRIVE_BACK_RIGHT_ANGLE = 7;
-  }
+		public static final int DRIVE_BACK_RIGHT_ANGLE = 7;
 
-  public static class VISION {
+		public static final int MANIPULATOR_WRIST = 9;
+		public static final int MANIPULATOR_SHOULDER = 10;
+	}
+
+	public static class VISION {
 		public static final int TARGET_CAM_PORT = 0;
 		public static final int TARGET_CAM_WIDTH = 320;
 		public static final int TARGET_CAM_HEIGHT = 240;
-  } 
+	}
+	
+	public static class PNEUMATICS {
+		public static final int COMPRESSOR = 0;
+		public static final int SOLENOID1 = 0;
+		public static final int SOLENOID2 = 1;
+		public static final int SOLENOID3 = 2;
+	}
+
 }

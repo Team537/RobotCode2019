@@ -1,6 +1,5 @@
 package frc.robot.subsystems;
 
-
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -12,8 +11,8 @@ public class Photosensor extends Subsystem {
   public DigitalInput sensorLeft = new DigitalInput(3);
 
   public void onWhiteLine(boolean right, boolean left){
-      SmartDashboard.putBoolean("Right On line?", right);
-      SmartDashboard.putBoolean("Left On line?", left);
+    SmartDashboard.putBoolean("Right On line?", right);
+    SmartDashboard.putBoolean("Left On line?", left);
   }
 
   @Override
