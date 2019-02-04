@@ -13,6 +13,14 @@ public class RobotMap {
 		public static final int JOYSTICK_SECONDARY = 1;
 	}
 
+	public static class SUBSYSTEMS {
+		public static final boolean ARM = true;
+		public static final boolean COLLECTOR = true;
+		public static final boolean CAMERA = true;
+		public static final boolean PHOTOSENSOR = false;
+		public static final boolean GYRO = true;
+	}
+
 	public static class ROBOT {
 		public static final double LED_BRIGHTNESS = 0.5;
 

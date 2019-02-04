@@ -28,13 +28,26 @@ public class Robot extends TimedRobot {
  
   @Override
   public void robotInit() {
+    
     m_drivetrain = new Drivetrain();
-    m_gyro = new Gyro();
-    m_photosensor = new Photosensor();
-    m_collector = new Collector();
-    m_arm = new ManipulatorArm();
-
     m_oi = new OI();
+
+    if(RobotMap.SUBSYSTEMS.GYRO){
+      m_gyro = new Gyro();
+    }
+
+    if(RobotMap.SUBSYSTEMS.PHOTOSENSOR){
+      m_photosensor = new Photosensor();
+    }
+
+    if(RobotMap.SUBSYSTEMS.COLLECTOR) {
+      m_collector = new Collector();
+    }
+
+    if(RobotMap.SUBSYSTEMS.ARM) {
+      m_arm = new ManipulatorArm();
+    }
+
     //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
