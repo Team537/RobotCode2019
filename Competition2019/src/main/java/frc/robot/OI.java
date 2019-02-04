@@ -30,11 +30,10 @@ public class OI {
 
 
     if(RobotMap.SUBSYSTEMS.ARM) {
-
     }
 
     if(RobotMap.SUBSYSTEMS.CAMERA) {
-      
     }
+    
   } 
 }
