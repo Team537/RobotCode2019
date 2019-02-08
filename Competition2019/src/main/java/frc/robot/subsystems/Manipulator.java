@@ -20,6 +20,7 @@ public class Manipulator extends Subsystem {
     
     public WPI_TalonSRX shoulder = new WPI_TalonSRX(RobotMap.CAN.MANIPULATOR_SHOULDER);
     public WPI_TalonSRX wrist = new WPI_TalonSRX(RobotMap.CAN.MANIPULATOR_WRIST);
+<<<<<<< HEAD
     public IJoystick armTriggerLeft = new JoystickExtreme(JoystickF310.Keys.BUMPER_LEFT);
     public IJoystick armTriggerRight = new JoystickExtreme(JoystickF310.Keys.BUMPER_RIGHT);
     public IJoystick wristTriggerRight = new JoystickExtreme(JoystickF310.Axis.RIGHT_TRIGGER);
@@ -34,5 +35,13 @@ public class Manipulator extends Subsystem {
 		setDefaultCommand(new Manipulate());
 	}
 
+=======
+    public static int curr = 0;
+
+    @Override
+    protected void initDefaultCommand() {
+        setDefaultCommand(new Manipulate(Manipulate.DOWN));
+    }
+>>>>>>> 4e80565e7afc4de3b175e4447a6fc307056b130a
 
 }

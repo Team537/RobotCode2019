@@ -20,7 +20,10 @@ public class Robot extends TimedRobot {
   public static Gyro m_gyro;
   public static Photosensor m_photosensor;
   public static Manipulator m_manipulator;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4e80565e7afc4de3b175e4447a6fc307056b130a
   public static OI m_oi;
   
  // TalonSRX manipulator_talon = new TalonSRX(1); // small motor

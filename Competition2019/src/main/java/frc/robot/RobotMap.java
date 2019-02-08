@@ -68,7 +68,6 @@ public class RobotMap {
   public static class VISION {
 		public static final int TARGET_CAM_PORT = 0;
 		public static final int TARGET_CAM_WIDTH = 320;
-
 		public static final int TARGET_CAM_HEIGHT = 240;
   } 
 }
