@@ -16,7 +16,7 @@ public class JoystickExtreme extends IJoystick {
 		public static final int BASE_9 = 9;
 		public static final int BASE_10 = 10;
 		public static final int BASE_11 = 11;
-		public static final int BASE_12 = 12;
+		public static final int BASE_12 = 12; 
 	}
 
 	public class Axis {

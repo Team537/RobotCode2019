@@ -1,6 +1,9 @@
 package frc.robot;
 
 
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -8,6 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Gyro;
+import frc.robot.subsystems.Manipulator;
 import frc.robot.subsystems.Photosensor;
 
 
@@ -15,7 +19,12 @@ public class Robot extends TimedRobot {
   public static Drivetrain m_drivetrain;
   public static Gyro m_gyro;
   public static Photosensor m_photosensor;
+  public static Manipulator m_manipulator;
+
   public static OI m_oi;
+  
+ // TalonSRX manipulator_talon = new TalonSRX(1); // small motor
+ //Joystick JoyS = new Joystick(0);
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -26,11 +35,16 @@ public class Robot extends TimedRobot {
     m_drivetrain = new Drivetrain();
     m_gyro = new Gyro();
     m_photosensor = new Photosensor();
+    m_manipulator = new Manipulator();
 
     m_oi = new OI();
     //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
+  }
+
+  public static Manipulator manipulator() {
+    return m_manipulator;
   }
 
   @Override
