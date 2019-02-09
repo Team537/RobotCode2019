@@ -3,20 +3,12 @@ package frc.robot.commands;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.command.Command;
-<<<<<<< HEAD
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.joysticks.JoystickF310;
-
 import static frc.robot.Robot.m_manipulator;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-=======
-import frc.robot.Maths;
-import frc.robot.Robot;
-import frc.robot.subsystems.Manipulator;
->>>>>>> 4e80565e7afc4de3b175e4447a6fc307056b130a
-
-public class Manipulate extends Command {
+public class CommandManipulate extends Command {
 
     public static boolean UP = true;
     public static boolean DOWN = false;
@@ -24,12 +16,12 @@ public class Manipulate extends Command {
     public boolean finished = false;
     public boolean dir;
 
-    public Manipulate(boolean dir) {
+    public CommandManipulate(boolean dir) { // possible dir error
         requires(Robot.m_manipulator);
         this.dir = dir;
     }
 
-    public Manipulate() {
+    public CommandManipulate() {
         
     }
 
@@ -46,6 +38,7 @@ public class Manipulate extends Command {
                 
             }
         });
+        return 0;
     }
 
     public static double[] getRange(int setting) {
@@ -89,14 +82,6 @@ public class Manipulate extends Command {
         return finished;
     }
 
-    @Override
-    protected void execute() {
-        if (dir)
-            Manipulator.curr--;
-        else
-            Manipulator.curr++;
-        Manipulator.curr = Maths.clampInt(Manipulator.curr, 0, 0);
-        Robot.m_manipulator.sholder.set(ControlMode.PercentOutput, 0.5D * Manipulator.curr);
+    
     }
 
-}
