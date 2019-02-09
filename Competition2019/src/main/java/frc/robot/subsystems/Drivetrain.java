@@ -5,6 +5,8 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
@@ -52,8 +54,9 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 		private double m_setpointAngle;
 		private double m_setpointDrive;
 		private SwerveMode m_swerveMode;
+		private AnalogInput m_magSense;
 
-		public SwerveModule(String name, boolean enabled, int portAngle, int portDrive, PID pidAngle) {
+		public SwerveModule(String name, boolean enabled, int portAngle, int portDrive, int portSensor, PID pidAngle) {
 			m_name = name;
 			m_enabled = enabled;
 			m_talonAngle = new WPI_TalonSRX(portAngle);
@@ -64,6 +67,8 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 			m_setpointAngle = 0.0;
 			m_setpointDrive = 0.0;
 			m_swerveMode = SwerveMode.ModeSpeed;
+			m_magSense = new AnalogInput(portSensor);
+			
 
 			if (!enabled) {
 				DriverStation.reportError("Module is set to be disabled: " + m_name, false);
@@ -85,6 +90,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 			m_talonDrive.enableCurrentLimit(false);
 			m_talonDrive.configPeakCurrentDuration(0, RobotMap.kTimeoutMs); // 10
 			m_talonDrive.configPeakCurrentLimit(0, RobotMap.kTimeoutMs); // 40
+			
 			
 		//	int absolutePosition = m_talonAngle.getSensorCollection().getPulseWidthPosition() & 0xFFF; 
 		//	m_talonAngle.getSensorCollection().setPulseWidthPosition(absolutePosition, RobotMap.kTimeoutMs); // talonAngle.setEncPosition(absolutePosition);
@@ -186,6 +192,21 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 			m_talonDrive.setSelectedSensorPosition(0, RobotMap.kPIDLoopIdx, RobotMap.kTimeoutMs);
 			stop();
 		}
+
+		public boolean findZero() {
+			double volts = m_magSense.getVoltage();
+			boolean atZero;
+			if(volts > 3.50) {
+				reset();
+				atZero = true;
+			} else {
+				m_talonAngle.set(ControlMode.PercentOutput, 0.30);
+				atZero = false;
+			}
+
+			return atZero;
+
+		}
 	
 		public void stop() {
 			m_talonDrive.set(ControlMode.PercentOutput, 0.0);
@@ -195,28 +216,29 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 	
 	public SwerveModule m_frontLeft = new SwerveModule(
 		"Front Left", true, 
-		RobotMap.CAN.DRIVE_FRONT_LEFT_ANGLE, RobotMap.CAN.DRIVE_FRONT_LEFT_DRIVE,
+		RobotMap.CAN.DRIVE_FRONT_LEFT_ANGLE, RobotMap.CAN.DRIVE_FRONT_LEFT_DRIVE, RobotMap.ANALOG_INPUT.FRONT_LEFT,
 		RobotMap.PIDs.DRIVE_ANGLE_FRONT_LEFT
 	);
 	public SwerveModule m_frontRight = new SwerveModule(
 		"Front Right", true, 
-		RobotMap.CAN.DRIVE_FRONT_RIGHT_ANGLE, RobotMap.CAN.DRIVE_FRONT_RIGHT_DRIVE,
+		RobotMap.CAN.DRIVE_FRONT_RIGHT_ANGLE, RobotMap.CAN.DRIVE_FRONT_RIGHT_DRIVE, RobotMap.ANALOG_INPUT.FRONT_RIGHT,
 		RobotMap.PIDs.DRIVE_ANGLE_FRONT_RIGHT
 	);
 	public SwerveModule m_backLeft = new SwerveModule(
 		"Back Left", true, 
-		RobotMap.CAN.DRIVE_BACK_LEFT_ANGLE, RobotMap.CAN.DRIVE_BACK_LEFT_DRIVE,
+		RobotMap.CAN.DRIVE_BACK_LEFT_ANGLE, RobotMap.CAN.DRIVE_BACK_LEFT_DRIVE, RobotMap.ANALOG_INPUT.BACK_LEFT, 
 		RobotMap.PIDs.DRIVE_ANGLE_BACK_LEFT
 	);
 	public SwerveModule m_backRight = new SwerveModule(
 		"Back Right", true, 
-		RobotMap.CAN.DRIVE_BACK_RIGHT_ANGLE, RobotMap.CAN.DRIVE_BACK_RIGHT_DRIVE,
+		RobotMap.CAN.DRIVE_BACK_RIGHT_ANGLE, RobotMap.CAN.DRIVE_BACK_RIGHT_DRIVE, RobotMap.ANALOG_INPUT.BACK_RIGHT,
 		RobotMap.PIDs.DRIVE_ANGLE_BACK_RIGHT
 	);
 	private PIDController m_controllerRotate;
 
 	
 	public Drivetrain() {
+		/*
 		m_controllerRotate = new PIDController(RobotMap.PIDs.DRIVE_ROTATE.getP(), RobotMap.PIDs.DRIVE_ROTATE.getI(), RobotMap.PIDs.DRIVE_ROTATE.getD(),
 			Robot.m_gyro, this);
 		m_controllerRotate.setInputRange(0.0, 360.0);
@@ -224,7 +246,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 		m_controllerRotate.setPercentTolerance(0.07);
 		m_controllerRotate.setContinuous();
 		m_controllerRotate.disable();
-		
+		*/
 		DriverStation.reportError("Is FMS Attached: " + DriverStation.getInstance().isFMSAttached(), false);
 
 		if (DriverStation.getInstance().isFMSAttached()) {
@@ -240,7 +262,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 	}
 	
 	public void setTarget(double gyro, double rotation, double strafe, double forward) {
-		if (m_controllerRotate.isEnabled()) {
+		if (false) if (m_controllerRotate.isEnabled()) {
 			rotation = m_controllerRotate.get();
 		}
 
@@ -316,13 +338,15 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 	}
 	
 	public void setControllerRotate(double setpoint) {
-		if (!m_controllerRotate.isEnabled()) {
+		if (false) if (!m_controllerRotate.isEnabled()) {
 			m_controllerRotate.reset();
 			m_controllerRotate.enable();
 		}
+		if (false) {
+			m_controllerRotate.setPID(RobotMap.PIDs.DRIVE_ROTATE.getP(), RobotMap.PIDs.DRIVE_ROTATE.getI(), RobotMap.PIDs.DRIVE_ROTATE.getD());
+			m_controllerRotate.setSetpoint(setpoint);
+		}
 		
-		m_controllerRotate.setPID(RobotMap.PIDs.DRIVE_ROTATE.getP(), RobotMap.PIDs.DRIVE_ROTATE.getI(), RobotMap.PIDs.DRIVE_ROTATE.getD());
-		m_controllerRotate.setSetpoint(setpoint);
 	}
 	
 	public void recalibrate() {
@@ -353,6 +377,21 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 		m_backRight.reset();
 		m_frontLeft.reset();
 		m_frontRight.reset();
+	}
+
+	public boolean findZero() {
+
+		m_backRight.findZero();
+		m_backLeft.findZero();
+		m_frontRight.findZero();
+		m_frontLeft.findZero();
+
+		if (m_backLeft.findZero() && m_backRight.findZero() && m_frontLeft.findZero() && m_frontRight.findZero()) {
+			return true;
+		} else {
+			return false;
+		}
+		
 	}
 	
 	public void stop() {

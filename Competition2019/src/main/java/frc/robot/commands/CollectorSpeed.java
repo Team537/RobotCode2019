@@ -5,7 +5,7 @@ import frc.robot.Robot;
 
 public class CollectorSpeed extends Command {
 
-  double inSpeed;
+  private double inSpeed;
 
   public CollectorSpeed(double collectSpeed) {
     requires(Robot.m_collector);

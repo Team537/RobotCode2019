@@ -3,18 +3,11 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
-import com.ctre.phoenix.motorcontrol.WPI_MotorSafetyImplem;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.sun.javadoc.RootDoc;
 
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
-import edu.wpi.first.wpilibj.PIDOutput;
-import edu.wpi.first.wpilibj.PIDSource;
-import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.ArmDefault;
 
@@ -39,7 +32,6 @@ public class ManipulatorArm extends Subsystem {
     m_shoulder.enableCurrentLimit(false);
     m_shoulder.configPeakCurrentDuration(0, RobotMap.kTimeoutMs); // 10
     m_shoulder.configPeakCurrentLimit(0, RobotMap.kTimeoutMs); // 30
-
   }
 
   public void dashboard() {

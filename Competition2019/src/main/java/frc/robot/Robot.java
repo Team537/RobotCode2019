@@ -1,7 +1,6 @@
 package frc.robot;
 
 
-import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -19,7 +18,7 @@ public class Robot extends TimedRobot {
   public static Gyro m_gyro;
   public static Photosensor m_photosensor;
   public static OI m_oi;
-  public static Collector m_collector;
+  public static Collector m_collector = new Collector();
   public static ManipulatorArm m_arm;
 
   Command m_autonomousCommand;
@@ -28,8 +27,10 @@ public class Robot extends TimedRobot {
  
   @Override
   public void robotInit() {
+    if(RobotMap.SUBSYSTEMS.DRIVE) {
+      m_drivetrain = new Drivetrain();
+    }
     
-    m_drivetrain = new Drivetrain();
     m_oi = new OI();
 
     if(RobotMap.SUBSYSTEMS.GYRO){
@@ -40,6 +41,7 @@ public class Robot extends TimedRobot {
       m_photosensor = new Photosensor();
     }
 
+    
     if(RobotMap.SUBSYSTEMS.COLLECTOR) {
       m_collector = new Collector();
     }

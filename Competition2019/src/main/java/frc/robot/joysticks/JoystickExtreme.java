@@ -33,6 +33,7 @@ public class JoystickExtreme extends IJoystick {
 		add("DriveForward", new ValueUsage(Axis.STICK_Y, true));
 		add("DriveLock", new ValueUsage(Keys.INDEX_TRIGGER));
 		add("Pivot", new ValueUsage(Keys.THUMB_TRIGGER));
+		add("ResetDrive", new ValueUsage(Keys.BASE_9));
 	}
 	
 	@Override

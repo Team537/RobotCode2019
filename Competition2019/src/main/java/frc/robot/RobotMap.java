@@ -1,7 +1,5 @@
 package frc.robot;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 public class RobotMap {
 
 	public static final int kSlotIdx = 0;
@@ -14,11 +12,12 @@ public class RobotMap {
 	}
 
 	public static class SUBSYSTEMS {
-		public static final boolean ARM = true;
-		public static final boolean COLLECTOR = true;
+		public static final boolean ARM = false;
+		public static final boolean COLLECTOR = false;
 		public static final boolean CAMERA = true;
 		public static final boolean PHOTOSENSOR = false;
-		public static final boolean GYRO = true;
+		public static final boolean GYRO = false;
+		public static final boolean DRIVE = false;
 	}
 
 	public static class ROBOT {
@@ -43,7 +42,8 @@ public class RobotMap {
   	}
 
 	public static class PIDs {
-  		public static final PID DRIVE_ANGLE_FRONT_LEFT = new PID(4.9, 0.0, 4.0, "PID Front Left");
+		//public static final PID DRIVE_ANGLE_FRONT_LEFT = new PID(4.9, 0.0, 4.0, "PID Front Left");
+		public static final PID DRIVE_ANGLE_FRONT_LEFT = new PID(3.0, 0.0, 2.3, "PID Front Left");
 		public static final PID DRIVE_ANGLE_FRONT_RIGHT = new PID(3.8, 0.0, 4.0, "PID Front Right");
 		public static final PID DRIVE_ANGLE_BACK_LEFT = new PID(5.4, 0.0, 4.3, "PID Back Left");
 		public static final PID DRIVE_ANGLE_BACK_RIGHT = new PID(5.4, 0.0, 4.3, "PID Back Right");
@@ -62,14 +62,16 @@ public class RobotMap {
 	public static class CAN {
   		public static final int CANIFIER = 0;
 
-		public static final int DRIVE_FRONT_LEFT_DRIVE = 4;
-		public static final int DRIVE_FRONT_LEFT_ANGLE = 3;
-		public static final int DRIVE_FRONT_RIGHT_DRIVE = 1;
-		public static final int DRIVE_FRONT_RIGHT_ANGLE = 2;
-		public static final int DRIVE_BACK_LEFT_DRIVE = 5;
-		public static final int DRIVE_BACK_LEFT_ANGLE = 6;
-		public static final int DRIVE_BACK_RIGHT_DRIVE = 8;
-		public static final int DRIVE_BACK_RIGHT_ANGLE = 7;
+		public static final int DRIVE_FRONT_LEFT_DRIVE = 1;
+		public static final int DRIVE_FRONT_LEFT_ANGLE = 2;
+		public static final int DRIVE_BACK_LEFT_DRIVE = 3;
+		public static final int DRIVE_BACK_LEFT_ANGLE = 4;
+
+		public static final int DRIVE_BACK_RIGHT_ANGLE = 5;
+		public static final int DRIVE_BACK_RIGHT_DRIVE = 6;
+		public static final int DRIVE_FRONT_RIGHT_ANGLE = 7;
+		public static final int DRIVE_FRONT_RIGHT_DRIVE = 8;
+
 
 		public static final int MANIPULATOR_WRIST = 9;
 		public static final int MANIPULATOR_SHOULDER = 10;
@@ -88,10 +90,18 @@ public class RobotMap {
 	}
 	
 	public static class PNEUMATICS {
-		public static final int COMPRESSOR = 0;
+		public static final int COMPRESSOR = 1;
 		public static final int SOLENOID1 = 0;
 		public static final int SOLENOID2 = 1;
 		public static final int SOLENOID3 = 2;
+	}
+
+	public static class ANALOG_INPUT {
+		public static final int FRONT_LEFT = 0;
+		public static final int FRONT_RIGHT = 1;
+		public static final int BACK_LEFT = 2;
+		public static final int BACK_RIGHT = 3;
+
 	}
 
 }

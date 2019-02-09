@@ -12,7 +12,7 @@ public class CollectorTilt extends Command {
 
   @Override
   protected void initialize() {
-      Robot.m_collector.tilt();
+    Robot.m_collector.tilt();
   }
 
   @Override
