@@ -61,6 +61,13 @@ public class Manipulate extends Command {
 
     @Override
     protected void execute() {
+        if (m_manipulator.armTriggerRight.getRawButton(6)) {
+            setting++;
+        }
+        if (m_manipulator.armTriggerRight.getRawButton(5)) {
+            setting--;
+        }
+        setting = Maths.clampInt(setting, 0, 2);
         {
             double d = calcFromRaw(m_manipulator.wrist.getSensorCollection().getAnalogInRaw());
             System.out.println("Wrist: " + d);
