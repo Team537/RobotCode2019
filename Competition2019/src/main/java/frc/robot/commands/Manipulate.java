@@ -45,14 +45,17 @@ public class Manipulate extends Command {
         return false;
     }
 
-    public static double dstFrmRange(double val, double[] range) {
+    public static double dstFrmSetting(double val) {
         try {
-            double min = range[0];
-            double max = range[1];
-            if (val < min)
-                return min - val;
-            else if (val > max) {
-                return val - max;
+            double whatever = 0.5D;
+            if (setting == 0)
+                whatever = 0D;
+            else if (setting == 2)
+                whatever = 1D;
+            if (val < whatever)
+                return whatever - val;
+            else if (val > whatever) {
+                return val - whatever;
             }
         } catch (Exception e) {
 
@@ -79,7 +82,7 @@ public class Manipulate extends Command {
             if (!isInRange(d, getRange())) {
                 m_manipulator.wrist.set(ControlMode.PercentOutput, 0D);
             } else {
-                m_manipulator.wrist.set(ControlMode.PercentOutput, Maths.clamp(dstFrmRange(d, getRange()) * RobotMap.ROBOT.MANIPULATOR_SPEED, 0.05D, 1D));
+                m_manipulator.wrist.set(ControlMode.PercentOutput, Maths.clamp(dstFrmSetting(d) * RobotMap.ROBOT.MANIPULATOR_SPEED, 0.035D, 1D));
             }
         }
         {
@@ -88,7 +91,7 @@ public class Manipulate extends Command {
             if (!isInRange(d, getRange())) {
                 m_manipulator.shoulder.set(ControlMode.PercentOutput, 0D);
             } else {
-                m_manipulator.shoulder.set(ControlMode.PercentOutput, Maths.clamp(dstFrmRange(d, getRange()) * RobotMap.ROBOT.MANIPULATOR_SPEED, 0.05D, 1D));
+                m_manipulator.shoulder.set(ControlMode.PercentOutput, Maths.clamp(dstFrmSetting(d) * RobotMap.ROBOT.MANIPULATOR_SPEED, 0.035D, 1D));
             }
         }
         /*if (m_manipulator.armTriggerRight.getRawButton(6))
