@@ -1,21 +1,27 @@
 package frc.robot.commands;
 
+
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class CommandsBallCollection extends Command {
-    public void BallCollection(){
-     requires(Robot.ballCollector);
+
+
+public class BallCollection extends Command {
+    double inTakeSpeed;
+
+    public BallCollection(double speed){
+     requires(Robot.m_collector);
+     this.inTakeSpeed = speed;
     }
 
 @Override
 protected void initialize() {
-    Robot.ballCollector.reset();
+    Robot.m_collector.reset();
     }
 
 @Override
 protected void execute() {
-
+    Robot.m_collector.setSpeed(inTakeSpeed);
     }
 
 @Override
@@ -25,7 +31,7 @@ protected void execute() {
     
   @Override
   protected void end() {
-      Robot.ballCollector.disable();
+      Robot.m_collector.disable();
   }
 
   @Override
