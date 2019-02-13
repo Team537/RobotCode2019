@@ -12,12 +12,11 @@ public class DriveReset extends Command {
 
   @Override
   protected void initialize() {
-    Robot.m_drivetrain.findZero();
+    Robot.m_drivetrain.stop();
   }
 
   @Override
   protected void execute() {
-
     Robot.m_drivetrain.findZero();
     
     if(Robot.m_drivetrain.findZero()){
@@ -32,11 +31,11 @@ public class DriveReset extends Command {
 
   @Override
   protected void end() {
-    //Robot.m_drivetrain.stop();
+    Robot.m_drivetrain.stop();
   }
 
   @Override
   protected void interrupted() {
-    //Robot.m_drivetrain.stop();
+    Robot.m_drivetrain.stop();
   }
 }

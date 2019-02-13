@@ -80,6 +80,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 			m_talonAngle.config_kD(RobotMap.kPIDLoopIdx, pidAngle.getD(), RobotMap.kTimeoutMs);
 			m_talonAngle.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 10, RobotMap.kTimeoutMs);
 			m_talonAngle.enableCurrentLimit(false);
+			m_talonAngle.setSensorPhase(false);
 			m_talonAngle.configPeakCurrentDuration(0, RobotMap.kTimeoutMs); // 10
 			m_talonAngle.configPeakCurrentLimit(0, RobotMap.kTimeoutMs); // 30
 			
@@ -105,7 +106,10 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 			m_currentAngle = m_talonAngle.getSelectedSensorPosition(RobotMap.kPIDLoopIdx);
 			m_currentPosition = m_talonDrive.getSelectedSensorPosition(RobotMap.kPIDLoopIdx);
 			m_currentVelocity = m_talonDrive.getSelectedSensorVelocity(RobotMap.kPIDLoopIdx);
-	
+			
+			SmartDashboard.putNumber("Current Angle: " + m_name, (m_currentAngle / 360));
+			SmartDashboard.putNumber("Current Velocity: " + m_name, m_currentVelocity);
+			
 			// Sets the setpoint, on 537 swerve angles are negated.
 			m_setpointAngle = -angle;
 			m_setpointDrive = drive;
@@ -114,6 +118,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 			m_setpointAngle = 4096.0 * (m_setpointAngle / 360.0);
 			double angleError = m_currentAngle - m_setpointAngle;
 			
+			SmartDashboard.putNumber("Angle Error" + m_name, angleError);
 			// If the setpoint error is half a rotation ahead or behind modify range for closer setpoint.
 			if (angleError < -2048.0) {
 				m_setpointAngle -= 4096.0;
@@ -210,7 +215,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 	
 		public void stop() {
 			m_talonDrive.set(ControlMode.PercentOutput, 0.0);
-			m_swerveMode = SwerveMode.ModeSpeed;
+			//m_swerveMode = SwerveMode.ModeSpeed;
 		}
 	}
 	
@@ -266,6 +271,10 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 			rotation = m_controllerRotate.get();
 		}
 
+		SmartDashboard.putNumber("Y ", forward);
+		SmartDashboard.putNumber("Z ", rotation);
+		SmartDashboard.putNumber("X ", strafe);
+
 		boolean driverControl = isDriverControl();
 		double fwd2 = (forward * Math.cos(gyro)) + strafe * Math.sin(gyro);
 		double str2 = (-forward * Math.sin(gyro)) + strafe * Math.cos(gyro);
@@ -295,12 +304,15 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 			brs /= maxSpeed;
 		}
 		
+		/*
 		if ((driverControl && !isAtAngle(60.0)) || (!driverControl && !isAtAngle(8.0))) {
 			fls = 0.0;
 			frs = 0.0;
 			bls = 0.0;
 			brs = 0.0;
-		}
+		}*/
+
+		SmartDashboard.putNumber("WheelSpeed", fls);
 
 		m_frontLeft.setTarget(fla, fls * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
 		m_frontRight.setTarget(fra, frs * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
@@ -395,7 +407,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 	}
 	
 	public void stop() {
-		m_controllerRotate.disable();
+		//m_controllerRotate.disable();
 		m_backLeft.stop();
 		m_backRight.stop();
 		m_frontLeft.stop();

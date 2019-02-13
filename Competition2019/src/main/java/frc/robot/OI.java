@@ -1,5 +1,6 @@
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.CollectorSpeed;
@@ -14,6 +15,7 @@ public class OI {
   public IJoystick m_main;
   public IJoystick m_secondary;
   public IJoystick m_test;
+  //public Joystick stick = new Joystick(1);
 
   public OI(){
     this.m_main = new JoystickExtreme(RobotMap.INTERFACE.JOYSTICK_MAIN);  
