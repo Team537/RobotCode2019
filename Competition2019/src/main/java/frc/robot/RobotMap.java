@@ -28,7 +28,7 @@ public class RobotMap {
 		public static final double MAX_ACCELERATION = 2.0; // m/s/s
 	  public static final double MAX_JERK = 60.0; // m/s/s/s
 	  
-		public static final double MANIPULATOR_SPEED = 0.5; // % 0-1
+		public static final double MANIPULATOR_SPEED = 3.5D; // Making this higher will increase speed, but decrease accuracy
 	  
 
 		//public static final Trajectory.Config TRAJECTORY_CONFIG = new Trajectory.Config(Trajectory.FitMethod.HERMITE_CUBIC, Trajectory.Config.SAMPLES_HIGH, 0.05, MAX_VELOCITY, MAX_ACCELERATION, MAX_JERK);

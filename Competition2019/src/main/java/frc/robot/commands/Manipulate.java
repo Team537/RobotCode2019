@@ -7,6 +7,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Maths;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class Manipulate extends Command {
 
@@ -78,7 +79,7 @@ public class Manipulate extends Command {
             if (!isInRange(d, getRange())) {
                 m_manipulator.wrist.set(ControlMode.PercentOutput, 0D);
             } else {
-                m_manipulator.wrist.set(ControlMode.PercentOutput, Maths.clamp(dstFrmRange(d, getRange()), 0.05D, 1D));
+                m_manipulator.wrist.set(ControlMode.PercentOutput, Maths.clamp(dstFrmRange(d, getRange()) * RobotMap.ROBOT.MANIPULATOR_SPEED, 0.05D, 1D));
             }
         }
         {
@@ -87,7 +88,7 @@ public class Manipulate extends Command {
             if (!isInRange(d, getRange())) {
                 m_manipulator.shoulder.set(ControlMode.PercentOutput, 0D);
             } else {
-                m_manipulator.shoulder.set(ControlMode.PercentOutput, Maths.clamp(dstFrmRange(d, getRange()), 0.05D, 1D));
+                m_manipulator.shoulder.set(ControlMode.PercentOutput, Maths.clamp(dstFrmRange(d, getRange()) * RobotMap.ROBOT.MANIPULATOR_SPEED, 0.05D, 1D));
             }
         }
         /*if (m_manipulator.armTriggerRight.getRawButton(6))
