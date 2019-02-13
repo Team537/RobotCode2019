@@ -8,7 +8,7 @@ import frc.robot.RobotMap;
 import frc.robot.joysticks.JoystickF310;
 import static frc.robot.Robot.m_manipulator;
 
-public class CommandManipulate extends Command {
+public class Manipulate extends Command {
 
     public static boolean UP = true;
     public static boolean DOWN = false;
@@ -16,12 +16,12 @@ public class CommandManipulate extends Command {
     public boolean finished = false;
     public boolean dir;
 
-    public CommandManipulate(boolean dir) { // possible dir error
+    public Manipulate(boolean dir) { // possible dir error
         requires(Robot.m_manipulator);
         this.dir = dir;
     }
 
-    public CommandManipulate() {
+    public Manipulate() {
         
     }
 

@@ -7,12 +7,12 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Maths;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
-import frc.robot.commands.CommandManipulate;
+import frc.robot.commands.Manipulate;
 import frc.robot.joysticks.IJoystick;
 import frc.robot.joysticks.JoystickExtreme;
 import frc.robot.joysticks.JoystickF310;
 
-public class SubsystemManipulator extends Subsystem {
+public class ManipulatorArm extends Subsystem {
     
     public static final int LOW = 0;
     public static final int MEDIUM = 1;
@@ -28,20 +28,20 @@ public class SubsystemManipulator extends Subsystem {
     public IJoystick wristTriggerRight = new JoystickExtreme(JoystickF310.Axis.RIGHT_TRIGGER);
     public IJoystick wristTriggerLeft = new JoystickExtreme(JoystickF310.Axis.LEFT_TRIGGER);
         
-    public SubsystemManipulator() {
+    public ManipulatorArm() {
             if (dir) // possible dir error
-                SubsystemManipulator.curr--;
+                ManipulatorArm.curr--;
             else
-            SubsystemManipulator.curr++;
-                SubsystemManipulator.curr = Maths.clampInt(SubsystemManipulator.curr, 0, 0);
-            Robot.m_manipulator.armTriggerRight.set(ControlMode.PercentOutput, 0.5D * SubsystemManipulator.curr);
+            ManipulatorArm.curr++;
+                ManipulatorArm.curr = Maths.clampInt(ManipulatorArm.curr, 0, 0);
+            Robot.m_manipulator.armTriggerRight.set(ControlMode.PercentOutput, 0.5D * ManipulatorArm.curr);
         }
     
     
 
     @Override
 	protected void initDefaultCommand() {
-		setDefaultCommand(new CommandManipulate());
+		setDefaultCommand(new Manipulate());
 	}
 
 
