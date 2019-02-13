@@ -61,11 +61,15 @@ public class Manipulate extends Command {
 
     @Override
     protected void execute() {
-        if (m_manipulator.armTriggerRight.getRawButton(6)) {
-            setting++;
-        }
-        if (m_manipulator.armTriggerRight.getRawButton(5)) {
-            setting--;
+        if (lastMillis + 400 > System.currentTimeMillis()) {
+            if (m_manipulator.armTriggerRight.getRawButton(6)) {
+                setting++;
+                lastMillis = System.currentTimeMillis();
+            }
+            if (m_manipulator.armTriggerRight.getRawButton(5)) {
+                setting--;
+                lastMillis = System.currentTimeMillis();
+            }
         }
         setting = Maths.clampInt(setting, 0, 2);
         {
