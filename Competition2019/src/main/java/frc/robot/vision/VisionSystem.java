@@ -1,9 +1,15 @@
 package frc.robot.vision;
 
+import org.opencv.core.Rect;
+import org.opencv.imgproc.Imgproc;
+
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.vision.VisionThread;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Robot;
 import frc.robot.commands.VisionAlignTarget;
 
 public class VisionSystem extends Subsystem {
@@ -17,7 +23,8 @@ public class VisionSystem extends Subsystem {
 	public double centerX;
 	public boolean current;
 	public static boolean targetFound;
-	private Rect r;
+  private Rect r;
+  private Rect r2;
 	public double alignRate;
 	public static double rate;
 	
@@ -37,16 +44,19 @@ public class VisionSystem extends Subsystem {
     return output;
   }
 
-  visionFind = new VisionThread(Robot.subsystemCamera.getUsbCamera(), new NewVision(), pipeline -> {
+  public VisionSystem() {
+  visionFind = new VisionThread(Robot.m_camera.getUsbCameraDown(), new VisionPipelineGenerated(), pipeline -> {
     if (!pipeline.filterContoursOutput().isEmpty()) {
       r = Imgproc.boundingRect(pipeline.filterContoursOutput().get(0));
-      r2 = Im
+      r2 = Imgproc.boundingRect(pipeline.filterContoursOutput().get(1));
       synchronized (imgLock) {
         
         //centerX = r.x + (r.width / 2);
         //rate = (centerX - (RobotMap.Vision.IMG_WIDTH))
         
-        double halfWidth = (double) r.width / 2.0;
+        double halfWidth1 = (double) r.width / 2.0;
+        double halfWidth = (double) r2.width/ 2.0;
+    
         //rate = (((double) r.x - halfWidth) / halfWidth);
 
         double pos = ((double) r.x - halfWidth);
@@ -59,12 +69,13 @@ public class VisionSystem extends Subsystem {
         
       } 
     } 
-});
+  });
+  }
   
 
 
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new VisionAlignTarget());
+    //setDefaultCommand(new VisionAlignTarget());
   }
 }

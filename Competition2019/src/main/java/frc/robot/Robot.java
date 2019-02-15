@@ -1,11 +1,11 @@
 package frc.robot;
 
-
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.subsystems.Camera;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Gyro;
@@ -18,8 +18,9 @@ public class Robot extends TimedRobot {
   public static Gyro m_gyro;
   public static Photosensor m_photosensor;
   public static OI m_oi;
-  public static Collector m_collector = new Collector();
+  public static Collector m_collector;
   public static ManipulatorArm m_arm;
+  public static Camera m_camera;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -48,6 +49,10 @@ public class Robot extends TimedRobot {
 
     if(RobotMap.SUBSYSTEMS.ARM) {
       m_arm = new ManipulatorArm();
+    }
+
+    if(RobotMap.SUBSYSTEMS.CAMERA) {
+      m_camera = new Camera();
     }
 
     //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
