@@ -9,13 +9,13 @@ import frc.robot.Maths;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
-public class Manipulate extends Command {
+public class Manipulate2 extends Command {
 
     public static int setting = 0;
 
     public long lastMillis;
 
-    public Manipulate() { // possible dir error
+    public Manipulate2() { // possible dir error
         requires(Robot.m_manipulator);
         lastMillis = System.currentTimeMillis();
     }

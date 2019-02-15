@@ -9,14 +9,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Gyro;
 import frc.robot.subsystems.Photosensor;
-import frc.robot.subsystems.ManipulatorArm;;
+import frc.robot.subsystems.ManipulatorArm2;
 
 
 public class Robot extends TimedRobot {
   public static Drivetrain m_drivetrain;
   public static Gyro m_gyro;
   public static Photosensor m_photosensor;
-  public static ManipulatorArm m_manipulator;
+  public static ManipulatorArm2 m_manipulator;
   public static OI m_oi;
   
  // TalonSRX manipulator_talon = new TalonSRX(1); // small motor
@@ -31,7 +31,7 @@ public class Robot extends TimedRobot {
     m_drivetrain = new Drivetrain();
     m_gyro = new Gyro();
     m_photosensor = new Photosensor();
-    m_manipulator = new ManipulatorArm();
+    m_manipulator = new ManipulatorArm2();
 
     m_oi = new OI();
     //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
@@ -39,7 +39,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Auto mode", m_chooser);
   }
 
-  public static ManipulatorArm manipulator() {
+  public static ManipulatorArm2 manipulator() {
     return m_manipulator;
   }
 
