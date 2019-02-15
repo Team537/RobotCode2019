@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 /**
  * A abstract class that is implemented to represent a driver input device.
  * This object allows buttons and axes to be mapped to a string name.
@@ -156,5 +158,8 @@ public abstract class IJoystick extends Joystick {
 		}
 		
 		return valueUsage.m_joystickButton;
+	}
+
+	public void set(ControlMode percentoutput, double rawAxis) {
 	}
 }
