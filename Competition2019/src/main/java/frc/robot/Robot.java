@@ -6,8 +6,10 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Gyro;
+import frc.robot.subsystems.ManipulatorArm;
 import frc.robot.subsystems.Photosensor;
 import frc.robot.subsystems.ManipulatorArm2;
 
@@ -18,21 +20,42 @@ public class Robot extends TimedRobot {
   public static Photosensor m_photosensor;
   public static ManipulatorArm2 m_manipulator;
   public static OI m_oi;
-  
- // TalonSRX manipulator_talon = new TalonSRX(1); // small motor
- //Joystick JoyS = new Joystick(0);
 
+  
+  public static Collector m_collector = new Collector();
+  public static ManipulatorArm m_arm;
+
+  
+  
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   @Override
   public void robotInit() {
-    m_drivetrain = new Drivetrain();
-    m_gyro = new Gyro();
-    m_photosensor = new Photosensor();
-    m_manipulator = new ManipulatorArm2();
+  m_oi = new OI();
+    
+    
+    if(RobotMap.SUBSYSTEMS.DRIVE) {
+      m_drivetrain = new Drivetrain();
+    }
+    
+    if(RobotMap.SUBSYSTEMS.GYRO){
+      m_gyro = new Gyro();
+    }
 
-    m_oi = new OI();
+    if(RobotMap.SUBSYSTEMS.PHOTOSENSOR){
+      m_photosensor = new Photosensor();
+    }
+
+    
+    if(RobotMap.SUBSYSTEMS.COLLECTOR) {
+      m_collector = new Collector();
+    }
+
+    if(RobotMap.SUBSYSTEMS.ARM) {
+      m_arm = new ManipulatorArm();
+    }
+
     //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);

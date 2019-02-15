@@ -3,19 +3,22 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class VisionAlignTarget extends Command {
-  public VisionAlignTarget() {
-    requires(Robot.m_drivetrain);
+public class CollectorDefault extends Command {
+  public CollectorDefault() {
+    // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
+    requires(Robot.m_collector);
   }
-
 
   @Override
   protected void initialize() {
-    
+    Robot.m_collector.reset();
+    Robot.m_collector.startCompressor();
   }
 
   @Override
   protected void execute() {
+    Robot.m_collector.startCompressor();
   }
 
   @Override
@@ -25,9 +28,11 @@ public class VisionAlignTarget extends Command {
 
   @Override
   protected void end() {
+    Robot.m_collector.disable();
   }
 
   @Override
   protected void interrupted() {
+    end();
   }
 }

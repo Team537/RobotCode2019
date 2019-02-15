@@ -3,15 +3,15 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class VisionAlignTarget extends Command {
-  public VisionAlignTarget() {
-    requires(Robot.m_drivetrain);
+public class ArmDefault extends Command {
+  public ArmDefault() {
+    // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
+    requires(Robot.m_arm);
   }
-
 
   @Override
   protected void initialize() {
-    
   }
 
   @Override
