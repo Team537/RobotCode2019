@@ -80,7 +80,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 			m_talonAngle.config_kD(RobotMap.kPIDLoopIdx, pidAngle.getD(), RobotMap.kTimeoutMs);
 			m_talonAngle.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 10, RobotMap.kTimeoutMs);
 			m_talonAngle.enableCurrentLimit(false);
-			m_talonAngle.setSensorPhase(false);
+			m_talonAngle.setSensorPhase(true);
 			m_talonAngle.configPeakCurrentDuration(0, RobotMap.kTimeoutMs); // 10
 			m_talonAngle.configPeakCurrentLimit(0, RobotMap.kTimeoutMs); // 30
 			
@@ -109,16 +109,17 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 			
 			SmartDashboard.putNumber("Current Angle: " + m_name, (m_currentAngle / 360));
 			SmartDashboard.putNumber("Current Velocity: " + m_name, m_currentVelocity);
-			
+
 			// Sets the setpoint, on 537 swerve angles are negated.
 			m_setpointAngle = -angle;
 			m_setpointDrive = drive;
 			
+			SmartDashboard.putNumber("Setpoint Angle: ", m_setpointAngle);
 			// Calculates the setpoint in encoder ticks.
 			m_setpointAngle = 4096.0 * (m_setpointAngle / 360.0);
 			double angleError = m_currentAngle - m_setpointAngle;
 			
-			SmartDashboard.putNumber("Angle Error" + m_name, angleError);
+			SmartDashboard.putNumber("Angle Error: " + m_name, angleError);
 			// If the setpoint error is half a rotation ahead or behind modify range for closer setpoint.
 			if (angleError < -2048.0) {
 				m_setpointAngle -= 4096.0;
@@ -129,6 +130,10 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 			// If the driver lets go of the control don't set angle, 0.0 will be imposible to reach on a controller.
 			if (!driverControl || angle != 0.0) {
 				m_talonAngle.set(ControlMode.Position, m_setpointAngle);
+			}
+
+			if (m_currentAngle > 4096){
+				m_talonAngle.set(ControlMode.Position, 0.00f);
 			}
 			
 			m_talonDrive.set(m_swerveMode.getControlMode(), m_setpointDrive);
@@ -225,17 +230,17 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 		RobotMap.PIDs.DRIVE_ANGLE_FRONT_LEFT
 	);
 	public SwerveModule m_frontRight = new SwerveModule(
-		"Front Right", true, 
+		"Front Right", false, 
 		RobotMap.CAN.DRIVE_FRONT_RIGHT_ANGLE, RobotMap.CAN.DRIVE_FRONT_RIGHT_DRIVE, RobotMap.ANALOG_INPUT.FRONT_RIGHT,
 		RobotMap.PIDs.DRIVE_ANGLE_FRONT_RIGHT
 	);
 	public SwerveModule m_backLeft = new SwerveModule(
-		"Back Left", true, 
+		"Back Left", false, 
 		RobotMap.CAN.DRIVE_BACK_LEFT_ANGLE, RobotMap.CAN.DRIVE_BACK_LEFT_DRIVE, RobotMap.ANALOG_INPUT.BACK_LEFT, 
 		RobotMap.PIDs.DRIVE_ANGLE_BACK_LEFT
 	);
 	public SwerveModule m_backRight = new SwerveModule(
-		"Back Right", true, 
+		"Back Right", false, 
 		RobotMap.CAN.DRIVE_BACK_RIGHT_ANGLE, RobotMap.CAN.DRIVE_BACK_RIGHT_DRIVE, RobotMap.ANALOG_INPUT.BACK_RIGHT,
 		RobotMap.PIDs.DRIVE_ANGLE_BACK_RIGHT
 	);
