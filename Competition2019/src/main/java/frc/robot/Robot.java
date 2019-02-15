@@ -11,6 +11,7 @@ import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Gyro;
 import frc.robot.subsystems.ManipulatorArm;
 import frc.robot.subsystems.Photosensor;
+import frc.robot.subsystems.ManipulatorArm2;
 
 
 public class Robot extends TimedRobot {
@@ -20,20 +21,23 @@ public class Robot extends TimedRobot {
   public static OI m_oi;
   public static Collector m_collector;
   public static ManipulatorArm m_arm;
+  public static ManipulatorArm2 m_arm2;
   public static Camera m_camera;
 
+  
+  
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
- 
   @Override
   public void robotInit() {
+  m_oi = new OI();
+    
+    
     if(RobotMap.SUBSYSTEMS.DRIVE) {
       m_drivetrain = new Drivetrain();
     }
     
-    m_oi = new OI();
-
     if(RobotMap.SUBSYSTEMS.GYRO){
       m_gyro = new Gyro();
     }
@@ -53,6 +57,10 @@ public class Robot extends TimedRobot {
 
     if(RobotMap.SUBSYSTEMS.CAMERA) {
       m_camera = new Camera();
+    }
+    
+    if(RobotMap.SUBSYSTEMS.ARM2) {
+      m_arm2 = new ManipulatorArm2();
     }
 
     //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());

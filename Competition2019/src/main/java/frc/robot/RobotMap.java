@@ -35,7 +35,9 @@ public class RobotMap {
 
 		public static final double MAX_VELOCITY = 1.7; // m/s (maximum robot velocity the robot is capable of)
 		public static final double MAX_ACCELERATION = 2.0; // m/s/s
-  		public static final double MAX_JERK = 60.0; // m/s/s/s
+  	public static final double MAX_JERK = 60.0; // m/s/s/s
+    
+    public static final int COLLECTOR_INTAKE = 11;
   
 
 		//public static final Trajectory.Config TRAJECTORY_CONFIG = new Trajectory.Config(Trajectory.FitMethod.HERMITE_CUBIC, Trajectory.Config.SAMPLES_HIGH, 0.05, MAX_VELOCITY, MAX_ACCELERATION, MAX_JERK);
@@ -66,6 +68,20 @@ public class RobotMap {
 		public static final int DRIVE_FRONT_LEFT_ANGLE = 2;
 		public static final int DRIVE_BACK_LEFT_DRIVE = 3;
 		public static final int DRIVE_BACK_LEFT_ANGLE = 4;
+
+
+		public static final int DRIVE_BACK_RIGHT_ANGLE = 5;
+		public static final int DRIVE_BACK_RIGHT_DRIVE = 6;
+		public static final int DRIVE_FRONT_RIGHT_ANGLE = 7;
+		public static final int DRIVE_FRONT_RIGHT_DRIVE = 8;
+
+		public static final int MANIPULATOR_WRIST = 9;
+		public static final int MANIPULATOR_SHOULDER = 10;
+	}
+
+	public static class DIO {
+		public static final int COLLECTOR_LIMIT = 1;
+	}
 
 		public static final int DRIVE_BACK_RIGHT_ANGLE = 5;
 		public static final int DRIVE_BACK_RIGHT_DRIVE = 6;
@@ -108,4 +124,7 @@ public class RobotMap {
 
 	}
 
+
+
 }
+
