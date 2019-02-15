@@ -32,8 +32,8 @@ public class OI {
     }
 
     if(RobotMap.SUBSYSTEMS.COLLECTOR) {
-      //this.m_secondary.getJoystickButton("CollectIn").whileHeld(new CollectorSpeed(0.50));
-      //this.m_secondary.getJoystickButton("CollectOut").whileHeld(new CollectorSpeed(-0.50));
+      //this.m_secondary.getJoystickButton("CollectIn").whileHeld(new CollectorSpeed(-0.50));
+      //this.m_secondary.getJoystickButton("CollectOut").whileHeld(new CollectorSpeed(0.50));
       //his.m_secondary.getJoystickButton("CollectHatchOut").whileHeld(new Co);
       //this.m_secondary.getJoystickButton("CollectTilt").whileHeld(new CollectorTilt());
     }
