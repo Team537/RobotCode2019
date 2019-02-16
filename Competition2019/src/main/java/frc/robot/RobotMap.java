@@ -13,10 +13,11 @@ public class RobotMap {
 
 	public static class SUBSYSTEMS {
 		public static final boolean ARM = false;
+		public static final boolean ARM2 = false;
 		public static final boolean COLLECTOR = false;
-		public static final boolean CAMERA = true;
+		public static final boolean CAMERA = false;
 		public static final boolean PHOTOSENSOR = false;
-		public static final boolean GYRO = false;
+		public static final boolean GYRO = true;
 		public static final boolean DRIVE = true;
 	}
 
@@ -24,8 +25,8 @@ public class RobotMap {
 		public static final double LED_BRIGHTNESS = 0.5;
 
 		public static final double WHEEL_DIAMETER = 0.1016; // m
-		public static final double WIDTH = 0.26; // m 
-		public static final double DEPTH = 0.207; // m
+		public static final double WIDTH = 0.5588; // m 
+		public static final double DEPTH = 0.5969; // m
 		public static final double RATIO = Math.sqrt((DEPTH * DEPTH) + (WIDTH * WIDTH));
 
 		public static final double DRIVE_M_TO_ENCODER = 1984.4878; // ticks/m
@@ -35,9 +36,10 @@ public class RobotMap {
 
 		public static final double MAX_VELOCITY = 1.7; // m/s (maximum robot velocity the robot is capable of)
 		public static final double MAX_ACCELERATION = 2.0; // m/s/s
-  	public static final double MAX_JERK = 60.0; // m/s/s/s
+  		public static final double MAX_JERK = 60.0; // m/s/s/s
     
-    public static final int COLLECTOR_INTAKE = 11;
+		public static final double COLLECTOR_INTAKE_SPEED = 0.30;
+		public static final double ARM_WRIST_SPEED = 0.30;
   
 
 		//public static final Trajectory.Config TRAJECTORY_CONFIG = new Trajectory.Config(Trajectory.FitMethod.HERMITE_CUBIC, Trajectory.Config.SAMPLES_HIGH, 0.05, MAX_VELOCITY, MAX_ACCELERATION, MAX_JERK);
@@ -74,20 +76,6 @@ public class RobotMap {
 		public static final int DRIVE_BACK_RIGHT_DRIVE = 6;
 		public static final int DRIVE_FRONT_RIGHT_ANGLE = 7;
 		public static final int DRIVE_FRONT_RIGHT_DRIVE = 8;
-
-		public static final int MANIPULATOR_WRIST = 9;
-		public static final int MANIPULATOR_SHOULDER = 10;
-	}
-
-	public static class DIO {
-		public static final int COLLECTOR_LIMIT = 1;
-	}
-
-		public static final int DRIVE_BACK_RIGHT_ANGLE = 5;
-		public static final int DRIVE_BACK_RIGHT_DRIVE = 6;
-		public static final int DRIVE_FRONT_RIGHT_ANGLE = 7;
-		public static final int DRIVE_FRONT_RIGHT_DRIVE = 8;
-
 
 		public static final int MANIPULATOR_WRIST = 9;
 		public static final int MANIPULATOR_SHOULDER = 10;

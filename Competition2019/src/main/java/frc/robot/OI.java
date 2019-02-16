@@ -28,7 +28,7 @@ public class OI {
     //this.m_test.getJoystickButton("TiltUp").whileHeld(new CollectorTilt());
     
     if(RobotMap.SUBSYSTEMS.DRIVE) {
-      this.m_main.getJoystickButton("ResetDrive").whenPressed(new DriveReset());
+      //sthis.m_main.getJoystickButton("ResetDrive").whenPressed(new DriveReset());
     }
 
     if(RobotMap.SUBSYSTEMS.COLLECTOR) {
@@ -44,6 +44,7 @@ public class OI {
 
     if(RobotMap.SUBSYSTEMS.CAMERA) {
     }
+  }
 
   
 }

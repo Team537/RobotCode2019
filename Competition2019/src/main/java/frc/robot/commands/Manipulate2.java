@@ -1,7 +1,5 @@
 package frc.robot.commands;
 
-import static frc.robot.Robot.m_manipulator;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -16,7 +14,7 @@ public class Manipulate2 extends Command {
     public long lastMillis;
 
     public Manipulate2() { // possible dir error
-        requires(Robot.m_manipulator);
+        requires(Robot.m_arm);
         lastMillis = System.currentTimeMillis();
     }
 
@@ -66,32 +64,32 @@ public class Manipulate2 extends Command {
     @Override
     protected void execute() {
         if (lastMillis + 400 > System.currentTimeMillis()) {
-            if (m_manipulator.armTriggerRight.getRawButton(6)) {
+            if (Robot.m_arm2.armTriggerRight.getRawButton(6)) {
                 setting++;
                 lastMillis = System.currentTimeMillis();
             }
-            if (m_manipulator.armTriggerRight.getRawButton(5)) {
+            if (Robot.m_arm2.armTriggerRight.getRawButton(5)) {
                 setting--;
                 lastMillis = System.currentTimeMillis();
             }
         }
         setting = Maths.clampInt(setting, 0, 2);
         {
-            double d = calcFromRaw(m_manipulator.wrist.getSensorCollection().getAnalogInRaw());
+            double d = calcFromRaw(Robot.m_arm2.wrist.getSensorCollection().getAnalogInRaw());
             System.out.println("Wrist: " + d);
             if (!isInRange(d, getRange())) {
-                m_manipulator.wrist.set(ControlMode.PercentOutput, 0D);
+                Robot.m_arm2.wrist.set(ControlMode.PercentOutput, 0D);
             } else {
-                m_manipulator.wrist.set(ControlMode.PercentOutput, Maths.clamp(dstFrmSetting(d) * RobotMap.ROBOT.MANIPULATOR_SPEED, 0.035D, 1D));
+                Robot.m_arm2.wrist.set(ControlMode.PercentOutput, Maths.clamp(dstFrmSetting(d) * RobotMap.ROBOT.ARM_WRIST_SPEED, 0.035D, 1D));
             }
         }
         {
-            double d = calcFromRaw(m_manipulator.shoulder.getSensorCollection().getAnalogInRaw());
+            double d = calcFromRaw(Robot.m_arm2.shoulder.getSensorCollection().getAnalogInRaw());
             System.out.println("Shoulder: " + d);
             if (!isInRange(d, getRange())) {
-                m_manipulator.shoulder.set(ControlMode.PercentOutput, 0D);
+                Robot.m_arm2.shoulder.set(ControlMode.PercentOutput, 0D);
             } else {
-                m_manipulator.shoulder.set(ControlMode.PercentOutput, Maths.clamp(dstFrmSetting(d) * RobotMap.ROBOT.MANIPULATOR_SPEED, 0.035D, 1D));
+                Robot.m_arm2.shoulder.set(ControlMode.PercentOutput, Maths.clamp(dstFrmSetting(d) * RobotMap.ROBOT.ARM_WRIST_SPEED, 0.035D, 1D));
             }
         }
         /*if (m_manipulator.armTriggerRight.getRawButton(6))
