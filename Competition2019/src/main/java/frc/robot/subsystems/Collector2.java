@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import frc.robot.RobotMap;
+import frc.robot.commands.BallCollection;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
@@ -17,20 +18,15 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 /**
  * Add your docs here.
  */
-public class Collector extends Subsystem {
+public class Collector2 extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
 private WPI_TalonSRX CollectorTalon = new WPI_TalonSRX(RobotMap.CAN.COLLECTOR);
-private DigitalInput BallLimit = new DigitalInput(RobotMap.DIO.COLLECTORLIMIT);
-
-
-    
 
     public void reset() {
       CollectorTalon.set(ControlMode.PercentOutput, 0.00);
     }
-
 
     public void disable () {
       CollectorTalon.set(ControlMode.PercentOutput, 0.00);
@@ -44,22 +40,15 @@ private DigitalInput BallLimit = new DigitalInput(RobotMap.DIO.COLLECTORLIMIT);
 
   @Override
   public void initDefaultCommand() {
-    
+    //setDefaultCommand(new BallCollection());
   }
 
+  public void setSpeed(double inSpeed) {
+    CollectorTalon.set(ControlMode.PercentOutput, inSpeed);
+  }
 
-public static void set(ControlMode percentoutput, double intakeSpeed) {
 }
 
-
-public void setSpeed(double inSpeed) {
-  boolean BallIn = BallLimit.get();
-  if(BallIn) {
-    CollectorTalon.set(ControlMode.PercentOutput, 0.00);
-  }else{
-    CollectorTalon.set(ControlMode.PercentOutput, inSpeed);}
-}
-}
 
 
 

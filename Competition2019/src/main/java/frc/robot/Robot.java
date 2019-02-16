@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.subsystems.Collector;
+import frc.robot.subsystems.Collector2;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Gyro;
 import frc.robot.subsystems.Photosensor;
@@ -17,7 +17,7 @@ public class Robot extends TimedRobot {
   public static Gyro m_gyro;
   public static Photosensor m_photosensor;
   public static OI m_oi;
-  public static Collector m_collector;
+  public static Collector2 m_collector;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
