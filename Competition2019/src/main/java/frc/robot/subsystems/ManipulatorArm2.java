@@ -34,7 +34,7 @@ public class ManipulatorArm2 extends Subsystem {
             else
             ManipulatorArm2.curr++;
                 ManipulatorArm2.curr = Maths.clampInt(ManipulatorArm2.curr, 0, 0);
-            Robot.m_manipulator.armTriggerRight.set(ControlMode.PercentOutput, 0.5D * ManipulatorArm2.curr);
+            Robot.m_arm2.armTriggerRight.set(ControlMode.PercentOutput, 0.5D * ManipulatorArm2.curr);
         }
     
     

@@ -80,7 +80,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 			m_talonAngle.config_kD(RobotMap.kPIDLoopIdx, pidAngle.getD(), RobotMap.kTimeoutMs);
 			m_talonAngle.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 10, RobotMap.kTimeoutMs);
 			m_talonAngle.enableCurrentLimit(false);
-			m_talonAngle.setSensorPhase(true);
+			m_talonAngle.setSensorPhase(false);
 			m_talonAngle.configPeakCurrentDuration(0, RobotMap.kTimeoutMs); // 10
 			m_talonAngle.configPeakCurrentLimit(0, RobotMap.kTimeoutMs); // 30
 			
@@ -107,7 +107,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 			m_currentPosition = m_talonDrive.getSelectedSensorPosition(RobotMap.kPIDLoopIdx);
 			m_currentVelocity = m_talonDrive.getSelectedSensorVelocity(RobotMap.kPIDLoopIdx);
 			
-			SmartDashboard.putNumber("Current Angle: " + m_name, (m_currentAngle / 360));
+			SmartDashboard.putNumber("Current Angle: " + m_name, getAngle());
 			SmartDashboard.putNumber("Current Velocity: " + m_name, m_currentVelocity);
 
 			// Sets the setpoint, on 537 swerve angles are negated.
@@ -126,15 +126,25 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 			} else if (angleError > 2048.0) {
 				m_setpointAngle += 4096.0;
 			}
+
+			
 			
 			// If the driver lets go of the control don't set angle, 0.0 will be imposible to reach on a controller.
 			if (!driverControl || angle != 0.0) {
 				m_talonAngle.set(ControlMode.Position, m_setpointAngle);
 			}
-
-			if (m_currentAngle > 4096){
+			
+			
+			if (m_currentAngle > 4096.0){
 				m_talonAngle.set(ControlMode.Position, 0.00f);
+			} else if (m_currentAngle < 0.00) {
+				m_talonAngle.set(ControlMode.Position, 4096.0f);
 			}
+
+			/*
+			while(m_currentAngle > 4096.0 || m_currentAngle < 0.00){
+				m_talonAngle.set(ControlMode.Position, 0.00f);
+			}*/
 			
 			m_talonDrive.set(m_swerveMode.getControlMode(), m_setpointDrive);
 		}
@@ -230,17 +240,17 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 		RobotMap.PIDs.DRIVE_ANGLE_FRONT_LEFT
 	);
 	public SwerveModule m_frontRight = new SwerveModule(
-		"Front Right", false, 
+		"Front Right", true, 
 		RobotMap.CAN.DRIVE_FRONT_RIGHT_ANGLE, RobotMap.CAN.DRIVE_FRONT_RIGHT_DRIVE, RobotMap.ANALOG_INPUT.FRONT_RIGHT,
 		RobotMap.PIDs.DRIVE_ANGLE_FRONT_RIGHT
 	);
 	public SwerveModule m_backLeft = new SwerveModule(
-		"Back Left", false, 
+		"Back Left", true, 
 		RobotMap.CAN.DRIVE_BACK_LEFT_ANGLE, RobotMap.CAN.DRIVE_BACK_LEFT_DRIVE, RobotMap.ANALOG_INPUT.BACK_LEFT, 
 		RobotMap.PIDs.DRIVE_ANGLE_BACK_LEFT
 	);
 	public SwerveModule m_backRight = new SwerveModule(
-		"Back Right", false, 
+		"Back Right", true, 
 		RobotMap.CAN.DRIVE_BACK_RIGHT_ANGLE, RobotMap.CAN.DRIVE_BACK_RIGHT_DRIVE, RobotMap.ANALOG_INPUT.BACK_RIGHT,
 		RobotMap.PIDs.DRIVE_ANGLE_BACK_RIGHT
 	);
@@ -257,6 +267,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 		m_controllerRotate.setContinuous();
 		m_controllerRotate.disable();
 		*/
+
 		DriverStation.reportError("Is FMS Attached: " + DriverStation.getInstance().isFMSAttached(), false);
 
 		if (DriverStation.getInstance().isFMSAttached()) {
