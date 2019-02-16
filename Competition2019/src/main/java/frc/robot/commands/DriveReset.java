@@ -20,6 +20,7 @@ public class DriveReset extends Command {
     Robot.m_drivetrain.findZero();
     
     if(Robot.m_drivetrain.findZero()){
+      Robot.m_drivetrain.reset();
       end();
     }
   }
@@ -36,6 +37,6 @@ public class DriveReset extends Command {
 
   @Override
   protected void interrupted() {
-    Robot.m_drivetrain.stop();
+    end();
   }
 }
