@@ -19,7 +19,7 @@ public class OI {
   //public Joystick stick = new Joystick(1);
 
   public OI(){
-    /*
+
   
     this.m_main = new JoystickExtreme(RobotMap.INTERFACE.JOYSTICK_MAIN);  
     this.m_secondary = new JoystickBox(RobotMap.INTERFACE.JOYSTICK_SECONDARY);
@@ -32,9 +32,9 @@ public class OI {
     }
 
     if(RobotMap.SUBSYSTEMS.COLLECTOR) {
-      this.m_secondary.getJoystickButton("CollectIn").whileHeld(new CollectorSpeed(-0.50));
+      this.m_secondary.getJoystickButton("CollectIn").whileHeld(new BallIn());
       this.m_secondary.getJoystickButton("CollectOut").whileHeld(new CollectorSpeed(0.50));
-      this.m_secondary.getJoystickButton("CollectTilt").whileHeld(new CollctorTilt());
+
     }
 
     if(RobotMap.SUBSYSTEMS.ARM) {
@@ -43,7 +43,7 @@ public class OI {
     if(RobotMap.SUBSYSTEMS.CAMERA) {
     }
     
-    */
+    
   
   }
 }

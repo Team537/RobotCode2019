@@ -8,7 +8,6 @@
 package frc.robot.subsystems;
 
 import frc.robot.RobotMap;
-import frc.robot.commands.BallCollection;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
@@ -18,11 +17,13 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 /**
  * Add your docs here.
  */
-public class Collector2 extends Subsystem {
+public class Collector extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
 private WPI_TalonSRX CollectorTalon = new WPI_TalonSRX(RobotMap.CAN.COLLECTOR);
+
+
 
     public void reset() {
       CollectorTalon.set(ControlMode.PercentOutput, 0.00);
@@ -40,14 +41,16 @@ private WPI_TalonSRX CollectorTalon = new WPI_TalonSRX(RobotMap.CAN.COLLECTOR);
 
   @Override
   public void initDefaultCommand() {
-    //setDefaultCommand(new BallCollection());
+    
   }
+
+
 
   public void setSpeed(double inSpeed) {
     CollectorTalon.set(ControlMode.PercentOutput, inSpeed);
   }
-
 }
+
 
 
 
