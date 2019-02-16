@@ -11,7 +11,9 @@ public class DriveArcade extends Command {
 
   @Override
   protected void initialize() {
+    Robot.m_drivetrain.stop();
     Robot.m_gyro.reset();
+    Robot.m_drivetrain.recalibrate();
     Robot.m_drivetrain.reset();
     Robot.m_drivetrain.setMode(SwerveMode.ModeSpeed);
   }
@@ -24,11 +26,6 @@ public class DriveArcade extends Command {
 		double strafe = Robot.m_oi.m_main.getRawAxis("DriveStrafe");
     double forward = Robot.m_oi.m_main.getRawAxis("DriveForward");
     
-    /*
-    double rotation = Robot.m_oi.stick.getRawAxis(2);
-		double strafe = Robot.m_oi.stick.getRawAxis(1);
-    double forward = Robot.m_oi.stick.getRawAxis(0);
-    */
     
     Robot.m_drivetrain.setTarget(gyro, rotation, strafe, forward);
   }

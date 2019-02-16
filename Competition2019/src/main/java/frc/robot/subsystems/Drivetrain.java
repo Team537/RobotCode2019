@@ -56,7 +56,13 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 		private SwerveMode m_swerveMode;
 		private AnalogInput m_magSense;
 
-		public SwerveModule(String name, boolean enabled, int portAngle, int portDrive, int portSensor, PID pidAngle) {
+		public SwerveModule(String name, 
+							boolean enabled, 
+							int portAngle, 
+							int portDrive, 
+							int portSensor,
+							boolean setPhase, 
+							PID pidAngle) {
 			m_name = name;
 			m_enabled = enabled;
 			m_talonAngle = new WPI_TalonSRX(portAngle);
@@ -80,7 +86,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 			m_talonAngle.config_kD(RobotMap.kPIDLoopIdx, pidAngle.getD(), RobotMap.kTimeoutMs);
 			m_talonAngle.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 10, RobotMap.kTimeoutMs);
 			m_talonAngle.enableCurrentLimit(false);
-			m_talonAngle.setSensorPhase(false);
+			m_talonAngle.setSensorPhase(setPhase);
 			m_talonAngle.configPeakCurrentDuration(0, RobotMap.kTimeoutMs); // 10
 			m_talonAngle.configPeakCurrentLimit(0, RobotMap.kTimeoutMs); // 30
 			
@@ -107,8 +113,9 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 			m_currentPosition = m_talonDrive.getSelectedSensorPosition(RobotMap.kPIDLoopIdx);
 			m_currentVelocity = m_talonDrive.getSelectedSensorVelocity(RobotMap.kPIDLoopIdx);
 			
-			SmartDashboard.putNumber("Current Angle: " + m_name, getAngle());
+			SmartDashboard.putNumber("Current Angle: " + m_name, m_currentAngle);
 			SmartDashboard.putNumber("Current Velocity: " + m_name, m_currentVelocity);
+			SmartDashboard.putNumber("Current Position " + m_name, m_currentPosition);
 
 			// Sets the setpoint, on 537 swerve angles are negated.
 			m_setpointAngle = -angle;
@@ -134,12 +141,21 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 				m_talonAngle.set(ControlMode.Position, m_setpointAngle);
 			}
 			
-			
+			/*
 			if (m_currentAngle > 4096.0){
-				m_talonAngle.set(ControlMode.Position, 0.00f);
+				while(m_currentAngle > 4096) {
+				m_talonAngle.set(ControlMode.PercentOutput, -0.80);
+				}
+				stop();
+				m_talonAngle.set(ControlMode.PercentOutput, -0.40);
 			} else if (m_currentAngle < 0.00) {
-				m_talonAngle.set(ControlMode.Position, 4096.0f);
-			}
+				while(m_currentAngle < 0.00) {
+					m_talonAngle.set(ControlMode.PercentOutput, 0.80);
+				}
+				stop();
+				m_talonAngle.set(ControlMode.PercentOutput, 0.40);
+			}*/
+
 
 			/*
 			while(m_currentAngle > 4096.0 || m_currentAngle < 0.00){
@@ -237,21 +253,25 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 	public SwerveModule m_frontLeft = new SwerveModule(
 		"Front Left", true, 
 		RobotMap.CAN.DRIVE_FRONT_LEFT_ANGLE, RobotMap.CAN.DRIVE_FRONT_LEFT_DRIVE, RobotMap.ANALOG_INPUT.FRONT_LEFT,
+		false,
 		RobotMap.PIDs.DRIVE_ANGLE_FRONT_LEFT
 	);
 	public SwerveModule m_frontRight = new SwerveModule(
 		"Front Right", true, 
 		RobotMap.CAN.DRIVE_FRONT_RIGHT_ANGLE, RobotMap.CAN.DRIVE_FRONT_RIGHT_DRIVE, RobotMap.ANALOG_INPUT.FRONT_RIGHT,
+		false,
 		RobotMap.PIDs.DRIVE_ANGLE_FRONT_RIGHT
 	);
 	public SwerveModule m_backLeft = new SwerveModule(
 		"Back Left", true, 
 		RobotMap.CAN.DRIVE_BACK_LEFT_ANGLE, RobotMap.CAN.DRIVE_BACK_LEFT_DRIVE, RobotMap.ANALOG_INPUT.BACK_LEFT, 
+		true,
 		RobotMap.PIDs.DRIVE_ANGLE_BACK_LEFT
 	);
 	public SwerveModule m_backRight = new SwerveModule(
 		"Back Right", true, 
 		RobotMap.CAN.DRIVE_BACK_RIGHT_ANGLE, RobotMap.CAN.DRIVE_BACK_RIGHT_DRIVE, RobotMap.ANALOG_INPUT.BACK_RIGHT,
+		true,
 		RobotMap.PIDs.DRIVE_ANGLE_BACK_RIGHT
 	);
 	private PIDController m_controllerRotate;
@@ -328,7 +348,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 			brs = 0.0;
 		}*/
 
-		SmartDashboard.putNumber("WheelSpeed", fls);
+		//SmartDashboard.putNumber("WheelSpeed", fls);
 
 		m_frontLeft.setTarget(fla, fls * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
 		m_frontRight.setTarget(fra, frs * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
