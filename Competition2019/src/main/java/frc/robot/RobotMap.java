@@ -24,8 +24,8 @@ public class RobotMap {
 		public static final double LED_BRIGHTNESS = 0.5;
 
 		public static final double WHEEL_DIAMETER = 0.1016; // m
-		public static final double WIDTH = 0.26; // m 
-		public static final double DEPTH = 0.207; // m
+		public static final double WIDTH = 0.5588; // m 
+		public static final double DEPTH = 0.5969; // m
 		public static final double RATIO = Math.sqrt((DEPTH * DEPTH) + (WIDTH * WIDTH));
 
 		public static final double DRIVE_M_TO_ENCODER = 1984.4878; // ticks/m
@@ -119,7 +119,6 @@ public class RobotMap {
 		public static final int FRONT_RIGHT = 1;
 		public static final int BACK_LEFT = 2;
 		public static final int BACK_RIGHT = 3;
-
 	}
 
 

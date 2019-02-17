@@ -3,26 +3,22 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class DriveReset extends Command {
-  public DriveReset() {
+public class CollectorDefault extends Command {
+  public CollectorDefault() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.m_drivetrain);
+    requires(Robot.m_collector);
   }
 
   @Override
   protected void initialize() {
-    Robot.m_drivetrain.stop();
+    Robot.m_collector.reset();
+   
   }
 
   @Override
   protected void execute() {
-    Robot.m_drivetrain.findZero();
     
-    if(Robot.m_drivetrain.findZero()){
-      Robot.m_drivetrain.reset();
-      end();
-    }
   }
 
   @Override
@@ -32,7 +28,7 @@ public class DriveReset extends Command {
 
   @Override
   protected void end() {
-    Robot.m_drivetrain.stop();
+    Robot.m_collector.disable();
   }
 
   @Override
