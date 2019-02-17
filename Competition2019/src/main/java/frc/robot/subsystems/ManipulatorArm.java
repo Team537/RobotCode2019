@@ -16,7 +16,7 @@ import frc.robot.commands.ArmDefault;
  */
 public class ManipulatorArm extends Subsystem {
 
-  private WPI_TalonSRX m_wrist = new WPI_TalonSRX(11);
+  private WPI_TalonSRX m_shoulder2 = new WPI_TalonSRX(11);
   private WPI_TalonSRX m_shoulder = new WPI_TalonSRX(12);
 
   private double m_wristPositionCurrent;
@@ -34,16 +34,35 @@ public class ManipulatorArm extends Subsystem {
     m_shoulder.configPeakCurrentLimit(0, RobotMap.kTimeoutMs); // 30
   }
 
+  public void reset() {
+    m_shoulder.setSelectedSensorPosition(0, RobotMap.kPIDLoopIdx, RobotMap.kTimeoutMs);
+  }
+
+  public void disable() {
+    m_shoulder.set(ControlMode.PercentOutput, 0.00);
+  }
+
   public void dashboard() {
-    SmartDashboard.putNumber("Wrist Encoder", m_wrist.getSelectedSensorPosition());
+    SmartDashboard.putNumber("Arm Position", m_shoulder.getSelectedSensorPosition());
   }
 
-  public void wristMovement(ControlMode mode, double posit) {
-    m_wrist.set(ControlMode.Position, posit);
+  public void setLevel(String level) {
+    if(level.equals("ONE")){
+      m_shoulder.set(ControlMode.Position, 100);
+    }
+
+    if(level.equals("TWO")) {
+      m_shoulder.set(ControlMode.Position, 200);
+    }
+
+    if(level.equals("THREE")) {
+      m_shoulder.set(ControlMode.PercentOutput, 300);
+    }
   }
 
-  public void shoulderMovement(ControlMode mode, double output) {
-    m_shoulder.set(mode, output);
+  public void armManual(double speed){
+    m_shoulder.set(ControlMode.PercentOutput, speed);
+    m_shoulder.set(ControlMode.Follower, - (m_shoulder.get()));
   }
   
 

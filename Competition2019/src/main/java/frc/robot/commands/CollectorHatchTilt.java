@@ -12,7 +12,7 @@ public class CollectorHatchTilt extends Command {
 
   @Override
   protected void initialize() {
-    Robot.m_collector.();
+    Robot.m_collector.disable();
   }
 
   @Override

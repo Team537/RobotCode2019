@@ -3,16 +3,12 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.CollectorDefault;
 
 public class Collector extends Subsystem {
-
-  private Compressor m_compressor = new Compressor(RobotMap.PNEUMATICS.COMPRESSOR);
     
   private Solenoid m_hatch1 = new Solenoid(0);
   private Solenoid m_hatch2 = new Solenoid(1);
@@ -40,6 +36,7 @@ public class Collector extends Subsystem {
     m_hatch1.set(false);
     m_hatch2.set(false);
     m_intake.set(ControlMode.PercentOutput, 0.00);
+    m_tilt.set(ControlMode.PercentOutput, 0.00);
   }
 
   public void reset() {

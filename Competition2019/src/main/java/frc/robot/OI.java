@@ -1,5 +1,7 @@
 package frc.robot;
 
+
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.CollectorSpeed;
@@ -15,16 +17,18 @@ import frc.robot.joysticks.JoystickF310;
 
 public class OI {
   public IJoystick m_main;
+  public IJoystick m_main2;
   public IJoystick m_secondary;
   
 
   public OI(){
+
     this.m_main = new JoystickExtreme(RobotMap.INTERFACE.JOYSTICK_MAIN);  
     this.m_secondary = new JoystickBox(RobotMap.INTERFACE.JOYSTICK_SECONDARY);
 
     
     if(RobotMap.SUBSYSTEMS.DRIVE) {
-      this.m_main.getJoystickButton("ResetDrive").whenPressed(new DriveReset());
+      //sthis.m_main.getJoystickButton("ResetDrive").whenPressed(new DriveReset());
     }
 
     if(RobotMap.SUBSYSTEMS.COLLECTOR) {
@@ -46,6 +50,11 @@ public class OI {
 
     if(RobotMap.SUBSYSTEMS.CAMERA) {
     }
-    
-  } 
+
+    if(RobotMap.SUBSYSTEMS.CLIMB) {
+      
+    }
+  }
+
+  
 }
