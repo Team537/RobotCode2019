@@ -73,7 +73,7 @@ public class RobotMap {
 		public static final int DRIVE_FRONT_RIGHT_DRIVE = 8;
 
 
-		public static final int MANIPULATOR_WRIST = 9;
+		public static final int COLLECTOR_TILT = 9;
 		public static final int MANIPULATOR_SHOULDER = 10;
 
 		public static final int COLLECTOR_INTAKE = 11;
