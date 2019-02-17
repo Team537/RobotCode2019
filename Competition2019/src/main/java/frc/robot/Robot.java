@@ -1,17 +1,19 @@
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.Camera;
+import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Gyro;
 import frc.robot.subsystems.ManipulatorArm;
 import frc.robot.subsystems.Photosensor;
-import frc.robot.subsystems.ManipulatorArm2;
+import frc.robot.subsystems.Pneumatics;
 
 
 public class Robot extends TimedRobot {
@@ -21,8 +23,9 @@ public class Robot extends TimedRobot {
   public static OI m_oi;
   public static Collector m_collector;
   public static ManipulatorArm m_arm;
-  public static ManipulatorArm2 m_arm2;
   public static Camera m_camera;
+  public static Climber m_climber;
+  public static Pneumatics m_pneumatics;
 
   
   
@@ -59,8 +62,12 @@ public class Robot extends TimedRobot {
       m_camera = new Camera();
     }
     
-    if(RobotMap.SUBSYSTEMS.ARM2) {
-      m_arm2 = new ManipulatorArm2();
+    if(RobotMap.SUBSYSTEMS.CLIMB) {
+      m_climber = new Climber();
+    }
+
+    if(RobotMap.SUBSYSTEMS.PNEUMATICS) {
+      m_pneumatics = new Pneumatics();
     }
 
     //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());

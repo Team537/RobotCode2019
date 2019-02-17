@@ -13,12 +13,13 @@ public class RobotMap {
 
 	public static class SUBSYSTEMS {
 		public static final boolean ARM = false;
-		public static final boolean ARM2 = false;
 		public static final boolean COLLECTOR = false;
 		public static final boolean CAMERA = false;
 		public static final boolean PHOTOSENSOR = false;
 		public static final boolean GYRO = true;
 		public static final boolean DRIVE = true;
+		public static final boolean CLIMB = true;
+		public static final boolean PNEUMATICS = false;
 	}
 
 	public static class ROBOT {
@@ -101,7 +102,9 @@ public class RobotMap {
 		public static final int COMPRESSOR = 1;
 		public static final int SOLENOID1 = 0;
 		public static final int SOLENOID2 = 1;
-		public static final int SOLENOID3 = 2;
+
+		public static final int CLIMB_1 = 4;
+		public static final int CLIMB_2 = 5;
 	}
 
 	public static class ANALOG_INPUT {
@@ -109,7 +112,6 @@ public class RobotMap {
 		public static final int FRONT_RIGHT = 1;
 		public static final int BACK_LEFT = 2;
 		public static final int BACK_RIGHT = 3;
-
 	}
 
 
