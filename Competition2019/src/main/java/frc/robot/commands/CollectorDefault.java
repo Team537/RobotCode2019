@@ -13,12 +13,11 @@ public class CollectorDefault extends Command {
   @Override
   protected void initialize() {
     Robot.m_collector.reset();
-    Robot.m_collector.startCompressor();
   }
 
   @Override
   protected void execute() {
-    Robot.m_collector.startCompressor();
+    Robot.m_collector.disable();
   }
 
   @Override

@@ -44,6 +44,10 @@ public class OI {
 
     if(RobotMap.SUBSYSTEMS.CAMERA) {
     }
+
+    if(RobotMap.SUBSYSTEMS.CLIMB) {
+      
+    }
   }
 
   

@@ -3,11 +3,11 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class ArmDefault extends Command {
-  public ArmDefault() {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+public class ArmLevel extends Command {
+  String level;
+  public ArmLevel(String inputLevel) {
     requires(Robot.m_arm);
+    this.level = inputLevel;
   }
 
   @Override
@@ -17,7 +17,7 @@ public class ArmDefault extends Command {
 
   @Override
   protected void execute() {
-    Robot.m_arm.disable();
+    Robot.m_arm.setLevel(level);
   }
 
   @Override

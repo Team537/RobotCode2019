@@ -3,21 +3,20 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class ArmDefault extends Command {
-  public ArmDefault() {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
-    requires(Robot.m_arm);
+public class Climber2 extends Command {
+  public Climber2() {
+    
+    requires(Robot.m_climber);
   }
 
   @Override
   protected void initialize() {
-    Robot.m_arm.disable();
+    Robot.m_climber.reset();
   }
 
   @Override
   protected void execute() {
-    Robot.m_arm.disable();
+    Robot.m_climber.climb2Deploy();
   }
 
   @Override
@@ -27,7 +26,7 @@ public class ArmDefault extends Command {
 
   @Override
   protected void end() {
-    Robot.m_arm.disable();
+    Robot.m_climber.reset();
   }
 
   @Override
