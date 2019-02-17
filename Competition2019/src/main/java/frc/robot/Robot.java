@@ -6,6 +6,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.subsystems.Camera;
+import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Gyro;
@@ -15,18 +17,24 @@ import frc.robot.subsystems.Pneumatics;
 
 
 public class Robot extends TimedRobot {
+
   public static Drivetrain m_drivetrain;
   public static Gyro m_gyro;
   public static Photosensor m_photosensor;
   public static OI m_oi;
-  public static Collector m_collector;
+  public static Collector m_collector = new Collector();
+  public static ManipulatorArm m_arm = new ManipulatorArm();
+  public static Pneumatics m_pneumatics;
+  public static Camera m_camera = new Camera();
+  public static Climber m_climber;
+
+
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   @Override
   public void robotInit() {
-  m_oi = new OI();
-    
+    m_oi = new OI();
     
     if(RobotMap.SUBSYSTEMS.DRIVE) {
       m_drivetrain = new Drivetrain();
@@ -37,28 +45,27 @@ public class Robot extends TimedRobot {
     }
 
     if(RobotMap.SUBSYSTEMS.PHOTOSENSOR){
-      m_photosensor = new Photosensor();
+      //m_photosensor = new Photosensor();
     }
 
-    
     if(RobotMap.SUBSYSTEMS.COLLECTOR) {
-      m_collector = new Collector();
+      //m_collector = new Collector();
     }
 
-    if(RobotMap.SUBSYSTEMS.ARM) {
-      m_arm = new ManipulatorArm();
-    }
+    //if(RobotMap.SUBSYSTEMS.ARM) {
+      //m_arm = new ManipulatorArm();
+    //}
 
-    if(RobotMap.SUBSYSTEMS.CAMERA) {
-      m_camera = new Camera();
-    }
+    //if(RobotMap.SUBSYSTEMS.CAMERA) {
+      //m_camera = new Camera();
+    //}
     
     if(RobotMap.SUBSYSTEMS.CLIMB) {
       m_climber = new Climber();
     }
 
     if(RobotMap.SUBSYSTEMS.PNEUMATICS) {
-      m_pneumatics = new Pneumatics();
+      //m_pneumatics = new Pneumatics();
     }
 
     //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());

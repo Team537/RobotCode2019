@@ -14,7 +14,9 @@ public class DriveArcade extends Command {
     Robot.m_drivetrain.stop();
     Robot.m_gyro.reset();
     Robot.m_drivetrain.recalibrate();
-    Robot.m_drivetrain.reset();
+    //Robot.m_drivetrain.reset();
+    //double gyro = Math.toRadians(Robot.m_gyro.getAngle());
+    //Robot.m_drivetrain.setTarget(gyro, 0.00, 0.00);
     Robot.m_drivetrain.setMode(SwerveMode.ModeSpeed);
   }
 

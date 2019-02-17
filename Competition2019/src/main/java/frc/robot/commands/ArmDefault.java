@@ -5,8 +5,6 @@ import frc.robot.Robot;
 
 public class ArmDefault extends Command {
   public ArmDefault() {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
     requires(Robot.m_arm);
   }
 

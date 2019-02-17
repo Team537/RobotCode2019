@@ -3,11 +3,11 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class CollectorHatchTilt extends Command {
-  public CollectorHatchTilt() {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+public class CollectorTilt extends Command {
+  public double speed;
+  public CollectorTilt(double tiltSpeed) {
     requires(Robot.m_collector);
+    this.speed = tiltSpeed;
   }
 
   @Override
@@ -17,7 +17,7 @@ public class CollectorHatchTilt extends Command {
 
   @Override
   protected void execute() {
-      Robot.m_collector.hatchOut();
+      Robot.m_collector.tilt(speed);
   }
 
   @Override

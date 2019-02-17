@@ -3,21 +3,23 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class ArmManual extends Command {
-  double armSpeed;
-  public ArmManual(double speed) {
-    requires(Robot.m_arm);
-    this.armSpeed = speed;
+public class DriveSetZero extends Command {
+  
+  public DriveSetZero() {
+    //requires(Robot.m_drivetrain);
   }
 
+  // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.m_arm.armManual(armSpeed);
+    
   }
 
+  // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_arm.armManual(armSpeed);
+    double gyro = Math.toRadians(Robot.m_gyro.getAngle());
+    Robot.m_drivetrain.setTarget(gyro, 0.00, 0.00);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -29,7 +31,7 @@ public class ArmManual extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.m_arm.disable();
+    Robot.m_drivetrain.stop();
   }
 
   // Called when another command which requires one or more of the same

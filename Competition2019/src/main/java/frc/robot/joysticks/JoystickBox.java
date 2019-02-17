@@ -31,8 +31,8 @@ public class JoystickBox extends IJoystick {
         add("Hatch Level 1", new ValueUsage(Keys.HATCH_LEVEL_1, false));
         add("Hatch Level 2", new ValueUsage(Keys.HATCH_LEVEL_2, false));
         add("Hatch Level 3", new ValueUsage(Keys.HATCH_LEVEL_3, false));
-        add("Arm Up", new ValueUsage(Keys.ARM_UP, false));
-        add("Arm Down", new ValueUsage(Keys.ARM_DOWN, false));
+        add("ArmUp", new ValueUsage(Keys.ARM_UP, false));
+        add("ArmDown", new ValueUsage(Keys.ARM_DOWN, false));
         add("Collector Level 1", new ValueUsage(Keys.COLLECTOR_LEVEL_1));
         add("Collector Level 2", new ValueUsage(Keys.COLLECTOR_LEVEL_2));
         add("Collector Lavel 3", new ValueUsage(Keys.COLLECTOR_LEVEL_3));

@@ -5,9 +5,7 @@ import frc.robot.Robot;
 
 public class DriveReset extends Command {
   public DriveReset() {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
-    requires(Robot.m_drivetrain);
+    //requires(Robot.m_drivetrain);
   }
 
   @Override

@@ -80,7 +80,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 				DriverStation.reportError("Module is set to be disabled: " + m_name, false);
 			}
 			
-			m_talonAngle.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, RobotMap.kPIDLoopIdx, RobotMap.kTimeoutMs);
+			m_talonAngle.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, RobotMap.kPIDLoopIdx, RobotMap.kTimeoutMs);
 			m_talonAngle.config_kP(RobotMap.kPIDLoopIdx, pidAngle.getP(), RobotMap.kTimeoutMs);
 			m_talonAngle.config_kI(RobotMap.kPIDLoopIdx, pidAngle.getI(), RobotMap.kTimeoutMs);
 			m_talonAngle.config_kD(RobotMap.kPIDLoopIdx, pidAngle.getD(), RobotMap.kTimeoutMs);
@@ -90,11 +90,13 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 			m_talonAngle.configPeakCurrentDuration(0, RobotMap.kTimeoutMs); // 10
 			m_talonAngle.configPeakCurrentLimit(0, RobotMap.kTimeoutMs); // 30
 			
-			m_talonDrive.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, RobotMap.kPIDLoopIdx, RobotMap.kTimeoutMs);
+			m_talonDrive.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, RobotMap.kPIDLoopIdx, RobotMap.kTimeoutMs);
 			m_talonDrive.setSensorPhase(false); // true
 			m_talonDrive.configClosedloopRamp(0.0, RobotMap.kTimeoutMs); // 0.08
 			m_talonDrive.configOpenloopRamp(0.0, RobotMap.kTimeoutMs); // 0.08
 			m_talonDrive.enableCurrentLimit(false);
+			m_talonDrive.configForwardSoftLimitEnable(false);
+			m_talonDrive.configReverseSoftLimitEnable(false);
 			m_talonDrive.configPeakCurrentDuration(0, RobotMap.kTimeoutMs); // 10
 			m_talonDrive.configPeakCurrentLimit(0, RobotMap.kTimeoutMs); // 40
 			
@@ -103,10 +105,30 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 		//	m_talonAngle.getSensorCollection().setPulseWidthPosition(absolutePosition, RobotMap.kTimeoutMs); // talonAngle.setEncPosition(absolutePosition);
 		}
 
+		//low pass filtering
+		private double alpha = 0.80;
+		public double previousAngle1 = 0;
+		public double outputAngle;
+
+		public double lowPassFiltering(double rawAngle, double previousAngle) {
+				
+			double angle = previousAngle * alpha + rawAngle * (1 - alpha);
+			double output = angle;
+			return output;
+		}
+		//lowpass end
+		  
+
 		public void setTarget(double angle, double drive, boolean driverControl) {
 			if (!m_enabled) {
 				return;
 			}
+
+			//lowpass filtering
+			outputAngle = lowPassFiltering(angle, previousAngle1);
+			previousAngle1 = outputAngle;
+			//lowpass end
+
 			
 			// Gets the sensor values.
 			m_currentAngle = m_talonAngle.getSelectedSensorPosition(RobotMap.kPIDLoopIdx);
@@ -118,10 +140,12 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 			SmartDashboard.putNumber("Current Position " + m_name, m_currentPosition);
 
 			// Sets the setpoint, on 537 swerve angles are negated.
-			m_setpointAngle = -angle;
+			m_setpointAngle = -outputAngle; //-angle;
 			m_setpointDrive = drive;
-			
-			SmartDashboard.putNumber("Setpoint Angle: ", m_setpointAngle);
+
+			SmartDashboard.putNumber("Output Drive: " + m_name, m_setpointDrive);
+			SmartDashboard.putNumber("Setpoint Angle: " + m_name, m_setpointAngle);
+
 			// Calculates the setpoint in encoder ticks.
 			m_setpointAngle = 4096.0 * (m_setpointAngle / 360.0);
 			double angleError = m_currentAngle - m_setpointAngle;
@@ -231,6 +255,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 
 		public boolean findZero() {
 			double volts = m_magSense.getVoltage();
+			SmartDashboard.putNumber(m_name + " Voltage", volts);
 			boolean atZero;
 			if(volts > 3.50) {
 				reset();
@@ -251,25 +276,29 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 	}
 	
 	public SwerveModule m_frontLeft = new SwerveModule(
-		"Front Left", true, 
+		"Front Left", 
+		RobotMap.MODULES.FRONT_LEFT, 
 		RobotMap.CAN.DRIVE_FRONT_LEFT_ANGLE, RobotMap.CAN.DRIVE_FRONT_LEFT_DRIVE, RobotMap.ANALOG_INPUT.FRONT_LEFT,
 		false,
 		RobotMap.PIDs.DRIVE_ANGLE_FRONT_LEFT
 	);
 	public SwerveModule m_frontRight = new SwerveModule(
-		"Front Right", true, 
+		"Front Right",
+		RobotMap.MODULES.FRONT_RIGHT, 
 		RobotMap.CAN.DRIVE_FRONT_RIGHT_ANGLE, RobotMap.CAN.DRIVE_FRONT_RIGHT_DRIVE, RobotMap.ANALOG_INPUT.FRONT_RIGHT,
 		false,
 		RobotMap.PIDs.DRIVE_ANGLE_FRONT_RIGHT
 	);
 	public SwerveModule m_backLeft = new SwerveModule(
-		"Back Left", true, 
+		"Back Left",
+		RobotMap.MODULES.BACK_LEFT, 
 		RobotMap.CAN.DRIVE_BACK_LEFT_ANGLE, RobotMap.CAN.DRIVE_BACK_LEFT_DRIVE, RobotMap.ANALOG_INPUT.BACK_LEFT, 
 		true,
 		RobotMap.PIDs.DRIVE_ANGLE_BACK_LEFT
 	);
 	public SwerveModule m_backRight = new SwerveModule(
-		"Back Right", true, 
+		"Back Right",
+		RobotMap.MODULES.BACK_RIGHT, 
 		RobotMap.CAN.DRIVE_BACK_RIGHT_ANGLE, RobotMap.CAN.DRIVE_BACK_RIGHT_DRIVE, RobotMap.ANALOG_INPUT.BACK_RIGHT,
 		true,
 		RobotMap.PIDs.DRIVE_ANGLE_BACK_RIGHT
@@ -287,6 +316,10 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 		m_controllerRotate.setContinuous();
 		m_controllerRotate.disable();
 		*/
+
+		if (!(RobotMap.ROBOT.TESTING_MODE && !DriverStation.getInstance().isFMSAttached())) {
+			recalibrate();
+		}
 
 		DriverStation.reportError("Is FMS Attached: " + DriverStation.getInstance().isFMSAttached(), false);
 
@@ -350,18 +383,18 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 
 		//SmartDashboard.putNumber("WheelSpeed", fls);
 
-		m_frontLeft.setTarget(fla, fls * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
-		m_frontRight.setTarget(fra, frs * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
+		m_frontLeft.setTarget(-fla, -fls * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
+		m_frontRight.setTarget(-fra, -frs * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
 		m_backLeft.setTarget(bla, bls * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
-		m_backRight.setTarget(bra, brs * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
+		m_backRight.setTarget(bra, -brs * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
 	}
 
 	public void setTarget(double gyro, double angle, double forward) {
 		double f = Maths.wrapDegrees(angle - gyro);
-		
-		//if (!isAtAngle(8.0)) {
-		//	forward = 0.0;
-		//}
+		/*
+		if (!isAtAngle(8.0)) {
+			forward = 0.0;
+		}*/
 		
 		m_frontRight.setTarget(f, forward, false);
 		m_frontLeft.setTarget(f, forward, false);

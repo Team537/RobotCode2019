@@ -16,12 +16,12 @@ import frc.robot.commands.ArmDefault;
  */
 public class ManipulatorArm extends Subsystem {
 
-  private WPI_TalonSRX m_shoulder2 = new WPI_TalonSRX(11);
-  private WPI_TalonSRX m_shoulder = new WPI_TalonSRX(12);
+  private WPI_TalonSRX m_shoulder2 = new WPI_TalonSRX(RobotMap.CAN.MANIPULATOR_SHOULDER_LEFT);
+  private WPI_TalonSRX m_shoulder = new WPI_TalonSRX(RobotMap.CAN.MANIPULATOR_SHOULDER_RIGHT);
 
-  private double m_wristPositionCurrent;
-  private PIDController m_wristPID;
-
+  //private double m_wristPositionCurrent;
+  //private PIDController m_wristPID;
+  /*
   public ManipulatorArm() {
     m_shoulder.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, RobotMap.kPIDLoopIdx, RobotMap.kTimeoutMs);
     m_shoulder.setInverted(false);
@@ -32,7 +32,7 @@ public class ManipulatorArm extends Subsystem {
     m_shoulder.enableCurrentLimit(false);
     m_shoulder.configPeakCurrentDuration(0, RobotMap.kTimeoutMs); // 10
     m_shoulder.configPeakCurrentLimit(0, RobotMap.kTimeoutMs); // 30
-  }
+  }*/
 
   public void reset() {
     m_shoulder.setSelectedSensorPosition(0, RobotMap.kPIDLoopIdx, RobotMap.kTimeoutMs);
@@ -47,28 +47,42 @@ public class ManipulatorArm extends Subsystem {
   }
 
   public void setLevel(String level) {
-    if(level.equals("ONE")){
+    if(level.equals("ONE_HATCH")){
       m_shoulder.set(ControlMode.Position, 100);
     }
 
-    if(level.equals("TWO")) {
+    if(level.equals("TWO_HATCH")) {
       m_shoulder.set(ControlMode.Position, 200);
     }
 
-    if(level.equals("THREE")) {
+    if(level.equals("THREE_HATCH")) {
       m_shoulder.set(ControlMode.PercentOutput, 300);
     }
+
+
+    if(level.equals("ONE_CARGO")){
+      m_shoulder.set(ControlMode.Position, 100);
+    }
+
+    if(level.equals("TWO_CARGO")) {
+      m_shoulder.set(ControlMode.Position, 200);
+    }
+
+    if(level.equals("THREE_CARGO")) {
+      m_shoulder.set(ControlMode.PercentOutput, 300);
+    }
+
   }
 
   public void armManual(double speed){
-    m_shoulder.set(ControlMode.PercentOutput, speed);
-    m_shoulder.set(ControlMode.Follower, - (m_shoulder.get()));
+    m_shoulder.set(ControlMode.PercentOutput, -speed);
+    m_shoulder2.set(ControlMode.PercentOutput, speed);
   }
   
 
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new ArmDefault());
+    //setDefaultCommand(new ArmDefault());
   }
 
 }

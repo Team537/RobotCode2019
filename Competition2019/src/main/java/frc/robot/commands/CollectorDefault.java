@@ -5,20 +5,17 @@ import frc.robot.Robot;
 
 public class CollectorDefault extends Command {
   public CollectorDefault() {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
     requires(Robot.m_collector);
   }
 
   @Override
   protected void initialize() {
     Robot.m_collector.reset();
-   
   }
 
   @Override
   protected void execute() {
-    
+    Robot.m_collector.disable();
   }
 
   @Override
