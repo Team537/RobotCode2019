@@ -3,8 +3,8 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class CollectorDefault extends Command {
-  public CollectorDefault() {
+public class CollectorBalltoHatch extends Command {
+  public CollectorBalltoHatch() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.m_collector);
@@ -12,13 +12,12 @@ public class CollectorDefault extends Command {
 
   @Override
   protected void initialize() {
-    Robot.m_collector.reset();
-   
+    Robot.m_collector.ballToHatch();
   }
 
   @Override
   protected void execute() {
-    
+      Robot.m_collector.ballToHatch();
   }
 
   @Override
@@ -28,11 +27,11 @@ public class CollectorDefault extends Command {
 
   @Override
   protected void end() {
-    Robot.m_collector.disable();
+      Robot.m_collector.disable();
   }
 
   @Override
   protected void interrupted() {
-    end();
+      Robot.m_collector.disable();
   }
 }

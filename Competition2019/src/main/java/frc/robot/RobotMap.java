@@ -14,12 +14,10 @@ public class RobotMap {
 	public static class SUBSYSTEMS {
 		public static final boolean ARM = false;
 		public static final boolean COLLECTOR = false;
-		public static final boolean CAMERA = false;
+		public static final boolean CAMERA = true;
 		public static final boolean PHOTOSENSOR = false;
-		public static final boolean GYRO = true;
+		public static final boolean GYRO = false;
 		public static final boolean DRIVE = true;
-		public static final boolean CLIMB = true;
-		public static final boolean PNEUMATICS = false;
 	}
 
 	public static class ROBOT {
@@ -37,10 +35,9 @@ public class RobotMap {
 
 		public static final double MAX_VELOCITY = 1.7; // m/s (maximum robot velocity the robot is capable of)
 		public static final double MAX_ACCELERATION = 2.0; // m/s/s
-  		public static final double MAX_JERK = 60.0; // m/s/s/s
+  	public static final double MAX_JERK = 60.0; // m/s/s/s
     
-		public static final double COLLECTOR_INTAKE_SPEED = 0.30;
-		public static final double ARM_WRIST_SPEED = 0.30;
+    public static final int COLLECTOR_INTAKE = 11;
   
 
 		//public static final Trajectory.Config TRAJECTORY_CONFIG = new Trajectory.Config(Trajectory.FitMethod.HERMITE_CUBIC, Trajectory.Config.SAMPLES_HIGH, 0.05, MAX_VELOCITY, MAX_ACCELERATION, MAX_JERK);
@@ -80,13 +77,25 @@ public class RobotMap {
 
 		public static final int MANIPULATOR_WRIST = 9;
 		public static final int MANIPULATOR_SHOULDER = 10;
-
-		public static final int COLLECTOR_INTAKE = 11;
+		public static final int COLLECTOR = 11; 
 	}
 
 	public static class DIO {
 		public static final int COLLECTOR_LIMIT = 1;
 	}
+
+		public static final int DRIVE_BACK_RIGHT_ANGLE = 5;
+		public static final int DRIVE_BACK_RIGHT_DRIVE = 6;
+		public static final int DRIVE_FRONT_RIGHT_ANGLE = 7;
+		public static final int DRIVE_FRONT_RIGHT_DRIVE = 8;
+
+
+		public static final int MANIPULATOR_WRIST = 9;
+		public static final int MANIPULATOR_SHOULDER = 10;
+
+		public static final int COLLECTOR_INTAKE = 11;
+	}
+
 
 	public static class VISION {
 		public static final int UP_CAM_PORT = 0;
@@ -102,9 +111,7 @@ public class RobotMap {
 		public static final int COMPRESSOR = 1;
 		public static final int SOLENOID1 = 0;
 		public static final int SOLENOID2 = 1;
-
-		public static final int CLIMB_1 = 4;
-		public static final int CLIMB_2 = 5;
+		public static final int SOLENOID3 = 2;
 	}
 
 	public static class ANALOG_INPUT {
@@ -115,6 +122,4 @@ public class RobotMap {
 	}
 
 
-
-}
 

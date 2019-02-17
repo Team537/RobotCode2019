@@ -3,8 +3,9 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class CollectorTilt extends Command {
-  public CollectorTilt() {
+public class CollectorHatchToBall extends Command {
+
+  public CollectorHatchToBall() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.m_collector);
@@ -12,12 +13,12 @@ public class CollectorTilt extends Command {
 
   @Override
   protected void initialize() {
-    Robot.m_collector.tilt();
+  Robot.m_collector.hatchToBall();
   }
 
   @Override
   protected void execute() {
-      Robot.m_collector.tilt();
+      Robot.m_collector.hatchToBall();
   }
 
   @Override
