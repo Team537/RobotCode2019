@@ -257,14 +257,14 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 			double volts = m_magSense.getVoltage();
 			SmartDashboard.putNumber(m_name + " Voltage", volts);
 			boolean atZero;
-			if(volts > 3.50) {
+			if(volts > 2.6669f) {
 				reset();
 				atZero = true;
 			} else {
 				m_talonAngle.set(ControlMode.PercentOutput, 0.30);
 				atZero = false;
 			}
-
+			SmartDashboard.putBoolean(m_name + " At Zero", atZero);
 			return atZero;
 
 		}

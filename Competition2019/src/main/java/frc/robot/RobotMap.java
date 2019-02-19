@@ -18,7 +18,7 @@ public class RobotMap {
 		public static final boolean PHOTOSENSOR = false;
 		public static final boolean GYRO = true;
 		public static final boolean DRIVE = true;
-		public static final boolean PNEUMATICS = false;
+		public static final boolean PNEUMATICS = true;
 		public static final boolean CLIMB = false;
 	}
 

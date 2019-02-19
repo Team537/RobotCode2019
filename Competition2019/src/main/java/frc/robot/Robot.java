@@ -24,7 +24,7 @@ public class Robot extends TimedRobot {
   public static OI m_oi;
   public static Collector m_collector = new Collector();
   public static ManipulatorArm m_arm = new ManipulatorArm();
-  public static Pneumatics m_pneumatics;
+  public static Pneumatics m_pneumatics = new Pneumatics();
   public static Camera m_camera = new Camera();
   public static Climber m_climber;
 
