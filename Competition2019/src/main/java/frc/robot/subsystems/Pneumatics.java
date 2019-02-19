@@ -19,7 +19,7 @@ public class Pneumatics extends Subsystem {
   }
 
   public void Stop() {
-
+    compressor.stop();
   }
 
   @Override
