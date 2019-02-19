@@ -47,6 +47,18 @@ public class ManipulatorArm extends Subsystem {
   }
 
   public void setLevel(String level) {
+
+    m_shoulder.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, RobotMap.kPIDLoopIdx, RobotMap.kTimeoutMs);
+    m_shoulder.setInverted(false);
+    m_shoulder.config_kP(RobotMap.kPIDLoopIdx, RobotMap.PIDs.ARM_SHOULDER.getP(), RobotMap.kTimeoutMs);
+		m_shoulder.config_kI(RobotMap.kPIDLoopIdx, RobotMap.PIDs.ARM_SHOULDER.getI(), RobotMap.kTimeoutMs);
+		m_shoulder.config_kD(RobotMap.kPIDLoopIdx, RobotMap.PIDs.ARM_SHOULDER.getD(), RobotMap.kTimeoutMs);
+    m_shoulder.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 10, RobotMap.kTimeoutMs);
+    m_shoulder.enableCurrentLimit(false);
+    m_shoulder.configPeakCurrentDuration(0, RobotMap.kTimeoutMs); // 10
+    m_shoulder.configPeakCurrentLimit(0, RobotMap.kTimeoutMs); // 30
+
+    
     if(level.equals("ONE_HATCH")){
       m_shoulder.set(ControlMode.Position, 100);
     }

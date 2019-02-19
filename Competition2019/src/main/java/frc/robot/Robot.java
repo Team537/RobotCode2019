@@ -64,9 +64,10 @@ public class Robot extends TimedRobot {
       m_climber = new Climber();
     }
 
+    /*
     if(RobotMap.SUBSYSTEMS.PNEUMATICS) {
       //m_pneumatics = new Pneumatics();
-    }
+    }*/
 
     //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());

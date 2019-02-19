@@ -372,6 +372,11 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 			bls /= maxSpeed;
 			brs /= maxSpeed;
 		}
+
+		if(rotation < 0.10) {
+			fls = bls;
+			frs = brs;
+		}
 		
 		/*
 		if ((driverControl && !isAtAngle(60.0)) || (!driverControl && !isAtAngle(8.0))) {
