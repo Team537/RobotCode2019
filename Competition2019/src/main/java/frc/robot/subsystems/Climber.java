@@ -14,10 +14,11 @@ public class Climber extends Subsystem {
   private Solenoid m_climb1 = new Solenoid(RobotMap.PNEUMATICS.CLIMB_1);
   private Solenoid m_climb2 = new Solenoid(RobotMap.PNEUMATICS.CLIMB_2);
 
-  public void reset(){
+  public void disable(){
     m_climb1.set(false);
     m_climb2.set(false);
   }
+
   public void climb1Deploy() {
     m_climb1.set(true);
   }
