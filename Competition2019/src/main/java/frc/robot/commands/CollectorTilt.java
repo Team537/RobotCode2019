@@ -4,10 +4,10 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class CollectorTilt extends Command {
-  public double speed;
-  public CollectorTilt(double tiltSpeed) {
+  public double position;
+  public CollectorTilt(double tiltPosition) {
     requires(Robot.m_collector);
-    this.speed = tiltSpeed;
+    this.position = tiltPosition;
   }
 
   @Override
@@ -17,7 +17,7 @@ public class CollectorTilt extends Command {
 
   @Override
   protected void execute() {
-      Robot.m_collector.tilt(speed);
+      Robot.m_collector.setTarget(Robot.m_collector.getTarget() + position);
   }
 
   @Override

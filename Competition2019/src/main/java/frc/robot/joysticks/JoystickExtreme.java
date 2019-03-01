@@ -36,8 +36,21 @@ public class JoystickExtreme extends IJoystick {
 		add("DriveForward", new ValueUsage(Axis.STICK_Y, true));
 		add("Get Hatch", new ValueUsage(Keys.INDEX_TRIGGER));
 		add("Go Back", new ValueUsage(Keys.THUMB_TRIGGER));
-		add("ResetDrive", new ValueUsage(Keys.BASE_9));
-		add("SetZero", new ValueUsage(Keys.BASE_11));
+		//add("ResetDrive", new ValueUsage(Keys.BASE_9));
+		//add("SetZero", new ValueUsage(Keys.BASE_11));
+
+		add("SwitchModule", new ValueUsage(Keys.STICK_3));
+		add("SwitchMode", new ValueUsage(Keys.STICK_4));
+		add("TuneIncrement", new ValueUsage(Keys.STICK_5));
+
+		add("P_Up", new ValueUsage(Keys.BASE_8)); //needs change
+		add("P_Down", new ValueUsage(Keys.BASE_7)); //needs change
+		add("I_Up", new ValueUsage(Keys.BASE_10)); //needs change
+		add("I_Down", new ValueUsage(Keys.BASE_9)); //needs change
+		add("D_Up", new ValueUsage(Keys.BASE_12)); //needs change
+		add("D_Down", new ValueUsage(Keys.BASE_11)); //needs change
+
+
 	}
 	
 	@Override

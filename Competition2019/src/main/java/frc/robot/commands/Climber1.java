@@ -12,7 +12,7 @@ public class Climber1 extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.m_climber.reset();
+    Robot.m_climber.disable();
   }
 
   // Called repeatedly when this Command is scheduled to run

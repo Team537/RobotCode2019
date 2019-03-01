@@ -4,20 +4,21 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class ArmManual extends Command {
-  double armSpeed;
-  public ArmManual(double speed) {
+  double armIncrement;
+  public ArmManual(double increment) {
     requires(Robot.m_arm);
-    this.armSpeed = speed;
+    this.armIncrement = increment;
   }
 
   @Override
   protected void initialize() {
-    Robot.m_arm.armManual(armSpeed);
+    Robot.m_arm.armManual(0.00);
   }
 
   @Override
   protected void execute() {
-    Robot.m_arm.armManual(armSpeed);
+    Robot.m_arm.armManual(armIncrement);
+    //Robot.m_arm.setTarget(Robot.m_arm.getTarget() + armIncrement);
   }
 
   // Make this return true when this Command no longer needs to run execute()
