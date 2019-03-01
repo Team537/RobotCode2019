@@ -11,7 +11,7 @@ public class Climber2 extends Command {
 
   @Override
   protected void initialize() {
-    Robot.m_climber.reset();
+    Robot.m_climber.disable();
   }
 
   @Override
@@ -26,7 +26,7 @@ public class Climber2 extends Command {
 
   @Override
   protected void end() {
-    Robot.m_climber.reset();
+    Robot.m_climber.disable();
   }
 
   @Override

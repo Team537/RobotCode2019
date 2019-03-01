@@ -4,8 +4,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class ArmLevel extends Command {
-  String level;
-  public ArmLevel(String inputLevel) {
+  double level;
+  public ArmLevel(double inputLevel) {
     requires(Robot.m_arm);
     this.level = inputLevel;
   }
@@ -17,7 +17,7 @@ public class ArmLevel extends Command {
 
   @Override
   protected void execute() {
-    Robot.m_arm.setLevel(level);
+    Robot.m_arm.setTarget(level);
   }
 
   @Override

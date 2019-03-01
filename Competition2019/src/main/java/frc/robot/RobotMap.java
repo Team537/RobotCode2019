@@ -23,6 +23,7 @@ public class RobotMap {
 	}
 
 	public static class ROBOT {
+
 		public static final double LED_BRIGHTNESS = 0.5;
 
 		public static final double WHEEL_DIAMETER = 0.1016; // m
@@ -54,17 +55,17 @@ public class RobotMap {
 
 	public static class PIDs {
 		//public static final PID DRIVE_ANGLE_FRONT_LEFT = new PID(4.9, 0.0, 4.0, "PID Front Left");
-		public static final PID DRIVE_ANGLE_FRONT_LEFT = new PID(3.0, 0.0, 2.3, "PID Front Left");
-		public static final PID DRIVE_ANGLE_FRONT_RIGHT = new PID(3.8, 0.0, 4.0, "PID Front Right");
-		public static final PID DRIVE_ANGLE_BACK_LEFT = new PID(5.4, 0.0, 4.3, "PID Back Left");
-		public static final PID DRIVE_ANGLE_BACK_RIGHT = new PID(5.4, 0.0, 4.3, "PID Back Right");
+		public static PID DRIVE_ANGLE_FRONT_LEFT = new PID(3.0, 0.0, 4.0, "PID Front Left"); //3.0, 0.0, 2.3,
+		public static PID DRIVE_ANGLE_FRONT_RIGHT = new PID(0.0, 0.0, 0.0, "PID Front Right"); //3.8, 0.0, 4.0,
+		public static PID DRIVE_ANGLE_BACK_LEFT = new PID(2.0, 0.0, 3.0, "PID Back Left"); //5.4, 0.0, 4.3,
+		public static PID DRIVE_ANGLE_BACK_RIGHT = new PID(0.0, 0.0, 0.0, "PID Back Right"); //5.4, 0.0, 4.3,
 
-		public static final PID DRIVE_PATH = new PID(1.0, 0.0, 0.0, "PID Path");
+		public static PID DRIVE_PATH = new PID(1.0, 0.0, 0.0, "PID Path");
 
-		public static final PID DRIVE_ROTATE = new PID(0.01, 0.0, 0.002, "PID Rotate");
-		public static final PID DRIVE_MODE_SPEED = new PID(0.0, 0.0, 0.0, "PID Mode Speed");
-		public static final PID DRIVE_MODE_RATE = new PID(0.05, 0.0, 0.025, 0.3, "PID Mode Rate");
-		public static final PID DRIVE_MODE_DISTANCE = new PID(0.22, 0.0, 0.0, "PID Front Distance");
+		public static PID DRIVE_ROTATE = new PID(0.01, 0.0, 0.002, "PID Rotate");
+		public static PID DRIVE_MODE_SPEED = new PID(0.0, 0.0, 0.0, "PID Mode Speed");
+		public static PID DRIVE_MODE_RATE = new PID(0.05, 0.0, 0.025, 0.3, "PID Mode Rate");
+		public static PID DRIVE_MODE_DISTANCE = new PID(0.22, 0.0, 0.0, "PID Front Distance");
 
 		public static final PID ARM_WRIST = new PID(0.00, 0.00, 0.00, "PID Arm Wrist");
 		public static final PID ARM_SHOULDER = new PID(0.00, 0.00, 0.00, "PID Arm Shoulder");
@@ -85,7 +86,7 @@ public class RobotMap {
 		public static final int DRIVE_FRONT_RIGHT_DRIVE = 8;
 
 		public static final int MANIPULATOR_SHOULDER_RIGHT = 13;
-		public static final int MANIPULATOR_SHOULDER_LEFT = 12;
+		public static final int MANIPULATOR_SHOULDER_LEFT = 12; //12
 
 		public static final int COLLECTOR_WRIST = 11;
 		public static final int COLLECTOR_INTAKE = 10; 
@@ -106,9 +107,9 @@ public class RobotMap {
 	}
 	
 	public static class PNEUMATICS {
-		public static final int COMPRESSOR = 1;
-		public static final int SOLENOID1 = 0;
-		public static final int SOLENOID2 = 1;
+		public static final int COMPRESSOR = 0;
+		public static final int HATCH_LEFT = 0;
+		public static final int HATCH_RIGHT = 0;
 
 		public static final int CLIMB_1 = 3;
 		public static final int CLIMB_2 = 4;

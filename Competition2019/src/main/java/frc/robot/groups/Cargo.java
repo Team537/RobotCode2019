@@ -20,6 +20,6 @@ public class Cargo extends CommandGroup {
     this.level = modeLevel;
 
   addParallel(new CollectorTilt(0.05));
-  addSequential(new ArmLevel(level));
+  //addSequential(new ArmLevel(level));
   }
 }

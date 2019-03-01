@@ -13,7 +13,7 @@ public class Hatch extends CommandGroup {
     this.level = modeLevel;
 
   addParallel(new CollectorBalltoHatch());
-  addSequential(new ArmLevel(level));
+  //addSequential(new ArmLevel(level));
   }
   
 }
