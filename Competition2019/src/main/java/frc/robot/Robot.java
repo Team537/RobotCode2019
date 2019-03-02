@@ -18,10 +18,10 @@ import frc.robot.subsystems.Pneumatics;
 
 public class Robot extends TimedRobot {
 
-  public static Drivetrain m_drivetrain;
+  public static Drivetrain m_drivetrain = new Drivetrain();
   public static Gyro m_gyro;
   public static Photosensor m_photosensor;
-  public static OI m_oi;
+  public static OI m_oi = new OI();
   public static Collector m_collector = new Collector();
   public static ManipulatorArm m_arm = new ManipulatorArm();
   public static Pneumatics m_pneumatics = new Pneumatics();
@@ -34,11 +34,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
-    m_oi = new OI();
-    
-    if(RobotMap.SUBSYSTEMS.DRIVE) {
-      m_drivetrain = new Drivetrain();
-    }
+   
     
     if(RobotMap.SUBSYSTEMS.GYRO){
       m_gyro = new Gyro();
@@ -54,10 +50,6 @@ public class Robot extends TimedRobot {
 
     //if(RobotMap.SUBSYSTEMS.ARM) {
       //m_arm = new ManipulatorArm();
-    //}
-
-    //if(RobotMap.SUBSYSTEMS.CAMERA) {
-      //m_camera = new Camera();
     //}
     
     if(RobotMap.SUBSYSTEMS.CLIMB) {

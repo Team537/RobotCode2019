@@ -18,6 +18,7 @@ import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.DriveArcade;
 import frc.robot.commands.DriveReset;
+import frc.robot.joysticks.JoystickExtreme;
 
 public class Drivetrain extends Subsystem implements PIDOutput {
 	public static enum SwerveMode {
@@ -105,6 +106,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 			m_talonAngle.setSensorPhase(setPhase);
 			m_talonAngle.configPeakCurrentDuration(0, RobotMap.kTimeoutMs); // 10
 			m_talonAngle.configPeakCurrentLimit(0, RobotMap.kTimeoutMs); // 30
+
 			
 			m_talonDrive.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, RobotMap.kPIDLoopIdx, RobotMap.kTimeoutMs);
 			m_talonDrive.setSensorPhase(false); // true
@@ -238,7 +240,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 		}
 		
 		public void resetAngleReading() {
-			m_talonAngle.getSensorCollection().setPulseWidthPosition(0, RobotMap.kTimeoutMs);
+			//m_talonAngle.getSensorCollection().setPulseWidthPosition(0, RobotMap.kTimeoutMs);
 			m_talonAngle.setSelectedSensorPosition(0, RobotMap.kPIDLoopIdx, RobotMap.kTimeoutMs);
 		}
 		
@@ -273,7 +275,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 		}
 
 		public void reset() {
-			m_talonDrive.setSelectedSensorPosition(0, RobotMap.kPIDLoopIdx, RobotMap.kTimeoutMs);
+			//m_talonDrive.setSelectedSensorPosition(0, RobotMap.kPIDLoopIdx, RobotMap.kTimeoutMs);
 			stop();
 		}
 
@@ -303,11 +305,24 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /**DRIVE BASE BEGINS*/
 
 
-
-	
 	public SwerveModule m_frontLeft = new SwerveModule(
 		"Front Left", 
 		RobotMap.MODULES.FRONT_LEFT, 
@@ -353,13 +368,13 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 		*/
 
 		if (!(RobotMap.ROBOT.TESTING_MODE && !DriverStation.getInstance().isFMSAttached())) {
-			recalibrate();
+			//recalibrate();
 		}
 
 		DriverStation.reportError("Is FMS Attached: " + DriverStation.getInstance().isFMSAttached(), false);
 
 		if (DriverStation.getInstance().isFMSAttached()) {
-			recalibrate();
+			//recalibrate();
 		}
 	}
 
@@ -407,34 +422,29 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 			bls /= maxSpeed;
 			brs /= maxSpeed;
 		}
-
-		if(rotation < 0.10) {
-			fls = bls;
-			frs = brs;
-		}
+				
 		
-		/*
 		if ((driverControl && !isAtAngle(60.0)) || (!driverControl && !isAtAngle(8.0))) {
 			fls = 0.0;
 			frs = 0.0;
 			bls = 0.0;
 			brs = 0.0;
-		}*/
+		}
 
 		//SmartDashboard.putNumber("WheelSpeed", fls);
 
-		m_frontLeft.setTarget(-fla, -fls * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
-		m_frontRight.setTarget(-fra, -frs * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
-		m_backLeft.setTarget(bla, bls * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
-		m_backRight.setTarget(bra, -brs * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
+		m_frontLeft.setTarget(-fla, fls * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
+		m_frontRight.setTarget(-fra, frs * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
+		m_backLeft.setTarget(bla, -bls * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
+		m_backRight.setTarget(bra, brs * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
 	}
 
 	public void setTarget(double gyro, double angle, double forward) {
 		double f = Maths.wrapDegrees(angle - gyro);
-		/*
+		
 		if (!isAtAngle(8.0)) {
 			forward = 0.0;
-		}*/
+		}
 		
 		m_frontRight.setTarget(f, forward, false);
 		m_frontLeft.setTarget(f, forward, false);

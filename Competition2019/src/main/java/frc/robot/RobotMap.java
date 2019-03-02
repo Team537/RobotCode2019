@@ -32,7 +32,7 @@ public class RobotMap {
 		public static final double RATIO = Math.sqrt((DEPTH * DEPTH) + (WIDTH * WIDTH));
 
 		public static final double DRIVE_M_TO_ENCODER = 1984.4878; // ticks/m
-		public static final double DRIVE_SPEED = 0.80; // % 0-1.0
+		public static final double DRIVE_SPEED = 0.70; // % 0-1.0
 		
 		public static final double DRIVE_PATH_SCALE = 0.4; // % -1.0-1.0 speed scale for the pathfinder
 
@@ -56,9 +56,9 @@ public class RobotMap {
 	public static class PIDs {
 		//public static final PID DRIVE_ANGLE_FRONT_LEFT = new PID(4.9, 0.0, 4.0, "PID Front Left");
 		public static PID DRIVE_ANGLE_FRONT_LEFT = new PID(3.0, 0.0, 4.0, "PID Front Left"); //3.0, 0.0, 2.3,
-		public static PID DRIVE_ANGLE_FRONT_RIGHT = new PID(0.0, 0.0, 0.0, "PID Front Right"); //3.8, 0.0, 4.0,
+		public static PID DRIVE_ANGLE_FRONT_RIGHT = new PID(3.0, 0.0, 1.0, "PID Front Right"); //3.8, 0.0, 4.0,
 		public static PID DRIVE_ANGLE_BACK_LEFT = new PID(2.0, 0.0, 3.0, "PID Back Left"); //5.4, 0.0, 4.3,
-		public static PID DRIVE_ANGLE_BACK_RIGHT = new PID(0.0, 0.0, 0.0, "PID Back Right"); //5.4, 0.0, 4.3,
+		public static PID DRIVE_ANGLE_BACK_RIGHT = new PID(2.0, 0.0, 2.0, "PID Back Right"); //5.4, 0.0, 4.3,
 
 		public static PID DRIVE_PATH = new PID(1.0, 0.0, 0.0, "PID Path");
 
@@ -74,16 +74,16 @@ public class RobotMap {
 	public static class CAN {
   		public static final int CANIFIER = 0;
 
-		public static final int DRIVE_FRONT_LEFT_DRIVE = 1;
-		public static final int DRIVE_FRONT_LEFT_ANGLE = 2;
-		public static final int DRIVE_BACK_LEFT_DRIVE = 3;
-		public static final int DRIVE_BACK_LEFT_ANGLE = 4;
+		public static final int DRIVE_FRONT_LEFT_DRIVE = 1;//1
+		public static final int DRIVE_FRONT_LEFT_ANGLE = 2;//2
+		public static final int DRIVE_BACK_LEFT_DRIVE = 3;//3
+		public static final int DRIVE_BACK_LEFT_ANGLE = 4;//4
 
 
-		public static final int DRIVE_BACK_RIGHT_ANGLE = 5;
-		public static final int DRIVE_BACK_RIGHT_DRIVE = 6;
-		public static final int DRIVE_FRONT_RIGHT_ANGLE = 7;
-		public static final int DRIVE_FRONT_RIGHT_DRIVE = 8;
+		public static final int DRIVE_BACK_RIGHT_ANGLE = 5;//5
+		public static final int DRIVE_BACK_RIGHT_DRIVE = 6;//6
+		public static final int DRIVE_FRONT_RIGHT_ANGLE = 7;//7
+		public static final int DRIVE_FRONT_RIGHT_DRIVE = 8;//8
 
 		public static final int MANIPULATOR_SHOULDER_RIGHT = 13;
 		public static final int MANIPULATOR_SHOULDER_LEFT = 12; //12
