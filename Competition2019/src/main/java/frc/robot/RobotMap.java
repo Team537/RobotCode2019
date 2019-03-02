@@ -56,9 +56,9 @@ public class RobotMap {
 	public static class PIDs {
 		//public static final PID DRIVE_ANGLE_FRONT_LEFT = new PID(4.9, 0.0, 4.0, "PID Front Left");
 		public static PID DRIVE_ANGLE_FRONT_LEFT = new PID(3.0, 0.0, 4.0, "PID Front Left"); //3.0, 0.0, 2.3,
-		public static PID DRIVE_ANGLE_FRONT_RIGHT = new PID(0.0, 0.0, 0.0, "PID Front Right"); //3.8, 0.0, 4.0,
+		public static PID DRIVE_ANGLE_FRONT_RIGHT = new PID(3.0, 0.0, 1.0, "PID Front Right"); //3.8, 0.0, 4.0,
 		public static PID DRIVE_ANGLE_BACK_LEFT = new PID(2.0, 0.0, 3.0, "PID Back Left"); //5.4, 0.0, 4.3,
-		public static PID DRIVE_ANGLE_BACK_RIGHT = new PID(0.0, 0.0, 0.0, "PID Back Right"); //5.4, 0.0, 4.3,
+		public static PID DRIVE_ANGLE_BACK_RIGHT = new PID(2.0, 0.0, 2.0, "PID Back Right"); //5.4, 0.0, 4.3,
 
 		public static PID DRIVE_PATH = new PID(1.0, 0.0, 0.0, "PID Path");
 

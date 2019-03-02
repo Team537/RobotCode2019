@@ -13,8 +13,8 @@ public class DriveArcade extends Command {
   protected void initialize() {
     Robot.m_drivetrain.stop();
     Robot.m_gyro.reset();
-    Robot.m_drivetrain.recalibrate();
-    //Robot.m_drivetrain.reset();
+    //Robot.m_drivetrain.recalibrate();
+    Robot.m_drivetrain.reset();
     //double gyro = Math.toRadians(Robot.m_gyro.getAngle());
     //Robot.m_drivetrain.setTarget(gyro, 0.00, 0.00);
     Robot.m_drivetrain.setMode(SwerveMode.ModeSpeed);
@@ -29,7 +29,7 @@ public class DriveArcade extends Command {
     double forward = Robot.m_oi.m_main.getRawAxis("DriveForward");
     
     
-    Robot.m_drivetrain.setTarget(gyro, rotation, strafe, forward);
+    Robot.m_drivetrain.setTarget(0.00, rotation, strafe, forward);
   }
 
   @Override
@@ -44,6 +44,6 @@ public class DriveArcade extends Command {
 
   @Override
   protected void interrupted() {
-    Robot.m_drivetrain.stop();
+    end();
   }
 }
