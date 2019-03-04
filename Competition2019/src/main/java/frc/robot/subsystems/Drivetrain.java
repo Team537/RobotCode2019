@@ -291,12 +291,11 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 			}
 			SmartDashboard.putBoolean(m_name + " At Zero", atZero);
 			return atZero;
-
 		}
 	
 		public void stop() {
 			m_talonDrive.set(ControlMode.PercentOutput, 0.0);
-			//m_swerveMode = SwerveMode.ModeSpeed;
+			m_swerveMode = SwerveMode.ModeSpeed;
 		}
 	}
 
@@ -394,10 +393,10 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 		double bls = Math.sqrt((a * a) + (d * d));
 		double brs = Math.sqrt((b * b) + (d * d));
 		
-		double fla = Math.atan2(a, c) * (180.0 / Math.PI); //b, d
+		double fla = Math.atan2(b, d) * (180.0 / Math.PI); //b, d
 		double fra = Math.atan2(b, c) * (180.0 / Math.PI);
 		double bla = Math.atan2(a, d) * (180.0 / Math.PI);
-		double bra = Math.atan2(b, d) * (180.0 / Math.PI); //a, c
+		double bra = Math.atan2(a, c) * (180.0 / Math.PI); //a, c
 
 		double maxSpeed = Maths.maxValue(fls, frs, bls, brs);
 
@@ -408,13 +407,13 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 			brs /= maxSpeed;
 		}
 		
-		/*
+		
 		if ((driverControl && !isAtAngle(60.0)) || (!driverControl && !isAtAngle(8.0))) {
 			fls = 0.0;
 			frs = 0.0;
 			bls = 0.0;
 			brs = 0.0;
-		}*/
+		}
 
 		//SmartDashboard.putNumber("WheelSpeed", fls);
 
@@ -427,9 +426,9 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 	public void setTarget(double gyro, double angle, double forward) {
 		double f = Maths.wrapDegrees(angle - gyro);
 		
-		if (!isAtAngle(8.0)) {
-			forward = 0.0;
-		}
+		//if (!isAtAngle(8.0)) {
+		//	forward = 0.0;
+		//}
 		
 		m_frontRight.setTarget(f, forward, false);
 		m_frontLeft.setTarget(f, forward, false);
