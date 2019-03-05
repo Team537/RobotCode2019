@@ -22,8 +22,8 @@ public class Robot extends TimedRobot {
   public static Gyro m_gyro;
   public static Photosensor m_photosensor;
   public static OI m_oi;
-  public static Collector m_collector = new Collector();
-  public static ManipulatorArm m_arm = new ManipulatorArm();
+  public static Collector m_collector; // = new Collector();
+  public static ManipulatorArm m_arm; // = new ManipulatorArm();
   public static Pneumatics m_pneumatics = new Pneumatics();
   public static Camera m_camera = new Camera();
   public static Climber m_climber;
@@ -34,7 +34,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
-    m_oi = new OI();
     
     if(RobotMap.SUBSYSTEMS.DRIVE) {
       m_drivetrain = new Drivetrain();
@@ -45,29 +44,28 @@ public class Robot extends TimedRobot {
     }
 
     if(RobotMap.SUBSYSTEMS.PHOTOSENSOR){
-      //m_photosensor = new Photosensor();
+      m_photosensor = new Photosensor();
     }
 
     if(RobotMap.SUBSYSTEMS.COLLECTOR) {
-      //m_collector = new Collector();
+      m_collector = new Collector();
     }
 
-    //if(RobotMap.SUBSYSTEMS.ARM) {
-      //m_arm = new ManipulatorArm();
-    //}
-
-    //if(RobotMap.SUBSYSTEMS.CAMERA) {
-      //m_camera = new Camera();
-    //}
-    
+    if(RobotMap.SUBSYSTEMS.ARM) {
+      m_arm = new ManipulatorArm();
+    }
+ 
     if(RobotMap.SUBSYSTEMS.CLIMB) {
       m_climber = new Climber();
     }
 
     /*
     if(RobotMap.SUBSYSTEMS.PNEUMATICS) {
-      //m_pneumatics = new Pneumatics();
-    }*/
+      m_pneumatics = new Pneumatics();
+    }
+    */
+
+    m_oi = new OI();
 
     //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
