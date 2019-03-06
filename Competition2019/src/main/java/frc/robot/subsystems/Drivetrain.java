@@ -388,10 +388,10 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 		double c = fwd2 - rotation * ((RobotMap.ROBOT.WIDTH / r) * 0.5);
 		double d = fwd2 + rotation * ((RobotMap.ROBOT.WIDTH / r) * 0.5);
 
-		double fls = Math.sqrt((a * a) + (c * c));
+		double fls = Math.sqrt((b * b) + (d * d)); //(a * a) + (c * c)
 		double frs = Math.sqrt((b * b) + (c * c));
 		double bls = Math.sqrt((a * a) + (d * d));
-		double brs = Math.sqrt((b * b) + (d * d));
+		double brs = Math.sqrt((a * a) + (c * c)); //(b * b) + (d * d)
 		
 		double fla = Math.atan2(b, d) * (180.0 / Math.PI); //b, d
 		double fra = Math.atan2(b, c) * (180.0 / Math.PI);
@@ -407,19 +407,20 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 			brs /= maxSpeed;
 		}
 		
-		
+		/*
 		if ((driverControl && !isAtAngle(60.0)) || (!driverControl && !isAtAngle(8.0))) {
 			fls = 0.0;
 			frs = 0.0;
 			bls = 0.0;
 			brs = 0.0;
 		}
+		*/
 
 		//SmartDashboard.putNumber("WheelSpeed", fls);
 
-		m_frontLeft.setTarget(fla, fls * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
-		m_frontRight.setTarget(fra, frs * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
-		m_backLeft.setTarget(bla, bls * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
+		m_frontLeft.setTarget(-fla, fls * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
+		m_frontRight.setTarget(-fra, frs * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
+		m_backLeft.setTarget(bla, -bls * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
 		m_backRight.setTarget(bra, brs * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
 	}
 

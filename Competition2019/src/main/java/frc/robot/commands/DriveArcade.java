@@ -32,16 +32,17 @@ public class DriveArcade extends Command {
 		double strafe = deadband(0.1, Robot.m_oi.m_main.getRawAxis("DriveStrafe"));
     double forward = deadband(0.1, Robot.m_oi.m_main.getRawAxis("DriveForward"));
     
-    Robot.m_drivetrain.setTarget(0.00, rotation, strafe, forward);
+    Robot.m_drivetrain.setTarget(gyro, rotation, strafe, forward);
   }
 
   private double deadband(double deadband, double input) {
-    if(input < deadband || input > -deadband) {
-      return 0.00;
+    double value;
+    if(input > deadband || input < -deadband) {
+      value = input - deadband;
     } else {
-      double value = input - deadband;
-      return value;
+      value = 0.00;
     }
+    return value;
   }
 
   @Override
