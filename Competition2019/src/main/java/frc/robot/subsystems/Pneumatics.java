@@ -12,10 +12,16 @@ import frc.robot.commands.CompressorOn;
 public class Pneumatics extends Subsystem {
 
   private Compressor compressor = new Compressor(RobotMap.PNEUMATICS.COMPRESSOR);
+  boolean enabled = compressor.enabled();
+  boolean pressureSwitch = compressor.getPressureSwitchValue();
+  double current = compressor.getCompressorCurrent();
+
+  public Pneumatics(){
+    compressor.setClosedLoopControl(true);
+  }
 
   public void CompressorOn() {
     compressor.start();
-    compressor.setClosedLoopControl(true);
   }
 
   public void Stop() {
