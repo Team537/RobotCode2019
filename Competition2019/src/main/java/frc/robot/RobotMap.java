@@ -12,13 +12,13 @@ public class RobotMap {
 	}
 
 	public static class SUBSYSTEMS {
-		public static final boolean ARM = true;
-		public static final boolean COLLECTOR = true;
+		public static final boolean ARM = false;
+		public static final boolean COLLECTOR = false;
 		public static final boolean CAMERA = true;
 		public static final boolean PHOTOSENSOR = false;
 		public static final boolean GYRO = true;
 		public static final boolean DRIVE = true;
-		public static final boolean PNEUMATICS = true;
+		public static final boolean PNEUMATICS = false;
 		public static final boolean CLIMB = false;
 	}
 
@@ -32,7 +32,7 @@ public class RobotMap {
 		public static final double RATIO = Math.sqrt((DEPTH * DEPTH) + (WIDTH * WIDTH));
 
 		public static final double DRIVE_M_TO_ENCODER = 1984.4878; // ticks/m
-		public static final double DRIVE_SPEED = 0.80; // % 0-1.0
+		public static final double DRIVE_SPEED = 0.90; // % 0-100
 		
 		public static final double DRIVE_PATH_SCALE = 0.4; // % -1.0-1.0 speed scale for the pathfinder
 
@@ -55,10 +55,10 @@ public class RobotMap {
 
 	public static class PIDs {
 		//public static final PID DRIVE_ANGLE_FRONT_LEFT = new PID(4.9, 0.0, 4.0, "PID Front Left");
-		public static PID DRIVE_ANGLE_FRONT_LEFT = new PID(3.0, 0.0, 4.0, "PID Front Left"); //3.0, 0.0, 2.3,
-		public static PID DRIVE_ANGLE_FRONT_RIGHT = new PID(0.0, 0.0, 0.0, "PID Front Right"); //3.8, 0.0, 4.0,
+		public static PID DRIVE_ANGLE_FRONT_LEFT = new PID(4.0, 0.0, 3.5, "PID Front Left"); //3.0, 0.0, 2.3,
+		public static PID DRIVE_ANGLE_FRONT_RIGHT = new PID(3.0, 0.0, 1.0, "PID Front Right"); //3.8, 0.0, 4.0,
 		public static PID DRIVE_ANGLE_BACK_LEFT = new PID(2.0, 0.0, 3.0, "PID Back Left"); //5.4, 0.0, 4.3,
-		public static PID DRIVE_ANGLE_BACK_RIGHT = new PID(0.0, 0.0, 0.0, "PID Back Right"); //5.4, 0.0, 4.3,
+		public static PID DRIVE_ANGLE_BACK_RIGHT = new PID(2.0, 0.0, 2.0, "PID Back Right"); //5.4, 0.0, 4.3,
 
 		public static PID DRIVE_PATH = new PID(1.0, 0.0, 0.0, "PID Path");
 

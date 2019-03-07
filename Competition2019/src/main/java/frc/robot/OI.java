@@ -47,22 +47,6 @@ public class OI {
       //this.m_main.getJoystickButton("P_UP").whenPressed(new );
     }
 
-    /*
-    if(!DriverStation.getInstance().isFMSAttached()){
-      m_main.getJoystickButton("SwitchModule").whenPressed(new DriveSetPID(TuneCommand.ChangeModule, 0, 0.0));
-      m_main.getJoystickButton("SwitchMode").whenPressed(new DriveSetPID(TuneCommand.ChangeTuning, 0, 0.0));
-      m_main.getJoystickButton("TuneIncrement").whenPressed(new DriveSetPID(TuneCommand.ChangeIncrement, 0, 0.0));
-
-      m_main.getJoystickButton("P_Up").whenPressed(new DriveSetPID(TuneCommand.ChangePIDVal, 0, 0.1));
-      m_main.getJoystickButton("P_Down").whenPressed(new DriveSetPID(TuneCommand.ChangePIDVal, 0, -0.1));
-
-      m_main.getJoystickButton("I_Down").whenPressed(new DriveSetPID(TuneCommand.ChangePIDVal, 1, 0.1));
-      m_main.getJoystickButton("I_Down").whenPressed(new DriveSetPID(TuneCommand.ChangePIDVal, 1, 0.1));
-
-      m_main.getJoystickButton("D_Up").whenPressed(new DriveSetPID(TuneCommand.ChangePIDVal, 2, 0.1));
-      m_main.getJoystickButton("D_Down").whenPressed(new DriveSetPID(TuneCommand.ChangePIDVal, 2, -0.1));
-    }*/
-
     if(RobotMap.SUBSYSTEMS.COLLECTOR) {
       this.m_main.getJoystickButton("Get Hatch").whileHeld(new CollectorTilt(100));
       this.m_main.getJoystickButton("Go Back").whileHeld(new CollectorTilt(-100));
@@ -86,8 +70,8 @@ public class OI {
       this.m_secondary.getJoystickButton("ArmUp").whileHeld(new ArmManual(100));
       this.m_secondary.getJoystickButton("ArmDown").whileHeld(new ArmManual(-100));
 
-      this.m_secondary.getJoystickButton("ArmUp").whileHeld(new ArmManual(0.30));
-      this.m_secondary.getJoystickButton("ArmDown").whileHeld(new ArmManual(-0.30));
+      //this.m_secondary.getJoystickButton("ArmUp").whileHeld(new ArmManual(0.30));
+      //this.m_secondary.getJoystickButton("ArmDown").whileHeld(new ArmManual(-0.30));
     }
 
     if(RobotMap.SUBSYSTEMS.CAMERA) {
