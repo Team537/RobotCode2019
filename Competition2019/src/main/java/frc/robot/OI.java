@@ -67,8 +67,8 @@ public class OI {
     }
 
     if(RobotMap.SUBSYSTEMS.ARM) {
-      this.m_secondary.getJoystickButton("ArmUp").whileHeld(new ArmManual(100));
-      this.m_secondary.getJoystickButton("ArmDown").whileHeld(new ArmManual(-100));
+      this.m_secondary.getJoystickButton("ArmUp").whileHeld(new ArmManual(50));
+      this.m_secondary.getJoystickButton("ArmDown").whileHeld(new ArmManual(-50));
 
       //this.m_secondary.getJoystickButton("ArmUp").whileHeld(new ArmManual(0.30));
       //this.m_secondary.getJoystickButton("ArmDown").whileHeld(new ArmManual(-0.30));

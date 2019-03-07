@@ -59,11 +59,10 @@ public class Robot extends TimedRobot {
       m_climber = new Climber();
     }
 
-    /*
     if(RobotMap.SUBSYSTEMS.PNEUMATICS) {
       m_pneumatics = new Pneumatics();
     }
-    */
+    
 
     m_oi = new OI();
 
