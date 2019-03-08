@@ -48,13 +48,13 @@ public class OI {
     }
 
     if(RobotMap.SUBSYSTEMS.COLLECTOR) {
-      this.m_main.getJoystickButton("Get Hatch").whileHeld(new CollectorTilt(100));
-      this.m_main.getJoystickButton("Go Back").whileHeld(new CollectorTilt(-100));
+      this.m_main.getJoystickButton("Get Hatch").whileHeld(new CollectorTilt(10));
+      this.m_main.getJoystickButton("Go Back").whileHeld(new CollectorTilt(-50));
 
       this.m_secondary.getJoystickButton("CollectIn").whileHeld(new CollectorSpeed(0.50));
       this.m_secondary.getJoystickButton("CollectOut").whileHeld(new CollectorSpeed(-1.00));
 
-      this.m_secondary.getJoystickButton("HatchOut").whenPressed(new CollectorHatchOut());
+      this.m_secondary.getJoystickButton("Hatch Out").whenPressed(new CollectorHatchOut());
 
       this.m_secondary.getJoystickButton("Hatch Level 1").whenPressed(new ArmLevel(0.00));
       this.m_secondary.getJoystickButton("Hatch Level 2").whenPressed(new ArmLevel(1000.00));
@@ -67,14 +67,11 @@ public class OI {
     }
 
     if(RobotMap.SUBSYSTEMS.ARM) {
-      this.m_secondary.getJoystickButton("ArmUp").whileHeld(new ArmManual(100));
-      this.m_secondary.getJoystickButton("ArmDown").whileHeld(new ArmManual(-100));
+      this.m_secondary.getJoystickButton("ArmUp").whileHeld(new ArmManual(1));
+      this.m_secondary.getJoystickButton("ArmDown").whileHeld(new ArmManual(-1));
 
       //this.m_secondary.getJoystickButton("ArmUp").whileHeld(new ArmManual(0.30));
       //this.m_secondary.getJoystickButton("ArmDown").whileHeld(new ArmManual(-0.30));
-    }
-
-    if(RobotMap.SUBSYSTEMS.CAMERA) {
     }
 
     if(RobotMap.SUBSYSTEMS.CLIMB) {

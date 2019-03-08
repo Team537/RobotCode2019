@@ -16,9 +16,10 @@ import frc.robot.commands.CollectorDefault;
 
 public class Collector extends Subsystem {
 
-  //private Compressor m_compressor = new Compressor(RobotMap.PNEUMATICS.COMPRESSOR);
+  //private Compressor m_compressor = new Compressor(1);
     
-  private Solenoid m_hatchLeft = new Solenoid(RobotMap.PNEUMATICS.HATCH_LEFT);
+  //private Solenoid m_hatchLeft = new Solenoid(RobotMap.PNEUMATICS.HATCH_LEFT);
+  //private Solenoid m_hatch = new Solenoid(RobotMap.PNEUMATICS.HATCH);
   //private Solenoid m_hatchRight = new Solenoid(RobotMap.PNEUMATICS.HATCH_RIGHT);
   private WPI_TalonSRX m_intake = new WPI_TalonSRX(RobotMap.CAN.COLLECTOR_INTAKE);
   private WPI_TalonSRX m_wrist = new WPI_TalonSRX(RobotMap.CAN.COLLECTOR_WRIST);
@@ -34,13 +35,24 @@ public class Collector extends Subsystem {
     m_wrist.enableCurrentLimit(false);
     m_wrist.configPeakCurrentDuration(0, RobotMap.kTimeoutMs); // 10
     m_wrist.configPeakCurrentLimit(0, RobotMap.kTimeoutMs); // 30
+    //m_wrist.configReverseSoftLimitEnable(true);
+    //m_wrist.configReverseSoftLimitThreshold(0, RobotMap.kTimeoutMs);
+    //m_compressor.setClosedLoopControl(true);
   }
   public void setSpeed(double intakeSpeed) {
     m_intake.set(ControlMode.PercentOutput, intakeSpeed);
   }
 
+  public void compressorOn(){
+    //m_compressor.start();
+    //m_compressor.setClosedLoopControl(true);
+  }
+
   public void hatchOut(){
-    m_hatchLeft.set(true);
+    //m_hatchLeft.set(true);
+    
+    
+    //m_hatch.set(true);
     //m_hatchRight.set(true);
 
   }
@@ -57,8 +69,10 @@ public class Collector extends Subsystem {
   }
   
   public void disable() {
-    m_hatchLeft.set(false);
+    //m_hatchLeft.set(false);
+    //m_hatch.set(false);
     //m_hatchRight.set(false);
+    //m_compressor.stop();
     m_intake.set(ControlMode.PercentOutput, 0.00);
     m_wrist.set(ControlMode.Position, m_wrist.getSelectedSensorPosition());
   }

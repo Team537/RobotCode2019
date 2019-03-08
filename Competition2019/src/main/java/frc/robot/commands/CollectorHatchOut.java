@@ -7,17 +7,17 @@ public class CollectorHatchOut extends Command {
   public CollectorHatchOut() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.m_collector);
+    requires(Robot.m_pneumatics);
   }
 
   @Override
   protected void initialize() {
-    Robot.m_collector.hatchOut();
+    Robot.m_pneumatics.hatchOut();
   }
 
   @Override
   protected void execute() {
-      Robot.m_collector.hatchOut();
+      Robot.m_pneumatics.hatchOut();
   }
 
   @Override
@@ -27,11 +27,11 @@ public class CollectorHatchOut extends Command {
 
   @Override
   protected void end() {
-      Robot.m_collector.disable();
+      Robot.m_pneumatics.hatchIn();
   }
 
   @Override
   protected void interrupted() {
-      Robot.m_collector.disable();
+      end();
   }
 }

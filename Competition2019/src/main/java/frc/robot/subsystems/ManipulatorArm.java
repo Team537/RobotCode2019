@@ -27,7 +27,7 @@ public class ManipulatorArm extends Subsystem {
   
   public ManipulatorArm() {
     m_shoulder.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, RobotMap.kPIDLoopIdx, RobotMap.kTimeoutMs);
-    m_shoulder.setInverted(false);
+    m_shoulder.setInverted(true);
     m_shoulder.setSensorPhase(true);
     m_shoulder.config_kP(RobotMap.kPIDLoopIdx, RobotMap.PIDs.ARM_SHOULDER.getP(), RobotMap.kTimeoutMs);
 		m_shoulder.config_kI(RobotMap.kPIDLoopIdx, RobotMap.PIDs.ARM_SHOULDER.getI(), RobotMap.kTimeoutMs);
@@ -36,8 +36,13 @@ public class ManipulatorArm extends Subsystem {
     //m_shoulder.enableCurrentLimit(false);
    // m_shoulder.configPeakCurrentDuration(0, RobotMap.kTimeoutMs); // 10
     //m_shoulder.configPeakCurrentLimit(0, RobotMap.kTimeoutMs); // 30
+    m_shoulder.configForwardSoftLimitThreshold(3000, RobotMap.kTimeoutMs);
+    m_shoulder.configReverseSoftLimitThreshold(0, RobotMap.kTimeoutMs);
+    m_shoulder.configForwardSoftLimitEnable(false);
+    m_shoulder.configReverseSoftLimitEnable(true);
+    
 
-    m_shoulder2.set(ControlMode.Follower, m_shoulder2.getDeviceID());
+    m_shoulder2.set(ControlMode.Follower, m_shoulder.getDeviceID());
     m_shoulder2.setInverted(InvertType.OpposeMaster);
   }
 
@@ -50,6 +55,8 @@ public class ManipulatorArm extends Subsystem {
     //m_shoulder2.set(ControlMode.PercentOutput, 0.00);
     //m_shoulder.stopMotor();
     //m_shoulder2.stopMotor();
+    //m_shoulder.set(ControlMode.PercentOutput, 0.10);
+
     m_armCurrentPostion = getCurrentPosition();
     m_shoulder.set(ControlMode.Position, m_armCurrentPostion);
   }
@@ -114,6 +121,7 @@ public class ManipulatorArm extends Subsystem {
     SmartDashboard.putNumber("Arm Error: ", m_armError);
     
     m_shoulder.set(ControlMode.Position, position);
+    m_shoulder2.set(ControlMode.Follower, m_shoulder.get());
   }
   
 

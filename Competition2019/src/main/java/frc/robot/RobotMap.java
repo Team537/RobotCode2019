@@ -12,13 +12,13 @@ public class RobotMap {
 	}
 
 	public static class SUBSYSTEMS {
-		public static final boolean ARM = false;
-		public static final boolean COLLECTOR = false;
+		public static final boolean ARM = true;
+		public static final boolean COLLECTOR = true;
 		public static final boolean CAMERA = true;
 		public static final boolean PHOTOSENSOR = false;
 		public static final boolean GYRO = true;
 		public static final boolean DRIVE = true;
-		public static final boolean PNEUMATICS = false;
+		public static final boolean PNEUMATICS = true;
 		public static final boolean CLIMB = false;
 	}
 
@@ -68,7 +68,7 @@ public class RobotMap {
 		public static PID DRIVE_MODE_DISTANCE = new PID(0.22, 0.0, 0.0, "PID Front Distance");
 
 		public static final PID ARM_WRIST = new PID(0.00, 0.00, 0.00, "PID Arm Wrist");
-		public static final PID ARM_SHOULDER = new PID(0.00, 0.00, 0.00, "PID Arm Shoulder");
+		public static final PID ARM_SHOULDER = new PID(4.00, 0.00, 3.00, "PID Arm Shoulder");
   	}
 
 	public static class CAN {
@@ -108,6 +108,7 @@ public class RobotMap {
 	
 	public static class PNEUMATICS {
 		public static final int COMPRESSOR = 0;
+		public static final int HATCH = 0;
 		public static final int HATCH_LEFT = 0;
 		public static final int HATCH_RIGHT = 0;
 

@@ -24,7 +24,7 @@ public class Robot extends TimedRobot {
   public static OI m_oi;
   public static Collector m_collector; // = new Collector();
   public static ManipulatorArm m_arm; // = new ManipulatorArm();
-  public static Pneumatics m_pneumatics = new Pneumatics();
+  public static Pneumatics m_pneumatics;// = new Pneumatics();
   public static Camera m_camera = new Camera();
   public static Climber m_climber;
 
@@ -34,7 +34,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
-    
+
     if(RobotMap.SUBSYSTEMS.DRIVE) {
       m_drivetrain = new Drivetrain();
     }
@@ -59,11 +59,12 @@ public class Robot extends TimedRobot {
       m_climber = new Climber();
     }
 
-    /*
+    
     if(RobotMap.SUBSYSTEMS.PNEUMATICS) {
       m_pneumatics = new Pneumatics();
+      //m_pneumatics.CompressorOn();
     }
-    */
+    
 
     m_oi = new OI();
 
