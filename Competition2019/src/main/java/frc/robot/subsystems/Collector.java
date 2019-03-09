@@ -35,7 +35,7 @@ public class Collector extends Subsystem {
     m_wrist.enableCurrentLimit(false);
     m_wrist.configPeakCurrentDuration(0, RobotMap.kTimeoutMs); // 10
     m_wrist.configPeakCurrentLimit(0, RobotMap.kTimeoutMs); // 30
-    //m_wrist.configReverseSoftLimitEnable(true);
+    m_wrist.configReverseSoftLimitEnable(false);
     //m_wrist.configReverseSoftLimitThreshold(0, RobotMap.kTimeoutMs);
     //m_compressor.setClosedLoopControl(true);
   }

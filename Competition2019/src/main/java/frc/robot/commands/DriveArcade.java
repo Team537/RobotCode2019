@@ -28,7 +28,7 @@ public class DriveArcade extends Command {
 		//double strafe = Robot.m_oi.m_main.getRawAxis("DriveStrafe");
     //double forward = Robot.m_oi.m_main.getRawAxis("DriveForward");
   
-    double rotation = deadband(0.15, Robot.m_oi.m_main.getRawAxis("DriveRotation"));
+    double rotation = deadband(0.20, Robot.m_oi.m_main.getRawAxis("DriveRotation"));
 		double strafe = deadband(0.1, Robot.m_oi.m_main.getRawAxis("DriveStrafe"));
     double forward = deadband(0.1, Robot.m_oi.m_main.getRawAxis("DriveForward"));
     

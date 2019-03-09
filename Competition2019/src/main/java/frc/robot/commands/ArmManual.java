@@ -17,7 +17,12 @@ public class ArmManual extends Command {
 
   @Override
   protected void execute() {
-    Robot.m_arm.armManual(armIncrement);
+    if(Robot.m_arm.m_armLimit.get() && armIncrement > 0){
+      end();
+    } else {
+      Robot.m_arm.armManual(armIncrement);
+    }
+    
     //Robot.m_arm.setTarget(Robot.m_arm.getTarget() + armIncrement);
   }
 

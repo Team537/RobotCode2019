@@ -6,6 +6,7 @@ import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -19,7 +20,8 @@ public class ManipulatorArm extends Subsystem {
 
   private WPI_TalonSRX m_shoulder2 = new WPI_TalonSRX(RobotMap.CAN.MANIPULATOR_SHOULDER_LEFT);
   private WPI_TalonSRX m_shoulder = new WPI_TalonSRX(RobotMap.CAN.MANIPULATOR_SHOULDER_RIGHT);
-  
+  public DigitalInput m_armLimit = new DigitalInput(RobotMap.DIO.ARM_LIMIT);
+
   private double m_armCurrentPostion;
   private double m_targetPosition;
   private double m_armError;
@@ -39,9 +41,9 @@ public class ManipulatorArm extends Subsystem {
     m_shoulder.configForwardSoftLimitThreshold(3000, RobotMap.kTimeoutMs);
     m_shoulder.configReverseSoftLimitThreshold(0, RobotMap.kTimeoutMs);
     m_shoulder.configForwardSoftLimitEnable(false);
-    m_shoulder.configReverseSoftLimitEnable(true);
+    m_shoulder.configReverseSoftLimitEnable(false);
     
-
+    m_shoulder2.configReverseSoftLimitEnable(false);
     m_shoulder2.set(ControlMode.Follower, m_shoulder.getDeviceID());
     m_shoulder2.setInverted(InvertType.OpposeMaster);
   }
@@ -120,8 +122,12 @@ public class ManipulatorArm extends Subsystem {
 
     SmartDashboard.putNumber("Arm Error: ", m_armError);
     
+    //if(m_armLimit.get()) {
+    //  disable();
+    //} else {
     m_shoulder.set(ControlMode.Position, position);
     m_shoulder2.set(ControlMode.Follower, m_shoulder.get());
+    //}
   }
   
 

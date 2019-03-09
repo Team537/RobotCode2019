@@ -14,12 +14,8 @@ import frc.robot.commands.CompressorOn;
 public class Pneumatics extends Subsystem {
 
   private Compressor m_compressor = new Compressor(22);
-  private Solenoid m_hatches = new Solenoid(0);
-  /*
-  public Pneumatics(){
-    compressor.setClosedLoopControl(true);
-  }
-  */
+  public Solenoid m_hatches = new Solenoid(22, 0);
+  
   public void CompressorOn() {
     m_compressor.start();
     m_compressor.setClosedLoopControl(true);

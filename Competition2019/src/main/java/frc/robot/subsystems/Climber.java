@@ -11,8 +11,8 @@ public class Climber extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  private Solenoid m_climb1 = new Solenoid(RobotMap.PNEUMATICS.CLIMB_1);
-  private Solenoid m_climb2 = new Solenoid(RobotMap.PNEUMATICS.CLIMB_2);
+  private Solenoid m_climb1 = new Solenoid(22, RobotMap.PNEUMATICS.CLIMB_1);
+  private Solenoid m_climb2 = new Solenoid(22, RobotMap.PNEUMATICS.CLIMB_2);
 
   public void disable(){
     m_climb1.set(false);

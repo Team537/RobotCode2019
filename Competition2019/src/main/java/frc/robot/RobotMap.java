@@ -76,8 +76,8 @@ public class RobotMap {
 
 		public static final int DRIVE_FRONT_LEFT_DRIVE = 1;
 		public static final int DRIVE_FRONT_LEFT_ANGLE = 2;
-		public static final int DRIVE_BACK_LEFT_DRIVE = 3;
-		public static final int DRIVE_BACK_LEFT_ANGLE = 4;
+		public static final int DRIVE_BACK_LEFT_DRIVE = 4;//3
+		public static final int DRIVE_BACK_LEFT_ANGLE = 3;//4
 
 
 		public static final int DRIVE_BACK_RIGHT_ANGLE = 5;
@@ -93,7 +93,7 @@ public class RobotMap {
 	}
 
 	public static class DIO {
-		public static final int COLLECTOR_LIMIT = 1;
+		public static final int ARM_LIMIT = 0;
 	}
 
 	public static class VISION {
@@ -107,13 +107,13 @@ public class RobotMap {
 	}
 	
 	public static class PNEUMATICS {
-		public static final int COMPRESSOR = 0;
+		//public static final int COMPRESSOR = 0;
 		public static final int HATCH = 0;
-		public static final int HATCH_LEFT = 0;
-		public static final int HATCH_RIGHT = 0;
+		//public static final int HATCH_LEFT = 0;
+		//public static final int HATCH_RIGHT = 0;
 
-		public static final int CLIMB_1 = 3;
-		public static final int CLIMB_2 = 4;
+		public static final int CLIMB_1 = 1;
+		public static final int CLIMB_2 = 2;
 	}
 
 	public static class ANALOG_INPUT {
