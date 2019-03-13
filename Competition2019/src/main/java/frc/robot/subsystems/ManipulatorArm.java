@@ -42,7 +42,7 @@ public class ManipulatorArm extends Subsystem {
     m_shoulder.configReverseSoftLimitThreshold(0, RobotMap.kTimeoutMs);
     m_shoulder.configForwardSoftLimitEnable(false);
     m_shoulder.configReverseSoftLimitEnable(false);
-    
+
     m_shoulder2.configReverseSoftLimitEnable(false);
     m_shoulder2.set(ControlMode.Follower, m_shoulder.getDeviceID());
     m_shoulder2.setInverted(InvertType.OpposeMaster);

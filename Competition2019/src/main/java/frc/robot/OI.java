@@ -53,8 +53,8 @@ public class OI {
       this.m_secondary.getJoystickButton("Collector Level 2").whenPressed(new ArmLevel(1000.00));
       this.m_secondary.getJoystickButton("Collector Level 3").whenPressed(new ArmLevel(2000.00));
 
-      this.m_secondary.getJoystickButton("ArmUp").whileHeld(new ArmManual(0.20));
-      this.m_secondary.getJoystickButton("ArmDown").whileHeld(new ArmManual(-0.25));
+      this.m_secondary.getJoystickButton("ArmUp").whileHeld(new ArmManual(0.35));
+      this.m_secondary.getJoystickButton("ArmDown").whileHeld(new ArmManual(-0.10));
 
       //this.m_secondary.getJoystickButton("ArmUp").whileHeld(new ArmManual(0.30));
       //this.m_secondary.getJoystickButton("ArmDown").whileHeld(new ArmManual(-0.30));

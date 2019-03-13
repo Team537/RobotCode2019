@@ -32,7 +32,7 @@ public class RobotMap {
 		public static final double RATIO = Math.sqrt((DEPTH * DEPTH) + (WIDTH * WIDTH));
 
 		public static final double DRIVE_M_TO_ENCODER = 1984.4878; // ticks/m
-		public static final double DRIVE_SPEED = 0.90; // % 0-100
+		public static final double DRIVE_SPEED = 1.0; // % 0-100
 		
 		public static final double DRIVE_PATH_SCALE = 0.4; // % -1.0-1.0 speed scale for the pathfinder
 
