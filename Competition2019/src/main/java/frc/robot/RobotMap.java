@@ -107,7 +107,7 @@ public class RobotMap {
 	}
 	
 	public static class PNEUMATICS {
-		public static final int COMPRESSOR = 0;
+		public static final int COMPRESSOR = 22;
 		public static final int HATCH_LEFT = 0;
 		public static final int HATCH_RIGHT = 0;
 

@@ -77,7 +77,7 @@ public class Collector extends Subsystem {
 
    @Override
    public void initDefaultCommand() {
-   setDefaultCommand(new CollectorDefault());
+    setDefaultCommand(new CollectorDefault());
   }
 
 }

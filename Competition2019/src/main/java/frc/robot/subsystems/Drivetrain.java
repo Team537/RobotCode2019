@@ -95,7 +95,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 			if (!enabled) {
 				DriverStation.reportError("Module is set to be disabled: " + m_name, false);
 			}
-			
+
 			m_talonAngle.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, RobotMap.kPIDLoopIdx, RobotMap.kTimeoutMs);
 			m_talonAngle.config_kP(RobotMap.kPIDLoopIdx, pidAngle.getP(), RobotMap.kTimeoutMs);
 			m_talonAngle.config_kI(RobotMap.kPIDLoopIdx, pidAngle.getI(), RobotMap.kTimeoutMs);
@@ -105,6 +105,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 			m_talonAngle.setSensorPhase(setPhase);
 			m_talonAngle.configPeakCurrentDuration(0, RobotMap.kTimeoutMs); // 10
 			m_talonAngle.configPeakCurrentLimit(0, RobotMap.kTimeoutMs); // 30
+			//m_talonAngle.configClosedloopRamp(0.2);
 			
 			m_talonDrive.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, RobotMap.kPIDLoopIdx, RobotMap.kTimeoutMs);
 			m_talonDrive.setSensorPhase(false); // true

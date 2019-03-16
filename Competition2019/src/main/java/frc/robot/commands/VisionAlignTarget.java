@@ -62,7 +62,9 @@ public class VisionAlignTarget extends Command {
           outputAngle = lowPassFiltering(angle, previousAngle1);
           previousAngle1 = outputAngle;
           
-          SmartDashboard.putNumber("Angle Out", outputAngle);		
+          SmartDashboard.putNumber("Angle Out", outputAngle);
+          
+          targetFound = true;
         } 
       } 
   });

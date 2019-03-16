@@ -65,7 +65,9 @@ public class VisionSystem extends Subsystem {
         outputAngle = lowPassFiltering(angle, previousAngle1);
         previousAngle1 = outputAngle;
         
-        SmartDashboard.putNumber("Angle Out", outputAngle);		
+        SmartDashboard.putNumber("Angle Out", outputAngle);
+        
+        targetFound = true;
         
       } 
     } 

@@ -43,6 +43,8 @@ public class JoystickExtreme extends IJoystick {
 		add("SwitchMode", new ValueUsage(Keys.STICK_4));
 		add("TuneIncrement", new ValueUsage(Keys.STICK_5));
 
+		add("Find", new ValueUsage(Keys.BASE_10));
+
 		add("P_Up", new ValueUsage(Keys.BASE_8)); //needs change
 		add("P_Down", new ValueUsage(Keys.BASE_7)); //needs change
 		add("I_Up", new ValueUsage(Keys.BASE_10)); //needs change

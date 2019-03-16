@@ -14,6 +14,7 @@ import frc.robot.subsystems.Gyro;
 import frc.robot.subsystems.ManipulatorArm;
 import frc.robot.subsystems.Photosensor;
 import frc.robot.subsystems.Pneumatics;
+import frc.robot.vision.VisionSystem;
 
 
 public class Robot extends TimedRobot {
@@ -27,6 +28,7 @@ public class Robot extends TimedRobot {
   public static Pneumatics m_pneumatics = new Pneumatics();
   public static Camera m_camera = new Camera();
   public static Climber m_climber;
+  public static VisionSystem m_vision;
 
 
   Command m_autonomousCommand;

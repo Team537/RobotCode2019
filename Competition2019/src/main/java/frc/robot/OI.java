@@ -16,6 +16,7 @@ import frc.robot.commands.CollectorTilt;
 import frc.robot.commands.DriveReset;
 import frc.robot.commands.DriveSetPID;
 import frc.robot.commands.DriveSetZero;
+import frc.robot.commands.FindTarget;
 import frc.robot.commands.DriveSetPID.TuneCommand;
 import frc.robot.groups.Cargo;
 import frc.robot.groups.Hatch;
@@ -45,6 +46,7 @@ public class OI {
       //this.m_main.getJoystickButton("ResetDrive").whenPressed(new DriveReset());
 
       //this.m_main.getJoystickButton("P_UP").whenPressed(new );
+      this.m_main.getJoystickButton("Find").whenPressed(new FindTarget());
     }
 
     if(RobotMap.SUBSYSTEMS.COLLECTOR) {
