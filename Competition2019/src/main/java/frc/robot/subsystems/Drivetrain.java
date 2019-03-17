@@ -16,6 +16,7 @@ import frc.robot.Maths;
 import frc.robot.PID;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
+//import frc.robot.Smoothing;
 import frc.robot.commands.DriveArcade;
 import frc.robot.commands.DriveReset;
 
@@ -71,6 +72,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 		private double m_setpointDrive;
 		private SwerveMode m_swerveMode;
 		private AnalogInput m_magSense;
+		//private Smoothing m_smoothAngle;
 
 		public SwerveModule(String name, 
 							boolean enabled, 
@@ -121,20 +123,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 		//	m_talonAngle.getSensorCollection().setPulseWidthPosition(absolutePosition, RobotMap.kTimeoutMs); // talonAngle.setEncPosition(absolutePosition);
 		}
 
-		//low pass filtering
-		private double alpha = 0.80;
-		public double previousAngle1 = 0;
-		public double outputAngle;
-
-		public double lowPassFiltering(double rawAngle, double previousAngle) {
-				
-			double angle = previousAngle * alpha + rawAngle * (1 - alpha);
-			double output = angle;
-			return output;
-		}
-		//lowpass end
-		  
-
+		
 		public void setTarget(double angle, double drive, boolean driverControl) {
 			if (!m_enabled) {
 				return;
@@ -145,12 +134,6 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 				m_swerveMode.setChanged(false);
 			}
 
-			//lowpass filtering
-			outputAngle = lowPassFiltering(angle, previousAngle1);
-			previousAngle1 = outputAngle;
-			//lowpass end
-
-			
 			// Gets the sensor values.
 			m_currentAngle = m_talonAngle.getSelectedSensorPosition(RobotMap.kPIDLoopIdx);
 			m_currentPosition = m_talonDrive.getSelectedSensorPosition(RobotMap.kPIDLoopIdx);
@@ -160,8 +143,10 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 			SmartDashboard.putNumber("Current Velocity: " + m_name, m_currentVelocity);
 			SmartDashboard.putNumber("Current Position " + m_name, m_currentPosition);
 
+			//this.m_smoothAngle = new Smoothing(rampVup, rampVdown, maxAup, maxAdown, startingPosition, startingVelocity);
+
 			// Sets the setpoint, on 537 swerve angles are negated.
-			m_setpointAngle = -angle; //-angle;
+			m_setpointAngle = -angle; //m_smoothAngle.compute(-angle);//-angle; //-angle;
 			m_setpointDrive = drive;
 
 			SmartDashboard.putNumber("Output Drive: " + m_name, m_setpointDrive);
