@@ -16,8 +16,8 @@ public class VisionAlignTarget extends Command {
 	public double centerX;
 	public boolean current;
 	public static boolean targetFound;
-  private Rect r;
-  private Rect r2;
+  private Rect r_left;
+  private Rect r_right;
 	public double alignRate;
 	public static double rate;
 	
@@ -43,21 +43,27 @@ public class VisionAlignTarget extends Command {
 
     visionFind = new VisionThread(Robot.m_camera.getUsbCameraDown(), new VisionPipelineGenerated(), pipeline -> {
       if (!pipeline.filterContoursOutput().isEmpty()) {
-        r = Imgproc.boundingRect(pipeline.filterContoursOutput().get(0));
-        r2 = Imgproc.boundingRect(pipeline.filterContoursOutput().get(1));
+        r_left = Imgproc.boundingRect(pipeline.filterContoursOutput().get(0));
+        r_right = Imgproc.boundingRect(pipeline.filterContoursOutput().get(1));
         synchronized (imgLock) {
           
           //centerX = r.x + (r.width / 2);
           //rate = (centerX - (RobotMap.Vision.IMG_WIDTH))
           
-          double halfWidth1 = (double) r.width / 2.0;
-          double halfWidth = (double) r2.width/ 2.0;
+          double halfWidth_left = (double) r_left.width / 2.0;
+          double halfWidth_right = (double) r_right.width/ 2.0;
 
       
           //rate = (((double) r.x - halfWidth) / halfWidth);
   
-          double pos = ((double) r.x - halfWidth);
-          angle = (pos - (WIDTH/2)) * 1.96;
+          double target_left = ((double) r_left.x - halfWidth_left);
+          double target_right = ((double) r_right.x - halfWidth_right);
+
+          double d = target_right - target_left;
+          
+          double center = target_left + d;
+
+          angle = (center - (WIDTH/2)) * 1.96;
           
           outputAngle = lowPassFiltering(angle, previousAngle1);
           previousAngle1 = outputAngle;

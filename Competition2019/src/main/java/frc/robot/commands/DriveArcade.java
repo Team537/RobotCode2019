@@ -34,9 +34,9 @@ public class DriveArcade extends Command {
     double forward = deadband(0.1, Robot.m_oi.m_main.getRawAxis("DriveForward"));
     */
 
-    double rotation = deadband(0.20, Math.pow((Robot.m_oi.m_main.getRawAxis("DriveRotation")), 3));
-		double strafe = deadband(0.1, Math.pow((Robot.m_oi.m_main.getRawAxis("DriveStrafe")), 3));
-    double forward = deadband(0.1, Math.pow((Robot.m_oi.m_main.getRawAxis("DriveForward")), 3));
+    double rotation = deadband(0.10, Math.pow((Robot.m_oi.m_main.getRawAxis("DriveRotation")), 3));
+		double strafe = deadband(0.05, Math.pow((Robot.m_oi.m_main.getRawAxis("DriveStrafe")), 3));
+    double forward = deadband(0.05, Math.pow((Robot.m_oi.m_main.getRawAxis("DriveForward")), 3));
     
     Robot.m_drivetrain.setTarget(gyro, rotation, strafe, forward);
   }

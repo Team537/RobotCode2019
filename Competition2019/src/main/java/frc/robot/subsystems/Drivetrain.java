@@ -165,7 +165,8 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 			}
 			
 			// If the driver lets go of the control don't set angle, 0.0 will be imposible to reach on a controller.
-			if (!driverControl || angle != 0.0) {
+			//if (!driverControl || angle != 0.0) {
+			if (drive != 0.0){
 				m_talonAngle.set(ControlMode.Position, m_setpointAngle);
 			}
 			
@@ -384,7 +385,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 		double bra = Math.atan2(a, c) * (180.0 / Math.PI); //a, c
 
 		double maxSpeed = Maths.maxValue(fls, frs, bls, brs);
-
+		
 		if (maxSpeed > 1.0) {
 			fls /= maxSpeed;
 			frs /= maxSpeed;
