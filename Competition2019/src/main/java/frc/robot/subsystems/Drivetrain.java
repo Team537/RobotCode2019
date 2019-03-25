@@ -161,7 +161,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 			SmartDashboard.putNumber("Current Position " + m_name, m_currentPosition);
 
 			// Sets the setpoint, on 537 swerve angles are negated.
-			m_setpointAngle = -angle; //-angle;
+			m_setpointAngle = -outputAngle; //-angle;
 			m_setpointDrive = drive;
 
 			SmartDashboard.putNumber("Output Drive: " + m_name, m_setpointDrive);
@@ -291,11 +291,12 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 			}
 			SmartDashboard.putBoolean(m_name + " At Zero", atZero);
 			return atZero;
+
 		}
 	
 		public void stop() {
 			m_talonDrive.set(ControlMode.PercentOutput, 0.0);
-			m_swerveMode = SwerveMode.ModeSpeed;
+			//m_swerveMode = SwerveMode.ModeSpeed;
 		}
 	}
 
@@ -388,15 +389,15 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 		double c = fwd2 - rotation * ((RobotMap.ROBOT.WIDTH / r) * 0.5);
 		double d = fwd2 + rotation * ((RobotMap.ROBOT.WIDTH / r) * 0.5);
 
-		double fls = Math.sqrt((b * b) + (d * d)); //(a * a) + (c * c)
+		double fls = Math.sqrt((a * a) + (c * c));
 		double frs = Math.sqrt((b * b) + (c * c));
 		double bls = Math.sqrt((a * a) + (d * d));
-		double brs = Math.sqrt((a * a) + (c * c)); //(b * b) + (d * d)
+		double brs = Math.sqrt((b * b) + (d * d));
 		
-		double fla = Math.atan2(b, d) * (180.0 / Math.PI); //b, d
+		double fla = Math.atan2(b, d) * (180.0 / Math.PI);
 		double fra = Math.atan2(b, c) * (180.0 / Math.PI);
 		double bla = Math.atan2(a, d) * (180.0 / Math.PI);
-		double bra = Math.atan2(a, c) * (180.0 / Math.PI); //a, c
+		double bra = Math.atan2(a, c) * (180.0 / Math.PI);
 
 		double maxSpeed = Maths.maxValue(fls, frs, bls, brs);
 
@@ -406,6 +407,11 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 			bls /= maxSpeed;
 			brs /= maxSpeed;
 		}
+
+		if(rotation < 0.10) {
+			fls = bls;
+			frs = brs;
+		}
 		
 		/*
 		if ((driverControl && !isAtAngle(60.0)) || (!driverControl && !isAtAngle(8.0))) {
@@ -413,23 +419,22 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 			frs = 0.0;
 			bls = 0.0;
 			brs = 0.0;
-		}
-		*/
+		}*/
 
 		//SmartDashboard.putNumber("WheelSpeed", fls);
 
-		m_frontLeft.setTarget(-fla, fls * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
-		m_frontRight.setTarget(-fra, frs * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
-		m_backLeft.setTarget(bla, -bls * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
-		m_backRight.setTarget(bra, brs * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
+		m_frontLeft.setTarget(-fla, -fls * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
+		m_frontRight.setTarget(-fra, -frs * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
+		m_backLeft.setTarget(bla, bls * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
+		m_backRight.setTarget(bra, -brs * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
 	}
 
 	public void setTarget(double gyro, double angle, double forward) {
 		double f = Maths.wrapDegrees(angle - gyro);
-		
-		//if (!isAtAngle(8.0)) {
-		//	forward = 0.0;
-		//}
+		/*
+		if (!isAtAngle(8.0)) {
+			forward = 0.0;
+		}*/
 		
 		m_frontRight.setTarget(f, forward, false);
 		m_frontLeft.setTarget(f, forward, false);
@@ -491,17 +496,17 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 		return m_controllerRotate;
 	}
 	
-	// public void setControllerRotate(double setpoint) {
-	// 	if (false) if (!m_controllerRotate.isEnabled()) {
-	// 		m_controllerRotate.reset();
-	// 		m_controllerRotate.enable();
-	// 	}
-	// 	if (false) {
-	// 		m_controllerRotate.setPID(RobotMap.PIDs.DRIVE_ROTATE.getP(), RobotMap.PIDs.DRIVE_ROTATE.getI(), RobotMap.PIDs.DRIVE_ROTATE.getD());
-	// 		m_controllerRotate.setSetpoint(setpoint);
-	// 	}
+	public void setControllerRotate(double setpoint) {
+		if (false) if (!m_controllerRotate.isEnabled()) {
+			m_controllerRotate.reset();
+			m_controllerRotate.enable();
+		}
+		if (false) {
+			m_controllerRotate.setPID(RobotMap.PIDs.DRIVE_ROTATE.getP(), RobotMap.PIDs.DRIVE_ROTATE.getI(), RobotMap.PIDs.DRIVE_ROTATE.getD());
+			m_controllerRotate.setSetpoint(setpoint);
+		}
 		
-	// }
+	}
 	
 	public void recalibrate() {
 		m_backLeft.resetAngleReading();

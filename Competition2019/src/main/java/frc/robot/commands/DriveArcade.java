@@ -13,8 +13,8 @@ public class DriveArcade extends Command {
   protected void initialize() {
     Robot.m_drivetrain.stop();
     Robot.m_gyro.reset();
-    //Robot.m_drivetrain.recalibrate();
-    Robot.m_drivetrain.reset();
+    Robot.m_drivetrain.recalibrate();
+    //Robot.m_drivetrain.reset();
     //double gyro = Math.toRadians(Robot.m_gyro.getAngle());
     //Robot.m_drivetrain.setTarget(gyro, 0.00, 0.00);
     Robot.m_drivetrain.setMode(SwerveMode.ModeSpeed);
@@ -24,25 +24,12 @@ public class DriveArcade extends Command {
   protected void execute() {
     
     double gyro = Math.toRadians(Robot.m_gyro.getAngle());
-    //double rotation = Robot.m_oi.m_main.getRawAxis("DriveRotation");
-		//double strafe = Robot.m_oi.m_main.getRawAxis("DriveStrafe");
-    //double forward = Robot.m_oi.m_main.getRawAxis("DriveForward");
-  
-    double rotation = deadband(0.15, Robot.m_oi.m_main.getRawAxis("DriveRotation"));
-		double strafe = deadband(0.1, Robot.m_oi.m_main.getRawAxis("DriveStrafe"));
-    double forward = deadband(0.1, Robot.m_oi.m_main.getRawAxis("DriveForward"));
+    double rotation = Robot.m_oi.m_main.getRawAxis("DriveRotation");
+		double strafe = Robot.m_oi.m_main.getRawAxis("DriveStrafe");
+    double forward = Robot.m_oi.m_main.getRawAxis("DriveForward");
+    
     
     Robot.m_drivetrain.setTarget(gyro, rotation, strafe, forward);
-  }
-
-  private double deadband(double deadband, double input) {
-    double value;
-    if(input > deadband || input < -deadband) {
-      value = input - deadband;
-    } else {
-      value = 0.00;
-    }
-    return value;
   }
 
   @Override
@@ -57,6 +44,6 @@ public class DriveArcade extends Command {
 
   @Override
   protected void interrupted() {
-    end();
+    Robot.m_drivetrain.stop();
   }
 }

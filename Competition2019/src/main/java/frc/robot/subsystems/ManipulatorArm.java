@@ -20,9 +20,7 @@ public class ManipulatorArm extends Subsystem {
   private WPI_TalonSRX m_shoulder2 = new WPI_TalonSRX(RobotMap.CAN.MANIPULATOR_SHOULDER_LEFT);
   private WPI_TalonSRX m_shoulder = new WPI_TalonSRX(RobotMap.CAN.MANIPULATOR_SHOULDER_RIGHT);
   
-  private double m_armCurrentPostion;
-  private double m_targetPosition;
-  private double m_armError;
+  private double m_armPositionCurrent;
   //private PIDController m_wristPID;
   
   public ManipulatorArm() {
@@ -48,10 +46,10 @@ public class ManipulatorArm extends Subsystem {
   public void disable() {
     //m_shoulder.set(ControlMode.Velocity, 0.00);
     //m_shoulder2.set(ControlMode.PercentOutput, 0.00);
-    //m_shoulder.stopMotor();
+    m_shoulder.stopMotor();
     //m_shoulder2.stopMotor();
-    m_armCurrentPostion = getCurrentPosition();
-    m_shoulder.set(ControlMode.Position, m_armCurrentPostion);
+
+    //m_shoulder.set(, demand0, demand1Type, demand1);)
   }
 
   public void dashboard() {
@@ -59,9 +57,20 @@ public class ManipulatorArm extends Subsystem {
   }
 
   public void setLevel(String level) {
-    
-    //m_armCurrentPostion = m_shoulder.getSelectedSensorPosition();
-    //SmartDashboard.putNumber("Arm Position", m_armCurrentPostion);
+    /*
+    m_shoulder.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, RobotMap.kPIDLoopIdx, RobotMap.kTimeoutMs);
+    m_shoulder.setInverted(false);
+    m_shoulder.setSensorPhase(true);
+    m_shoulder.config_kP(RobotMap.kPIDLoopIdx, RobotMap.PIDs.ARM_SHOULDER.getP(), RobotMap.kTimeoutMs);
+		m_shoulder.config_kI(RobotMap.kPIDLoopIdx, RobotMap.PIDs.ARM_SHOULDER.getI(), RobotMap.kTimeoutMs);
+		m_shoulder.config_kD(RobotMap.kPIDLoopIdx, RobotMap.PIDs.ARM_SHOULDER.getD(), RobotMap.kTimeoutMs);
+    m_shoulder.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 10, RobotMap.kTimeoutMs);
+    m_shoulder.enableCurrentLimit(false);
+    m_shoulder.configPeakCurrentDuration(0, RobotMap.kTimeoutMs); // 10
+    m_shoulder.configPeakCurrentLimit(0, RobotMap.kTimeoutMs); // 30
+*/
+    m_armPositionCurrent = m_shoulder.getSelectedSensorPosition();
+    SmartDashboard.putNumber("Arm Position", m_armPositionCurrent);
     
     if(level.equals("ONE_HATCH")){
       m_shoulder.set(ControlMode.Position, 100);
@@ -102,17 +111,7 @@ public class ManipulatorArm extends Subsystem {
     return m_shoulder.getClosedLoopTarget(); 
   }
 
-  public double getCurrentPosition() {
-    return m_shoulder.getSelectedSensorPosition();
-  }
-
   public void setTarget(double position) {
-    SmartDashboard.putNumber("Arm Position: ", getCurrentPosition());
-    SmartDashboard.putNumber("Arm Target: ", getTarget());
-    m_armError = getTarget() - getCurrentPosition();
-
-    SmartDashboard.putNumber("Arm Error: ", m_armError);
-    
     m_shoulder.set(ControlMode.Position, position);
   }
   
