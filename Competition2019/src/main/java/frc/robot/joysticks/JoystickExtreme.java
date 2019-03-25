@@ -34,8 +34,9 @@ public class JoystickExtreme extends IJoystick {
 		add("DriveRotation", new ValueUsage(Axis.STICK_Z));
 		add("DriveStrafe", new ValueUsage(Axis.STICK_X));
 		add("DriveForward", new ValueUsage(Axis.STICK_Y, true));
-		add("Get Hatch", new ValueUsage(Keys.INDEX_TRIGGER));
-		add("Go Back", new ValueUsage(Keys.THUMB_TRIGGER));
+		add("Get Hatch", new ValueUsage(Keys.STICK_6));
+		add("Go Back", new ValueUsage(Keys.STICK_4));
+		add("No Rotate", new ValueUsage(Keys.INDEX_TRIGGER));
 		//add("ResetDrive", new ValueUsage(Keys.BASE_9));
 		//add("SetZero", new ValueUsage(Keys.BASE_11));
 

@@ -19,7 +19,7 @@ public class RobotMap {
 		public static final boolean GYRO = true;
 		public static final boolean DRIVE = true;
 		public static final boolean PNEUMATICS = true;
-		public static final boolean CLIMB = false;
+		public static final boolean CLIMB = true;
 	}
 
 	public static class ROBOT {
@@ -32,6 +32,7 @@ public class RobotMap {
 		public static final double RATIO = Math.sqrt((DEPTH * DEPTH) + (WIDTH * WIDTH));
 
 		public static final double DRIVE_M_TO_ENCODER = 1984.4878; // ticks/m
+
 		public static final double DRIVE_SPEED = 1.00; // % 0-100
 		
 		public static final double DRIVE_PATH_SCALE = 0.4; // % -1.0-1.0 speed scale for the pathfinder

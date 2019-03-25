@@ -297,7 +297,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 		"Front Left", 
 		RobotMap.MODULES.FRONT_LEFT, 
 		RobotMap.CAN.DRIVE_FRONT_LEFT_ANGLE, RobotMap.CAN.DRIVE_FRONT_LEFT_DRIVE, RobotMap.ANALOG_INPUT.FRONT_LEFT,
-		false,
+		false, //false
 		RobotMap.PIDs.DRIVE_ANGLE_FRONT_LEFT
 	);
 	public SwerveModule m_frontRight = new SwerveModule(
@@ -318,7 +318,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 		"Back Right",
 		RobotMap.MODULES.BACK_RIGHT, 
 		RobotMap.CAN.DRIVE_BACK_RIGHT_ANGLE, RobotMap.CAN.DRIVE_BACK_RIGHT_DRIVE, RobotMap.ANALOG_INPUT.BACK_RIGHT,
-		true ,//true
+		false ,//true
 		RobotMap.PIDs.DRIVE_ANGLE_BACK_RIGHT
 	);
 	private SwerveMode m_swerveMode;

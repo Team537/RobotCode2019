@@ -17,6 +17,7 @@ public class OI {
   public IJoystick m_main2;
   public IJoystick m_secondary;
   public IJoystick m_test;
+
   //public Joystick stick = new Joystick(1);
 
   public OI(){
@@ -29,7 +30,6 @@ public class OI {
     
     if(RobotMap.SUBSYSTEMS.DRIVE) {
       //this.m_main.getJoystickButton("SetZero").whenPressed(new DriveSetZero());
-      //this.m_main.getJoystickButton("ResetDrive").whenPressed(new DriveReset());
 
       //this.m_main.getJoystickButton("P_UP").whenPressed(new );
     }
