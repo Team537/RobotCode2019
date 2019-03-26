@@ -11,7 +11,7 @@ public class CompressorOn extends Command {
 
   @Override
   protected void initialize() {
-    Robot.m_pneumatics.Stop();
+    //Robot.m_pneumatics.CompressorOn();
   }
 
   @Override
@@ -26,7 +26,8 @@ public class CompressorOn extends Command {
 
   @Override
   protected void end() {
-    Robot.m_pneumatics.Stop();
+    //Robot.m_pneumatics.Stop();
+    //Robot.m_pneumatics.CompressorOn();
   }
 
   @Override
