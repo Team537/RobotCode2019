@@ -7,6 +7,7 @@ import frc.robot.commands.Climber2;
 import frc.robot.commands.CollectorHatchOut;
 import frc.robot.commands.CollectorSpeed;
 import frc.robot.commands.CollectorTilt;
+import frc.robot.commands.DriveLock;
 import frc.robot.joysticks.IJoystick;
 import frc.robot.joysticks.JoystickBox;
 import frc.robot.joysticks.JoystickExtreme;
@@ -29,7 +30,7 @@ public class OI {
     //this.m_test.getJoystickButton("TiltUp").whileHeld(new CollectorTilt());
     
     if(RobotMap.SUBSYSTEMS.DRIVE) {
-      //this.m_main.getJoystickButton("SetZero").whenPressed(new DriveSetZero());
+      //this.m_main.getJoystickButton("DriveLock").whileHeld(new DriveLock());
 
       //this.m_main.getJoystickButton("P_UP").whenPressed(new );
     }

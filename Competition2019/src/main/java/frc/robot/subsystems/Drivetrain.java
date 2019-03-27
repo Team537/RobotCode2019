@@ -327,7 +327,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 	
 	public Drivetrain() {
 		m_swerveMode = SwerveMode.ModeSpeed;
-		/*
+		
 		m_controllerRotate = new PIDController(RobotMap.PIDs.DRIVE_ROTATE.getP(), RobotMap.PIDs.DRIVE_ROTATE.getI(), RobotMap.PIDs.DRIVE_ROTATE.getD(),
 			Robot.m_gyro, this);
 		m_controllerRotate.setInputRange(0.0, 360.0);
@@ -335,7 +335,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 		m_controllerRotate.setPercentTolerance(0.07);
 		m_controllerRotate.setContinuous();
 		m_controllerRotate.disable();
-		*/
+		
 
 		if (!(RobotMap.ROBOT.TESTING_MODE && !DriverStation.getInstance().isFMSAttached())) {
 			recalibrate();
@@ -356,7 +356,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 	}
 	
 	public void setTarget(double gyro, double rotation, double strafe, double forward) {
-		if (false) if (m_controllerRotate.isEnabled()) {
+		if (m_controllerRotate.isEnabled()) {
 			rotation = m_controllerRotate.get();
 		}
 
@@ -406,8 +406,8 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 
 		m_frontLeft.setTarget(-fla, fls * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
 		m_frontRight.setTarget(-fra, frs * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
-		m_backLeft.setTarget(-bla, -bls * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
-		m_backRight.setTarget(bra, brs * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
+		m_backLeft.setTarget(-bla, bls * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
+		m_backRight.setTarget(-bra, brs * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
 	}
 
 	public void setTarget(double gyro, double angle, double forward) {
@@ -477,17 +477,17 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 		return m_controllerRotate;
 	}
 	
-	// public void setControllerRotate(double setpoint) {
-	// 	if (false) if (!m_controllerRotate.isEnabled()) {
-	// 		m_controllerRotate.reset();
-	// 		m_controllerRotate.enable();
-	// 	}
-	// 	if (false) {
-	// 		m_controllerRotate.setPID(RobotMap.PIDs.DRIVE_ROTATE.getP(), RobotMap.PIDs.DRIVE_ROTATE.getI(), RobotMap.PIDs.DRIVE_ROTATE.getD());
-	// 		m_controllerRotate.setSetpoint(setpoint);
-	// 	}
+	public void setControllerRotate(double setpoint) {
+		if (!m_controllerRotate.isEnabled()) {
+	 		m_controllerRotate.reset();
+	 		m_controllerRotate.enable();
+	 	}
+	 	
+	 	m_controllerRotate.setPID(RobotMap.PIDs.DRIVE_ROTATE.getP(), RobotMap.PIDs.DRIVE_ROTATE.getI(), RobotMap.PIDs.DRIVE_ROTATE.getD());
+	 	m_controllerRotate.setSetpoint(setpoint);
+	 	
 		
-	// }
+	 }
 	
 	public void recalibrate() {
 		m_backLeft.resetAngleReading();
@@ -543,7 +543,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 	}
 	
 	public void stop() {
-		//m_controllerRotate.disable();
+		m_controllerRotate.disable();
 		m_backLeft.stop();
 		m_backRight.stop();
 		m_frontLeft.stop();

@@ -35,14 +35,14 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
 
-    if(RobotMap.SUBSYSTEMS.DRIVE) {
-      m_drivetrain = new Drivetrain();
-    }
-    
     if(RobotMap.SUBSYSTEMS.GYRO){
       m_gyro = new Gyro();
     }
 
+    if(RobotMap.SUBSYSTEMS.DRIVE) {
+      m_drivetrain = new Drivetrain();
+    }
+    
     if(RobotMap.SUBSYSTEMS.PHOTOSENSOR){
       m_photosensor = new Photosensor();
     }
