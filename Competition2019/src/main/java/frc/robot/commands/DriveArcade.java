@@ -42,6 +42,7 @@ public class DriveArcade extends Command {
       forward = Math.pow((Robot.m_oi.m_main.getRawAxis("DriveForward")), 3);
     }
     rotation = deadband(0.20, Robot.m_oi.m_main.getRawAxis("DriveRotation"));
+    //rotation = Math.pow(Robot.m_oi.m_main.getRawAxis("DriveRotation"), 5);
 
     /*
     double rotation = deadband(0.15, Math.pow((Robot.m_oi.m_main.getRawAxis("DriveRotation")), 3));
@@ -67,7 +68,7 @@ public class DriveArcade extends Command {
     double value;
 
     if(input > deadband || input < -deadband) {
-      value = (((1.0 - deadband) * input) + (deadband * Math.pow(input, 3.0)));
+      value = Math.pow(input, 5.0) * 0.50;
         //(((1.0 - deadband) * input) - (deadband * Math.pow(input, 3.0)));
     } else {
       value = 0.00;

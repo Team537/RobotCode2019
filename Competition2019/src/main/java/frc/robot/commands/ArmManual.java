@@ -19,7 +19,11 @@ public class ArmManual extends Command {
   protected void execute() {
     if(Robot.m_arm.m_armLimit.get() && armIncrement > 0){
       end();
-    } else {
+    } 
+    else if(Robot.m_arm.m_armBottomLimit.get() && armIncrement < 0){
+      end();
+    }
+    else {
       Robot.m_arm.armManual(armIncrement);
     }
     
