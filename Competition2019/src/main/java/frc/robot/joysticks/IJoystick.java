@@ -30,6 +30,8 @@ public abstract class IJoystick extends Joystick {
 		 */
 		public IJoystickButton(GenericHID joystick, int buttonNumber) {
 			super(joystick, buttonNumber);
+				if (1 > buttonNumber)
+					throw new RuntimeException("button invalid" + buttonNumber);
 		}
 
 		/**

@@ -1,5 +1,6 @@
 package frc.robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import frc.robot.commands.ArmLevel;
 import frc.robot.commands.ArmManual;
 import frc.robot.commands.Climber1;
@@ -22,7 +23,7 @@ public class OI {
   //public Joystick stick = new Joystick(1);
 
   public OI(){
-
+try {
     this.m_main = new JoystickExtreme(RobotMap.INTERFACE.JOYSTICK_MAIN);  
     this.m_secondary = new JoystickBox(RobotMap.INTERFACE.JOYSTICK_SECONDARY);
 
@@ -46,13 +47,13 @@ public class OI {
     }
 
     if(RobotMap.SUBSYSTEMS.ARM) {
-      this.m_secondary.getJoystickButton("Hatch Level 1").whenPressed(new ArmLevel(0.00));
-      this.m_secondary.getJoystickButton("Hatch Level 2").whenPressed(new ArmLevel(1000.00));
-      this.m_secondary.getJoystickButton("Hatch Level 3").whenPressed(new ArmLevel(2000.00));
+      // this.m_secondary.getJoystickButton("Hatch Level 1").whenPressed(new ArmLevel(0.00));
+      // this.m_secondary.getJoystickButton("Hatch Level 2").whenPressed(new ArmLevel(1000.00));
+      // this.m_secondary.getJoystickButton("Hatch Level 3").whenPressed(new ArmLevel(2000.00));
 
-      this.m_secondary.getJoystickButton("Collector Level 1").whenPressed(new ArmLevel(0.00));
-      this.m_secondary.getJoystickButton("Collector Level 2").whenPressed(new ArmLevel(1000.00));
-      this.m_secondary.getJoystickButton("Collector Level 3").whenPressed(new ArmLevel(2000.00));
+      // this.m_secondary.getJoystickButton("Collector Level 1").whenPressed(new ArmLevel(0.00));
+      // this.m_secondary.getJoystickButton("Collector Level 2").whenPressed(new ArmLevel(1000.00));
+      // this.m_secondary.getJoystickButton("Collector Level 3").whenPressed(new ArmLevel(2000.00));
 
       this.m_secondary.getJoystickButton("ArmUp").whileHeld(new ArmManual(0.35));
       this.m_secondary.getJoystickButton("ArmDown").whileHeld(new ArmManual(-0.10));
@@ -65,7 +66,9 @@ public class OI {
       this.m_secondary.getJoystickButton("Climb Level 1").whileHeld(new Climber1());
       this.m_secondary.getJoystickButton("Climb Level 2").whileHeld(new Climber2());
     }
-    
+  } catch (Exception tex) {
+    DriverStation.reportError("oi init", tex.getStackTrace());
+  }
     
   
   }
