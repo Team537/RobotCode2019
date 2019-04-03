@@ -3,21 +3,19 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class CollectorDefault extends Command {
-  public CollectorDefault() {
-    requires(Robot.m_collector);
+public class DriveLock extends Command {
+  public DriveLock() {
+    //requires(Robot.m_drivetrain);
   }
 
   @Override
   protected void initialize() {
-    Robot.m_collector.disable();
-    //Robot.m_collector.compressorOn();
+    double gyro = Robot.m_gyro.getAngle();
+    Robot.m_drivetrain.setControllerRotate(gyro);
   }
 
   @Override
   protected void execute() {
-    Robot.m_collector.disable();
-    //Robot.m_collector.compressorOn();
   }
 
   @Override
@@ -27,7 +25,7 @@ public class CollectorDefault extends Command {
 
   @Override
   protected void end() {
-    Robot.m_collector.disable();
+    Robot.m_drivetrain.getControllerRotate().disable();
   }
 
   @Override

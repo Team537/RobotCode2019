@@ -11,6 +11,7 @@ import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Gyro;
+import frc.robot.subsystems.LED;
 import frc.robot.subsystems.ManipulatorArm;
 import frc.robot.subsystems.Photosensor;
 import frc.robot.subsystems.Pneumatics;
@@ -27,6 +28,7 @@ public class Robot extends TimedRobot {
   public static Pneumatics m_pneumatics;// = new Pneumatics();
   public static Camera m_camera = new Camera();
   public static Climber m_climber;
+  public static LED m_led;
 
 
   Command m_autonomousCommand;
@@ -35,14 +37,14 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
 
-    if(RobotMap.SUBSYSTEMS.DRIVE) {
-      m_drivetrain = new Drivetrain();
-    }
-    
     if(RobotMap.SUBSYSTEMS.GYRO){
       m_gyro = new Gyro();
     }
 
+    if(RobotMap.SUBSYSTEMS.DRIVE) {
+      m_drivetrain = new Drivetrain();
+    }
+    
     if(RobotMap.SUBSYSTEMS.PHOTOSENSOR){
       m_photosensor = new Photosensor();
     }

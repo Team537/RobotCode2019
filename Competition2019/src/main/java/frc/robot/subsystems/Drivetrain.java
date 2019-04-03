@@ -16,6 +16,7 @@ import frc.robot.Maths;
 import frc.robot.PID;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
+//import frc.robot.Smoothing;
 import frc.robot.commands.DriveArcade;
 import frc.robot.commands.DriveReset;
 
@@ -71,6 +72,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 		private double m_setpointDrive;
 		private SwerveMode m_swerveMode;
 		private AnalogInput m_magSense;
+		//private Smoothing m_smoothAngle;
 
 		public SwerveModule(String name, 
 							boolean enabled, 
@@ -121,20 +123,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 		//	m_talonAngle.getSensorCollection().setPulseWidthPosition(absolutePosition, RobotMap.kTimeoutMs); // talonAngle.setEncPosition(absolutePosition);
 		}
 
-		//low pass filtering
-		private double alpha = 0.80;
-		public double previousAngle1 = 0;
-		public double outputAngle;
-
-		public double lowPassFiltering(double rawAngle, double previousAngle) {
-				
-			double angle = previousAngle * alpha + rawAngle * (1 - alpha);
-			double output = angle;
-			return output;
-		}
-		//lowpass end
-		  
-
+		
 		public void setTarget(double angle, double drive, boolean driverControl) {
 			if (!m_enabled) {
 				return;
@@ -145,12 +134,6 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 				m_swerveMode.setChanged(false);
 			}
 
-			//lowpass filtering
-			outputAngle = lowPassFiltering(angle, previousAngle1);
-			previousAngle1 = outputAngle;
-			//lowpass end
-
-			
 			// Gets the sensor values.
 			m_currentAngle = m_talonAngle.getSelectedSensorPosition(RobotMap.kPIDLoopIdx);
 			m_currentPosition = m_talonDrive.getSelectedSensorPosition(RobotMap.kPIDLoopIdx);
@@ -160,8 +143,10 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 			SmartDashboard.putNumber("Current Velocity: " + m_name, m_currentVelocity);
 			SmartDashboard.putNumber("Current Position " + m_name, m_currentPosition);
 
+			//this.m_smoothAngle = new Smoothing(rampVup, rampVdown, maxAup, maxAdown, startingPosition, startingVelocity);
+
 			// Sets the setpoint, on 537 swerve angles are negated.
-			m_setpointAngle = -angle; //-angle;
+			m_setpointAngle = -angle; //m_smoothAngle.compute(-angle);//-angle; //-angle;
 			m_setpointDrive = drive;
 
 			SmartDashboard.putNumber("Output Drive: " + m_name, m_setpointDrive);
@@ -180,7 +165,8 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 			}
 			
 			// If the driver lets go of the control don't set angle, 0.0 will be imposible to reach on a controller.
-			if (!driverControl || angle != 0.0) {
+			//if (!driverControl || angle != 0.0) {
+			if (drive != 0.0){
 				m_talonAngle.set(ControlMode.Position, m_setpointAngle);
 			}
 			
@@ -311,7 +297,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 		"Front Left", 
 		RobotMap.MODULES.FRONT_LEFT, 
 		RobotMap.CAN.DRIVE_FRONT_LEFT_ANGLE, RobotMap.CAN.DRIVE_FRONT_LEFT_DRIVE, RobotMap.ANALOG_INPUT.FRONT_LEFT,
-		false,
+		false, //false
 		RobotMap.PIDs.DRIVE_ANGLE_FRONT_LEFT
 	);
 	public SwerveModule m_frontRight = new SwerveModule(
@@ -332,7 +318,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 		"Back Right",
 		RobotMap.MODULES.BACK_RIGHT, 
 		RobotMap.CAN.DRIVE_BACK_RIGHT_ANGLE, RobotMap.CAN.DRIVE_BACK_RIGHT_DRIVE, RobotMap.ANALOG_INPUT.BACK_RIGHT,
-		true ,//true
+		false ,//true
 		RobotMap.PIDs.DRIVE_ANGLE_BACK_RIGHT
 	);
 	private SwerveMode m_swerveMode;
@@ -341,7 +327,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 	
 	public Drivetrain() {
 		m_swerveMode = SwerveMode.ModeSpeed;
-		/*
+		
 		m_controllerRotate = new PIDController(RobotMap.PIDs.DRIVE_ROTATE.getP(), RobotMap.PIDs.DRIVE_ROTATE.getI(), RobotMap.PIDs.DRIVE_ROTATE.getD(),
 			Robot.m_gyro, this);
 		m_controllerRotate.setInputRange(0.0, 360.0);
@@ -349,7 +335,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 		m_controllerRotate.setPercentTolerance(0.07);
 		m_controllerRotate.setContinuous();
 		m_controllerRotate.disable();
-		*/
+		
 
 		if (!(RobotMap.ROBOT.TESTING_MODE && !DriverStation.getInstance().isFMSAttached())) {
 			recalibrate();
@@ -370,7 +356,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 	}
 	
 	public void setTarget(double gyro, double rotation, double strafe, double forward) {
-		if (false) if (m_controllerRotate.isEnabled()) {
+		if (m_controllerRotate.isEnabled()) {
 			rotation = m_controllerRotate.get();
 		}
 
@@ -399,7 +385,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 		double bra = Math.atan2(a, c) * (180.0 / Math.PI); //a, c
 
 		double maxSpeed = Maths.maxValue(fls, frs, bls, brs);
-
+		
 		if (maxSpeed > 1.0) {
 			fls /= maxSpeed;
 			frs /= maxSpeed;
@@ -420,8 +406,8 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 
 		m_frontLeft.setTarget(-fla, fls * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
 		m_frontRight.setTarget(-fra, frs * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
-		m_backLeft.setTarget(-bla, -bls * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
-		m_backRight.setTarget(bra, brs * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
+		m_backLeft.setTarget(-bla, bls * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
+		m_backRight.setTarget(-bra, brs * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
 	}
 
 	public void setTarget(double gyro, double angle, double forward) {
@@ -491,17 +477,17 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 		return m_controllerRotate;
 	}
 	
-	// public void setControllerRotate(double setpoint) {
-	// 	if (false) if (!m_controllerRotate.isEnabled()) {
-	// 		m_controllerRotate.reset();
-	// 		m_controllerRotate.enable();
-	// 	}
-	// 	if (false) {
-	// 		m_controllerRotate.setPID(RobotMap.PIDs.DRIVE_ROTATE.getP(), RobotMap.PIDs.DRIVE_ROTATE.getI(), RobotMap.PIDs.DRIVE_ROTATE.getD());
-	// 		m_controllerRotate.setSetpoint(setpoint);
-	// 	}
+	public void setControllerRotate(double setpoint) {
+		if (!m_controllerRotate.isEnabled()) {
+	 		m_controllerRotate.reset();
+	 		m_controllerRotate.enable();
+	 	}
+	 	
+	 	m_controllerRotate.setPID(RobotMap.PIDs.DRIVE_ROTATE.getP(), RobotMap.PIDs.DRIVE_ROTATE.getI(), RobotMap.PIDs.DRIVE_ROTATE.getD());
+	 	m_controllerRotate.setSetpoint(setpoint);
+	 	
 		
-	// }
+	 }
 	
 	public void recalibrate() {
 		m_backLeft.resetAngleReading();
@@ -557,7 +543,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 	}
 	
 	public void stop() {
-		//m_controllerRotate.disable();
+		m_controllerRotate.disable();
 		m_backLeft.stop();
 		m_backRight.stop();
 		m_frontLeft.stop();

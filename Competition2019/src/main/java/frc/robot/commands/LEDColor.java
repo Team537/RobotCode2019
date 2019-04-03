@@ -3,31 +3,27 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class ArmManual extends Command {
-  double armIncrement;
-  public ArmManual(double increment) {
-    requires(Robot.m_arm);
-    this.armIncrement = increment;
+public class LEDColor extends Command {
+  private double m_r, m_g, m_b;
+
+  public LEDColor(double r, double g, double b) {
+    // Use requires() here to declare subsystem dependencies
+    requires(Robot.m_led);
+
+    m_r = r;
+    m_g = g;
+    m_b = b;
   }
 
+  // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.m_arm.armManual(0.00);
   }
 
+  // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(Robot.m_arm.m_armLimit.get() && armIncrement > 0){
-      end();
-    } 
-    else if(Robot.m_arm.m_armBottomLimit.get() && armIncrement < 0){
-      end();
-    }
-    else {
-      Robot.m_arm.armManual(armIncrement);
-    }
-    
-    //Robot.m_arm.setTarget(Robot.m_arm.getTarget() + armIncrement);
+    Robot.m_led.setColor(m_r, m_g, m_b);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -39,7 +35,7 @@ public class ArmManual extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.m_arm.disable();
+    Robot.m_led.setColor(1.0, 0.0, 0.0);
   }
 
   // Called when another command which requires one or more of the same

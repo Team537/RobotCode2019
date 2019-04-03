@@ -21,6 +21,7 @@ public class ManipulatorArm extends Subsystem {
   private WPI_TalonSRX m_shoulder2 = new WPI_TalonSRX(RobotMap.CAN.MANIPULATOR_SHOULDER_LEFT);
   private WPI_TalonSRX m_shoulder = new WPI_TalonSRX(RobotMap.CAN.MANIPULATOR_SHOULDER_RIGHT);
   public DigitalInput m_armLimit = new DigitalInput(RobotMap.DIO.ARM_LIMIT);
+  public DigitalInput m_armBottomLimit = new DigitalInput(RobotMap.DIO.ARM_LIMIT_BOTTOM);
 
   private double m_armCurrentPostion;
   private double m_targetPosition;
@@ -42,6 +43,7 @@ public class ManipulatorArm extends Subsystem {
     m_shoulder.configReverseSoftLimitThreshold(0, RobotMap.kTimeoutMs);
     m_shoulder.configForwardSoftLimitEnable(false);
     m_shoulder.configReverseSoftLimitEnable(false);
+    m_shoulder.configPeakOutputReverse(-1.00);
 
     m_shoulder2.configReverseSoftLimitEnable(false);
     m_shoulder2.set(ControlMode.Follower, m_shoulder.getDeviceID());
