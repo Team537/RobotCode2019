@@ -9,6 +9,7 @@ import frc.robot.commands.CollectorHatchOut;
 import frc.robot.commands.CollectorSpeed;
 import frc.robot.commands.CollectorTilt;
 import frc.robot.commands.DriveLock;
+import frc.robot.commands.Elevator;
 import frc.robot.joysticks.IJoystick;
 import frc.robot.joysticks.JoystickBox;
 import frc.robot.joysticks.JoystickExtreme;
@@ -40,8 +41,8 @@ try {
       this.m_main.getJoystickButton("Get Hatch").whileHeld(new CollectorTilt(10));
       this.m_main.getJoystickButton("Go Back").whileHeld(new CollectorTilt(-10));
 
-      this.m_secondary.getJoystickButton("CollectIn").whileHeld(new CollectorSpeed(0.50));
-      this.m_secondary.getJoystickButton("CollectOut").whileHeld(new CollectorSpeed(-1.00));
+      // this.m_secondary.getJoystickButton("CollectIn").whileHeld(new CollectorSpeed(0.50));
+      // this.m_secondary.getJoystickButton("CollectOut").whileHeld(new CollectorSpeed(-1.00));
 
       this.m_secondary.getJoystickButton("Hatch Out").whileHeld(new CollectorHatchOut());
     }
@@ -55,16 +56,20 @@ try {
       // this.m_secondary.getJoystickButton("Collector Level 2").whenPressed(new ArmLevel(1000.00));
       // this.m_secondary.getJoystickButton("Collector Level 3").whenPressed(new ArmLevel(2000.00));
 
-      this.m_secondary.getJoystickButton("ArmUp").whileHeld(new ArmManual(0.35));
-      this.m_secondary.getJoystickButton("ArmDown").whileHeld(new ArmManual(-0.10));
+      // this.m_secondary.getJoystickButton("ArmUp").whileHeld(new ArmManual(0.35));
+      // this.m_secondary.getJoystickButton("ArmDown").whileHeld(new ArmManual(-0.10));
 
       //this.m_secondary.getJoystickButton("ArmUp").whileHeld(new ArmManual(0.30));
       //this.m_secondary.getJoystickButton("ArmDown").whileHeld(new ArmManual(-0.30));
+
+      this.m_secondary.getJoystickButton("ArmUp").whileHeld(new Elevator(0.35));
+      this.m_secondary.getJoystickButton("ArmDown").whileHeld(new Elevator(-0.30));
     }
 
     if(RobotMap.SUBSYSTEMS.CLIMB) {
-      this.m_secondary.getJoystickButton("Climb Level 1").whileHeld(new Climber1());
-      this.m_secondary.getJoystickButton("Climb Level 2").whileHeld(new Climber2());
+      //this.m_secondary.getJoystickButton("Climb Level 1").whileHeld(new Climber1());
+     // this.m_secondary.getJoystickButton("Climb Level 2").whileHeld(new Climber2());
+    
     }
   } catch (Exception tex) {
     DriverStation.reportError("oi init", tex.getStackTrace());

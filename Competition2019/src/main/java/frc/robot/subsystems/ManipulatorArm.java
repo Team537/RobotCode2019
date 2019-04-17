@@ -20,8 +20,10 @@ public class ManipulatorArm extends Subsystem {
 
   private WPI_TalonSRX m_shoulder2 = new WPI_TalonSRX(RobotMap.CAN.MANIPULATOR_SHOULDER_LEFT);
   private WPI_TalonSRX m_shoulder = new WPI_TalonSRX(RobotMap.CAN.MANIPULATOR_SHOULDER_RIGHT);
+  public WPI_TalonSRX m_elevator = new WPI_TalonSRX(RobotMap.CAN.MANIPULATOR_ELEVATOR);
   public DigitalInput m_armLimit = new DigitalInput(RobotMap.DIO.ARM_LIMIT);
   public DigitalInput m_armBottomLimit = new DigitalInput(RobotMap.DIO.ARM_LIMIT_BOTTOM);
+  
 
   private double m_armCurrentPostion;
   private double m_targetPosition;
@@ -69,35 +71,9 @@ public class ManipulatorArm extends Subsystem {
     SmartDashboard.putNumber("Arm Position", m_shoulder.getSelectedSensorPosition());
   }
 
-  public void setLevel(String level) {
+  public void setSpeed(double speed) {
     
-    //m_armCurrentPostion = m_shoulder.getSelectedSensorPosition();
-    //SmartDashboard.putNumber("Arm Position", m_armCurrentPostion);
-    
-    if(level.equals("ONE_HATCH")){
-      m_shoulder.set(ControlMode.Position, 100);
-    }
-
-    if(level.equals("TWO_HATCH")) {
-      m_shoulder.set(ControlMode.Position, 200);
-    }
-
-    if(level.equals("THREE_HATCH")) {
-      m_shoulder.set(ControlMode.PercentOutput, 300);
-    }
-
-
-    if(level.equals("ONE_CARGO")){
-      m_shoulder.set(ControlMode.Position, 100);
-    }
-
-    if(level.equals("TWO_CARGO")) {
-      m_shoulder.set(ControlMode.Position, 200);
-    }
-
-    if(level.equals("THREE_CARGO")) {
-      m_shoulder.set(ControlMode.PercentOutput, 300);
-    }
+    m_elevator.set(ControlMode.PercentOutput, speed);
 
   }
 

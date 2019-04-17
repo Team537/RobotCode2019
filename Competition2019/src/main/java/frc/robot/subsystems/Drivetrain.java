@@ -318,7 +318,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 		"Back Right",
 		RobotMap.MODULES.BACK_RIGHT, 
 		RobotMap.CAN.DRIVE_BACK_RIGHT_ANGLE, RobotMap.CAN.DRIVE_BACK_RIGHT_DRIVE, RobotMap.ANALOG_INPUT.BACK_RIGHT,
-		false ,//true
+		true ,//true
 		RobotMap.PIDs.DRIVE_ANGLE_BACK_RIGHT
 	);
 	private SwerveMode m_swerveMode;
@@ -407,7 +407,7 @@ public class Drivetrain extends Subsystem implements PIDOutput {
 		m_frontLeft.setTarget(-fla, fls * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
 		m_frontRight.setTarget(-fra, frs * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
 		m_backLeft.setTarget(-bla, bls * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
-		m_backRight.setTarget(-bra, brs * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
+		m_backRight.setTarget(bra, brs * RobotMap.ROBOT.DRIVE_SPEED, driverControl);
 	}
 
 	public void setTarget(double gyro, double angle, double forward) {

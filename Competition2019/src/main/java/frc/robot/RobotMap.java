@@ -88,9 +88,10 @@ public class RobotMap {
 
 		public static final int MANIPULATOR_SHOULDER_RIGHT = 13;
 		public static final int MANIPULATOR_SHOULDER_LEFT = 12; //12
-
+		public static final int MANIPULATOR_ELEVATOR = 30;
 		public static final int COLLECTOR_WRIST = 11;
 		public static final int COLLECTOR_INTAKE = 10; 
+		
 	}
 
 	public static class DIO {
