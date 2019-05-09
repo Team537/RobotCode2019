@@ -3,8 +3,8 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class CollectorHatchOut extends Command {
-  public CollectorHatchOut() {
+public class CollectorHookOut extends Command {
+  public CollectorHookOut() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.m_pneumatics);
@@ -12,12 +12,12 @@ public class CollectorHatchOut extends Command {
 
   @Override
   protected void initialize() {
-    Robot.m_pneumatics.hatchOut();
+    Robot.m_pneumatics.hookOut();
   }
 
   @Override
   protected void execute() {
-      Robot.m_pneumatics.hatchOut();
+      Robot.m_pneumatics.hookOut();
   }
 
   @Override
@@ -27,7 +27,7 @@ public class CollectorHatchOut extends Command {
 
   @Override
   protected void end() {
-      Robot.m_pneumatics.hatchIn();
+      Robot.m_pneumatics.hookIn();
   }
 
   @Override

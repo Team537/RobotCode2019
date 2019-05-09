@@ -14,7 +14,8 @@ import frc.robot.commands.CompressorOn;
 public class Pneumatics extends Subsystem {
 
   private Compressor m_compressor = new Compressor(22);
-  public Solenoid m_hatches = new Solenoid(22, 0);
+  public Solenoid m_hook = new Solenoid(22, 0);
+  public Solenoid m_piston = new Solenoid(22, 1);
   
   public void CompressorOn() {
     m_compressor.start();
@@ -22,11 +23,19 @@ public class Pneumatics extends Subsystem {
     SmartDashboard.putBoolean("Compressor Status", m_compressor.enabled());
   }
 
-  public void hatchOut() {
-    m_hatches.set(true);
+  public void hookOut() {
+    m_hook.set(true);
   }
-  public void hatchIn(){
-    m_hatches.set(false);
+  public void hookIn() {
+    m_hook.set(false);
+  }
+
+  public void pistonOut() {
+    m_piston.set(true);
+  }
+
+  public void pistonIn() {
+    m_piston.set(false);
   }
 
   public void Stop() {
@@ -35,7 +44,7 @@ public class Pneumatics extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    SmartDashboard.putBoolean("Hatch Solenoids", m_hatches.get());
+    SmartDashboard.putBoolean("Hatch Solenoids", m_hook.get());
     // Set the default command for a subsystem here.
     setDefaultCommand(new CompressorOn());
   }

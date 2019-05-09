@@ -5,7 +5,8 @@ import frc.robot.commands.ArmLevel;
 import frc.robot.commands.ArmManual;
 import frc.robot.commands.Climber1;
 import frc.robot.commands.Climber2;
-import frc.robot.commands.CollectorHatchOut;
+import frc.robot.commands.CollectorHookOut;
+import frc.robot.commands.CollectorPistonOut;
 import frc.robot.commands.CollectorSpeed;
 import frc.robot.commands.CollectorTilt;
 import frc.robot.commands.DriveLock;
@@ -27,39 +28,21 @@ try {
     this.m_main = new JoystickExtreme(RobotMap.INTERFACE.JOYSTICK_MAIN);  
     this.m_secondary = new JoystickBox(RobotMap.INTERFACE.JOYSTICK_SECONDARY);
 
-    //this.m_test = new JoystickF310(1);
-    //this.m_test.getJoystickButton("TiltUp").whileHeld(new CollectorTilt());
-    
-    if(RobotMap.SUBSYSTEMS.DRIVE) {
-      //this.m_main.getJoystickButton("DriveLock").whileHeld(new DriveLock());
-
-      //this.m_main.getJoystickButton("P_UP").whenPressed(new );
-    }
 
     if(RobotMap.SUBSYSTEMS.COLLECTOR) {
-      this.m_main.getJoystickButton("Get Hatch").whileHeld(new CollectorTilt(10));
-      this.m_main.getJoystickButton("Go Back").whileHeld(new CollectorTilt(-10));
+      this.m_secondary.getJoystickButton("WristUp").whileHeld(new CollectorTilt(10));
+      this.m_secondary.getJoystickButton("WristDown").whileHeld(new CollectorTilt(-10));
 
       this.m_secondary.getJoystickButton("CollectIn").whileHeld(new CollectorSpeed(0.50));
       this.m_secondary.getJoystickButton("CollectOut").whileHeld(new CollectorSpeed(-1.00));
 
-      this.m_secondary.getJoystickButton("Hatch Out").whileHeld(new CollectorHatchOut());
+      this.m_secondary.getJoystickButton("HookOut").whileHeld(new CollectorHookOut());
+      this.m_secondary.getJoystickButton("PistonOut").whileHeld(new CollectorPistonOut());
     }
 
     if(RobotMap.SUBSYSTEMS.ARM) {
-      // this.m_secondary.getJoystickButton("Hatch Level 1").whenPressed(new ArmLevel(0.00));
-      // this.m_secondary.getJoystickButton("Hatch Level 2").whenPressed(new ArmLevel(1000.00));
-      // this.m_secondary.getJoystickButton("Hatch Level 3").whenPressed(new ArmLevel(2000.00));
-
-      // this.m_secondary.getJoystickButton("Collector Level 1").whenPressed(new ArmLevel(0.00));
-      // this.m_secondary.getJoystickButton("Collector Level 2").whenPressed(new ArmLevel(1000.00));
-      // this.m_secondary.getJoystickButton("Collector Level 3").whenPressed(new ArmLevel(2000.00));
-
-      this.m_secondary.getJoystickButton("ArmUp").whileHeld(new ArmManual(0.35));
-      this.m_secondary.getJoystickButton("ArmDown").whileHeld(new ArmManual(-0.10));
-
-      //this.m_secondary.getJoystickButton("ArmUp").whileHeld(new ArmManual(0.30));
-      //this.m_secondary.getJoystickButton("ArmDown").whileHeld(new ArmManual(-0.30));
+      this.m_secondary.getJoystickButton("ArmUp").whileHeld(new ArmManual(0.40));
+      this.m_secondary.getJoystickButton("ArmDown").whileHeld(new ArmManual(-0.20));
     }
 
     if(RobotMap.SUBSYSTEMS.CLIMB) {

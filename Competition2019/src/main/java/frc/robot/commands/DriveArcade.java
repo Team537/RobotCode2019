@@ -1,4 +1,4 @@
-package frc.robot.commands;
+ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -13,9 +13,9 @@ public class DriveArcade extends Command {
   @Override
   protected void initialize() {
     Robot.m_drivetrain.stop();
-    Robot.m_gyro.reset();
+    //Robot.m_gyro.reset();
     //Robot.m_drivetrain.recalibrate();
-    Robot.m_drivetrain.reset();
+    //Robot.m_drivetrain.reset();
     //double gyro = Math.toRadians(Robot.m_gyro.getAngle());
     //Robot.m_drivetrain.setTarget(gyro, 0.00, 0.00);
     Robot.m_drivetrain.setMode(SwerveMode.ModeSpeed);

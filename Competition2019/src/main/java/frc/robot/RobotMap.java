@@ -116,8 +116,8 @@ public class RobotMap {
 		//public static final int HATCH_LEFT = 0;
 		//public static final int HATCH_RIGHT = 0;
 
-		public static final int CLIMB_1 = 1;
-		public static final int CLIMB_2 = 2;
+		public static final int CLIMB_1 = 44;
+		public static final int CLIMB_2 = 44;
 	}
 
 	public static class ANALOG_INPUT {
